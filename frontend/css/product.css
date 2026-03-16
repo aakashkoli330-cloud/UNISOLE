@@ -1,0 +1,268 @@
+/* ================================
+UNISOLE – PRODUCT SYSTEM (GLOBAL)
+================================ */
+
+/* ======================================================
+PRODUCT LISTING (MEN / WOMEN / HOME) – DO NOT TOUCH
+====================================================== */
+
+/* SECTION */
+.products-section {
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 40px;
+  color: #111;
+}
+
+/* GRID */
+.products-grid,
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 32px;
+}
+
+/* CARD */
+.product-card {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: all 0.35s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 50px rgba(0,0,0,0.12);
+}
+
+/* IMAGE WRAPPER */
+.product-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f6f6f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-img img {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover img {
+  transform: scale(1.08);
+}
+
+/* INFO */
+.product-info {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.product-info h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+}
+
+.product-info .category {
+  font-size: 13px;
+  color: #777;
+}
+
+.product-info .price {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* ACTIONS */
+.product-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.product-actions a,
+.product-actions button {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+/* VIEW */
+.btn-view {
+  background: #f8d706;
+  color: #000;
+}
+
+.btn-view:hover {
+  background: #e6c900;
+}
+
+/* ADD TO CART */
+.btn-cart {
+  background: #1f74ba;
+  color: #fff;
+}
+
+.btn-cart:hover {
+  background: #155a91;
+}
+
+/* ======================================================
+SINGLE PRODUCT PAGE (product.html) – PREMIUM
+====================================================== */
+
+.product-page {
+  max-width: 1200px;
+  margin: 120px auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* IMAGE SIDE – FLOATING HERO */
+.product-image {
+  background: transparent;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image img {
+  max-width: 100%;
+  max-height: 520px;
+  object-fit: contain;
+  filter: drop-shadow(0 30px 45px rgba(0, 0, 0, 0.18));
+  transition: transform 0.4s ease;
+}
+
+.product-image img:hover {
+  transform: scale(1.04);
+}
+
+/* DETAILS SIDE */
+.product-details {
+  display: flex;
+  flex-direction: column;
+}
+
+/* TITLE */
+.product-title {
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: -0.8px;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+/* PRICE */
+.product-price {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 22px;
+}
+
+/* DESCRIPTION */
+.product-desc {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #666;
+  max-width: 420px;
+  margin-bottom: 36px;
+}
+
+/* SINGLE ACTION BUTTON */
+.action-buttons.single {
+  margin-bottom: 40px;
+}
+
+.add-cart-btn {
+  width: 100%;
+  padding: 18px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  background: #111;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.add-cart-btn:hover {
+  background: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* EXTRA INFO – QUIET & CLEAN */
+.extra-info {
+  display: grid;
+  gap: 12px;
+  font-size: 13px;
+  color: #777;
+}
+
+/* ======================================================
+RESPONSIVE
+====================================================== */
+
+@media (max-width: 900px) {
+  .product-page {
+    grid-template-columns: 1fr;
+    gap: 50px;
+    margin-top: 80px;
+  }
+
+  .product-image img {
+    max-height: 360px;
+  }
+
+  .product-title {
+    font-size: 30px;
+  }
+}
+
+
+
+/* ======================================================
+RESPONSIVE
+====================================================== */
+
+@media (max-width: 900px) {
+  .product-page {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .product-image img {
+    max-height: 320px;
+  }
+}

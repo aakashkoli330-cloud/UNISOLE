@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login | UNISOLE</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/cart.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/checkout.css">
+  <link rel="stylesheet" href="css/profile.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+
+  <!-- Google Identity Services -->
+  <script src="js/https://accounts.google.com/gsi/client" async defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body class="auth-page">
+  <div class="auth-container">
+    <div class="brand">UNISOLE</div>
+
+    <div class="auth-box">
+      <h2>Welcome Back</h2>
+      <p class="subtitle">Login to your account</p>
+
+      <!-- Email/Password Login -->
+      <form id="loginForm">
+        <input type="email" name="email" id="email" placeholder="Enter your email" required>
+        <input type="password" name="password" id="password" placeholder="Enter your password" required>
+        <button type="submit">Login</button>
+      </form>
+
+      <p style="text-align:center; margin: 10px 0;">or</p>
+
+      <!-- Google Sign-In Button -->
+      <div id="googleSignInButton"></div>
+
+      <p id="error" style="color:red;"></p>
+
+      <div class="auth-switch">
+        Don’t have an account?
+        <a href="register.html">Register</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="js/login.js"></script>
+</body>
+</html>

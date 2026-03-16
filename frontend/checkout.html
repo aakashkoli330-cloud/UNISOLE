@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout | UNISOLE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ================= STYLES ================= -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/cart.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/checkout.css">
+  <link rel="stylesheet" href="css/profile.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<!-- ================= NAVBAR ================= -->
+<header class="navbar">
+  <div class="nav-container">
+
+    <!-- BRAND -->
+    <a href="index.html" class="brand">UNISOLE</a>
+
+    <!-- LINKS -->
+    <nav class="nav-links">
+      <a href="mens.html">Men</a>
+      <a href="womens.html">Women</a>
+      <a href="orders.html">Orders</a>
+    </nav>
+
+    <!-- ACTIONS -->
+    <div class="nav-actions">
+
+      <!-- CART ICON -->
+      <a href="cart.html" class="cart-btn" aria-label="Cart">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span id="cart-count" class="cart-count">0</span>
+      </a>
+
+      <!-- LOGIN BUTTON -->
+      <a href="login.html" class="login-btn">Login</a>
+
+      <!-- PROFILE AVATAR -->
+      <a href="profile.html" class="profile-avatar" id="profile-btn" style="display:none;" aria-label="Profile">
+        <i class="fa-solid fa-user"></i>
+      </a>
+
+    </div>
+  </div>
+</header>
+<!-- ================= CHECKOUT ================= -->
+<main class="checkout-page">
+
+  <h1 class="checkout-title">Checkout</h1>
+
+  <div class="checkout-layout">
+
+    <!-- LEFT: Shipping & Payment -->
+    <section class="checkout-form">
+
+      <h2>Shipping Details</h2>
+
+      <div class="form-group">
+        <input id="fullName" type="text" placeholder="Full Name">
+        <input id="phone" type="text" placeholder="Phone Number">
+      </div>
+
+      <input id="address" type="text" placeholder="Address">
+      <input id="city" type="text" placeholder="City">
+
+      <div class="form-group">
+        <input id="state" type="text" placeholder="State">
+        <input id="pincode" type="text" placeholder="Pincode">
+      </div>
+
+      <h2 class="section-gap">Payment Method</h2>
+
+      <div class="payment-method">
+        <label>
+          <input type="radio" name="payment" value="cod" checked>
+          <span>Cash on Delivery</span>
+        </label>
+
+        <label>
+          <input type="radio" name="payment" value="upi" disabled>
+          <span>UPI / Card (Coming Soon)</span>
+        </label>
+      </div>
+
+    </section>
+
+    <!-- RIGHT: Order Summary -->
+    <aside class="order-summary">
+
+      <h2>Order Summary</h2>
+
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span id="subtotal">₹0</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Shipping</span>
+        <span>Free</span>
+      </div>
+
+      <div class="summary-row total">
+        <span>Total</span>
+        <span id="total">₹0</span>
+      </div>
+
+      <button id="placeOrderBtn" class="place-order-btn">
+        Place Order
+      </button>
+
+    </aside>
+
+  </div>
+</main>
+
+<!-- ================= SCRIPTS ================= -->
+ <script src="js/cartActions.js"></script>
+<script src="js/headerAuth.js"></script>
+<script src="js/checkout.js"></script>
+
+</body>
+</html>

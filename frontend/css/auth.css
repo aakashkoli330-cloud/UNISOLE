@@ -1,0 +1,159 @@
+.cart-page {
+max-width: 1100px;
+margin: 80px auto;
+padding: 20px;
+}
+
+.cart-page h1 {
+margin-bottom: 30px;
+}
+
+.cart-item {
+display: grid;
+grid-template-columns: 120px 1fr auto;
+gap: 20px;
+align-items: center;
+background: #111;
+padding: 20px;
+border-radius: 12px;
+margin-bottom: 20px;
+}
+
+.cart-item img {
+width: 100%;
+border-radius: 10px;
+}
+
+.cart-info h3 {
+margin-bottom: 8px;
+}
+
+.cart-info p {
+color: #ccc;
+}
+
+.cart-actions {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
+.qty-box {
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.qty-box button {
+background: #222;
+color: #fff;
+border: none;
+padding: 6px 12px;
+border-radius: 6px;
+cursor: pointer;
+}
+
+.remove-btn {
+background: crimson;
+color: #fff;
+border: none;
+padding: 8px;
+border-radius: 6px;
+cursor: pointer;
+}
+
+.cart-summary {
+text-align: right;
+margin-top: 30px;
+}
+
+.cart-summary h2 {
+margin-bottom: 15px;
+}
+
+.auth-page {
+min-height: 100vh;
+background: #000;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: "Inter", sans-serif;
+color: #fff;
+}
+
+/* CONTAINER */
+.auth-page .auth-container {
+width: 100%;
+max-width: 420px;
+text-align: center;
+}
+
+/* BRAND */
+.auth-page .brand {
+font-size: 42px;
+font-weight: 800;
+letter-spacing: 6px;
+margin-bottom: 40px;
+}
+
+/* BOX */
+.auth-page .auth-box {
+background: #0b0b0b;
+border: 1px solid #222;
+border-radius: 14px;
+padding: 32px;
+}
+
+.auth-page .auth-box h2 {
+margin-bottom: 6px;
+}
+
+.auth-page .subtitle {
+font-size: 14px;
+color: #aaa;
+margin-bottom: 24px;
+}
+
+/* INPUTS */
+.auth-page input {
+width: 100%;
+padding: 14px;
+margin-bottom: 16px;
+background: #000;
+border: 1px solid #222;
+border-radius: 10px;
+color: #fff;
+}
+
+.auth-page input:focus {
+outline: none;
+border-color: #f0a500;
+}
+
+/* BUTTON */
+.auth-page button {
+width: 100%;
+padding: 14px;
+background: #f0a500;
+border: none;
+border-radius: 10px;
+font-weight: 600;
+cursor: pointer;
+}
+
+.auth-page button:hover {
+background: #ffb700;
+}
+
+/* SWITCH */
+.auth-page .auth-switch {
+margin-top: 20px;
+font-size: 14px;
+color: #aaa;
+}
+
+.auth-page .auth-switch a {
+color: #fff;
+font-weight: 600;
+text-decoration: none;
+}

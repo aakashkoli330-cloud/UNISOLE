@@ -1,0 +1,166 @@
+/* ================================
+   PROFILE PAGE – DEPLOYMENT READY
+================================ */
+
+.profile-page {
+  padding: 90px 10%;
+  background: #0b0b0b;
+  min-height: 100vh;
+  color: #ffffff;
+}
+
+/* ================================
+   GRID LAYOUT
+================================ */
+
+.profile-container {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+/* ================================
+   LEFT PROFILE CARD
+================================ */
+
+.profile-card {
+  background: #111;
+  padding: 30px;
+  border-radius: 18px;
+  border: 1px solid #222;
+  text-align: center;
+}
+
+.profile-card h2 {
+  margin-top: 15px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.profile-card p {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+/* Logout Button */
+.logout-btn {
+  margin-top: 25px;
+  background: transparent;
+  border: 1px solid #f8d706;
+  padding: 10px 22px;
+  border-radius: 30px;
+  color: #f8d706;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #f8d706;
+  color: #000;
+}
+
+/* ================================
+   RIGHT PROFILE FORM
+================================ */
+
+.profile-form {
+  background: #111;
+  padding: 40px;
+  border-radius: 18px;
+  border: 1px solid #222;
+}
+
+.profile-form h3 {
+  margin: 30px 0 14px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #f8d706;
+}
+
+.profile-form h3:first-child {
+  margin-top: 0;
+}
+
+/* ================================
+   INPUTS
+================================ */
+
+.profile-form input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  border: 1px solid #222;
+  background: #000;
+  color: #fff;
+  font-size: 14px;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-form input::placeholder {
+  color: #777;
+}
+
+.profile-form input:focus {
+  outline: none;
+  border-color: #f8d706;
+  box-shadow: 0 0 0 2px rgba(248, 215, 6, 0.15);
+}
+
+/* ================================
+   BUTTONS
+================================ */
+
+.profile-form button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 8px;
+  border-radius: 14px;
+  background: #f8d706;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  color: #000;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(248, 215, 6, 0.25);
+}
+
+/* ================================
+   DANGER BUTTON (PASSWORD / DELETE)
+================================ */
+
+.profile-form .danger {
+  background: #b11226;
+  color: #fff;
+  margin-top: 14px;
+}
+
+.profile-form .danger:hover {
+  box-shadow: 0 10px 25px rgba(177, 18, 38, 0.4);
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+  .profile-container {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-card {
+    text-align: center;
+  }
+
+  .profile-page {
+    padding: 80px 6%;
+  }
+}

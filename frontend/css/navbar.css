@@ -1,0 +1,154 @@
+/* =========================
+   UNISOLE – PREMIUM NAVBAR
+========================= */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.nav-container {
+  max-width: 1300px;
+  margin: auto;
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* =========================
+   BRAND
+========================= */
+.brand {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: #ffffff !important;
+  text-decoration: none;
+  position: relative;
+  transition: opacity 0.25s ease;
+}
+
+.brand:hover {
+  opacity: 0.85;
+}
+
+.brand::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #1f74ba, #f8d706);
+  transition: width 0.3s ease;
+}
+
+.brand:hover::after {
+  width: 100%;
+}
+
+/* =========================
+   NAV LINKS
+========================= */
+.nav-links {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-links a {
+  color: #e5e5e5;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+.nav-links a:hover {
+  color: #f8d706;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #f8d706;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* =========================
+   ACTION ICONS
+========================= */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-actions a {
+  color: #ffffff;
+  font-size: 18px;
+  position: relative;
+  text-decoration: none;
+  transition: color 0.25s ease, transform 0.2s ease;
+}
+
+.nav-actions a:hover {
+  color: #f8d706;
+  transform: translateY(-1px);
+}
+
+/* =========================
+   CART COUNT
+========================= */
+.cart-count {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: #f8d706;
+  color: #000;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* =========================
+   LOGIN BUTTON (UNCHANGED)
+========================= */
+.login-btn {
+  padding: 8px 18px;
+  border-radius: 30px;
+  border: 1px solid #1f74ba;
+  color: #1f74ba;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  background: #1f74ba;
+  color: #ffffff;
+}
+
+/* =========================
+   REMOVE OLD AVATAR STYLES
+========================= */
+.profile-avatar {
+  all: unset;
+}

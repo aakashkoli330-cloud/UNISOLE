@@ -1,0 +1,169 @@
+/* ================================
+UNISOLE - Base CSS
+Global Reset, Variables, Fonts
+================================ */
+
+/* 🔤 Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+/* 🎨 CSS Variables (Design System) /
+:root {
+/ Brand Colors */
+--primary-blue: #1F74BA;
+--accent-yellow: #F8D706;
+--accent-orange: #F09120;
+
+/* Neutrals */
+--dark-bg: #0E0E0E;
+--dark-card: #181818;
+--white: #FFFFFF;
+--light-grey: #F5F5F5;
+--grey: #CCCCCC;
+
+/* Typography */
+--font-heading: 'Poppins', sans-serif;
+--font-body: 'Inter', sans-serif;
+
+/* Layout */
+--container-width: 1200px;
+--radius-sm: 6px;
+--radius-md: 10px;
+--radius-lg: 14px;
+
+/* Effects */
+--shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.15);
+--transition-fast: 0.2s ease;
+--transition-normal: 0.3s ease;
+}
+
+/* 🧹 CSS Reset */
+
+{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+
+/* 🌍 Base HTML */
+html {
+scroll-behavior: smooth;
+}
+
+/* 📄 Body */
+body {
+font-family: var(--font-body);
+background-color: var(--dark-bg);
+color: var(--white);
+line-height: 1.6;
+}
+
+/* 🧱 Container Utility */
+.container {
+max-width: var(--container-width);
+margin: 0 auto;
+padding: 0 20px;
+}
+
+/* 🔠 Headings */
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-heading);
+font-weight: 600;
+color: var(--white);
+}
+
+/* 📝 Text */
+p {
+color: var(--grey);
+font-size: 15px;
+}
+
+/* 🔗 Links */
+a {
+text-decoration: none;
+color: inherit;
+transition: var(--transition-fast);
+}
+
+a:hover {
+color: var(--accent-yellow);
+}
+
+/* 🔘 Buttons (Global Style) */
+button {
+font-family: var(--font-heading);
+border: none;
+outline: none;
+cursor: pointer;
+border-radius: var(--radius-sm);
+transition: var(--transition-normal);
+}
+
+.btn-primary {
+background-color: var(--primary-blue);
+color: var(--white);
+padding: 12px 24px;
+}
+
+.btn-primary:hover {
+background-color: #155c93;
+}
+
+.btn-accent {
+background-color: var(--accent-yellow);
+color: #000;
+padding: 12px 24px;
+}
+
+.btn-accent:hover {
+background-color: #e2c306;
+}
+
+/* 🧾 Inputs */
+input, select, textarea {
+width: 100%;
+padding: 12px;
+border-radius: var(--radius-sm);
+border: 1px solid #333;
+background-color: #111;
+color: var(--white);
+font-family: var(--font-body);
+}
+
+input::placeholder {
+color: #777;
+}
+
+/* 🧾 Forms */
+form {
+width: 100%;
+}
+
+/* 📦 Card Utility */
+.card {
+background-color: var(--dark-card);
+border-radius: var(--radius-md);
+box-shadow: var(--shadow-soft);
+padding: 20px;
+}
+
+/* 🖼 Images */
+img {
+max-width: 100%;
+display: block;
+}
+
+/* 📱 Responsive Helpers */
+.hidden {
+display: none;
+}
+
+/* 🔚 Footer (basic default) */
+footer {
+background-color: #0a0a0a;
+color: #888;
+padding: 40px 0;
+margin-top: 80px;
+text-align: center;
+}
+

@@ -1,0 +1,30 @@
+/* ================================
+UNISOLE – MEN PAGE ONLY
+================================ */
+
+body {
+  background: #0b0b0b;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+/* HEADER */
+.page-header {
+  padding: 80px 80px 40px;
+}
+
+.page-header h1 {
+  font-size: 52px;
+  font-weight: 900;
+}
+
+.page-header p {
+  margin-top: 12px;
+  color: #bdbdbd;
+  max-width: 500px;
+}
+
+/* SECTION TITLE OVERRIDE */
+.mens-section .section-title {
+  color: #fff;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Orders | UNISOLE</title>
+
+  <!-- STYLES -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/order.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/cart.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/checkout.css">
+  <link rel="stylesheet" href="css/profile.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<!-- ================= NAVBAR ================= -->
+<header class="navbar">
+  <div class="nav-container">
+
+    <!-- BRAND -->
+    <a href="index.html" class="brand">UNISOLE</a>
+
+    <!-- LINKS -->
+    <nav class="nav-links">
+      <a href="mens.html">Men</a>
+      <a href="womens.html">Women</a>
+      <a href="orders.html">Orders</a>
+    </nav>
+
+    <!-- ACTIONS -->
+    <div class="nav-actions">
+
+      <!-- CART ICON -->
+      <a href="cart.html" class="cart-btn" aria-label="Cart">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span id="cart-count" class="cart-count">0</span>
+      </a>
+
+      <!-- LOGIN BUTTON -->
+      <a href="login.html" class="login-btn">Login</a>
+
+      <!-- PROFILE AVATAR -->
+      <a href="profile.html" class="profile-avatar" id="profile-btn" style="display:none;" aria-label="Profile">
+        <i class="fa-solid fa-user"></i>
+      </a>
+
+    </div>
+  </div>
+</header>
+<!-- ================= ORDERS PAGE ================= -->
+<main class="orders-page">
+
+  <h1 class="page-title">My Orders</h1>
+
+  <!-- ORDERS LIST -->
+  <div class="orders-list" id="orders-list">
+    <!-- Orders will be injected here by orders.js -->
+  </div>
+
+  <!-- EMPTY STATE -->
+  <p class="empty-text" id="empty-orders" style="display:none;">
+    You haven’t placed any orders yet.
+  </p>
+
+</main>
+
+<!-- ================= SCRIPTS ================= -->
+ <script src="js/cartActions.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/authNavbar.js"></script>
+
+<script src="js/orders.js"></script>
+<script src="js/authNavbar.js"></script>
+<script src="js/headerAuth.js"></script>
+
+</body>
+</html>
