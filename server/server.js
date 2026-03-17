@@ -17,32 +17,44 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ================= STATIC FILES =================
+
 // Serve images
 app.use("/images", express.static(path.join(__dirname, "images")));
 
-// Serve frontend
+// Serve frontend (HTML, CSS, JS)
 const frontendPath = path.join(__dirname, "../frontend");
 app.use(express.static(frontendPath));
 
-// API Routes
+// ================= API ROUTES =================
+
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/products", require("./routes/productRoutes"));
 app.use("/api/cart", require("./routes/cartRoutes"));
 app.use("/api/orders", require("./routes/orderRoutes"));
 
-// Fallback route (important for deployment)
+// ================= ROUTES =================
+
+// Homepage
 app.get("/", (req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
 
-// MongoDB connection
+// ⚠️ IMPORTANT: fallback for all routes (MUST BE LAST)
+app.use((req, res) => {
+  res.sendFile(path.join(frontendPath, "index.html"));
+});
+
+// ================= DATABASE =================
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error("MongoDB connection failed:", err.message));
 
-// Start server
+// ================= SERVER =================
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
