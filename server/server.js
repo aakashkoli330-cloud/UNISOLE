@@ -32,7 +32,7 @@ app.use("/api/cart", require("./routes/cartRoutes"));
 app.use("/api/orders", require("./routes/orderRoutes"));
 
 // Fallback route (important for deployment)
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
 
