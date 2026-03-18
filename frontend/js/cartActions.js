@@ -45,15 +45,13 @@
         headers: { Authorization: `Bearer ${token}` }
       });
 
-      if (!res.ok) throw new Error();
+      if (!res.ok) throw new Error("Failed to fetch cart");
 
       const data = await res.json();
-      const items = Array.isArray(data.items) ? data.items : data;
+      const items = Array.isArray(data.items) ? data.items : [];
 
-      const totalQty = items.reduce(
-        (sum, item) => sum + (item.quantity || 0),
-        0
-      );
+      // calculate total quantity
+      const totalQty = items.reduce((sum, item) => sum + (item.quantity || 0), 0);
 
       badges.forEach(b => {
         b.textContent = totalQty;
@@ -62,6 +60,10 @@
 
     } catch (err) {
       console.error("Cart count error:", err);
+      badges.forEach(b => {
+        b.textContent = "0";
+        b.style.display = "none";
+      });
     }
   };
 
@@ -80,12 +82,13 @@
         body: JSON.stringify({ productId })
       });
 
-      if (!res.ok) throw new Error();
+      if (!res.ok) throw new Error("Add to cart failed");
 
       await window.updateCartCount();
       alert("Added to cart");
 
-    } catch {
+    } catch (err) {
+      console.error(err);
       alert("Failed to add to cart");
     }
   };
@@ -95,19 +98,27 @@
     const token = getToken();
     if (!token) return requireLogin();
 
-    await fetch(`${API_URL}/update`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify({ productId, change })
-    });
+    try {
+      const res = await fetch(`${API_URL}/update`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ productId, change: Number(change) })
+      });
 
-    if (typeof window.loadCart === "function") {
-      window.loadCart();
+      if (!res.ok) throw new Error("Update quantity failed");
+
+      if (typeof window.loadCart === "function") {
+        window.loadCart();
+      }
+      await window.updateCartCount();
+
+    } catch (err) {
+      console.error(err);
+      alert("Failed to update quantity");
     }
-    window.updateCartCount();
   };
 
   /* ================= REMOVE ITEM ================= */
@@ -116,15 +127,23 @@
     if (!token) return requireLogin();
     if (!confirm("Remove item?")) return;
 
-    await fetch(`${API_URL}/remove/${productId}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` }
-    });
+    try {
+      const res = await fetch(`${API_URL}/remove/${productId}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` }
+      });
 
-    if (typeof window.loadCart === "function") {
-      window.loadCart();
+      if (!res.ok) throw new Error("Remove item failed");
+
+      if (typeof window.loadCart === "function") {
+        window.loadCart();
+      }
+      await window.updateCartCount();
+
+    } catch (err) {
+      console.error(err);
+      alert("Failed to remove item");
     }
-    window.updateCartCount();
   };
 
   /* ================= INIT ================= */
