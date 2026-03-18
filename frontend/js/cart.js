@@ -36,7 +36,6 @@ window.loadCart = async function () {
       subtotalEl.textContent = "₹0";
       totalEl.textContent = "₹0";
 
-      // 🔄 sync navbar count
       if (window.updateCartCount) updateCartCount();
       return;
     }
@@ -46,6 +45,8 @@ window.loadCart = async function () {
     let subtotal = 0;
 
     items.forEach(({ product, quantity }) => {
+      if (!product) return; // ✅ Skip deleted products
+
       subtotal += product.price * quantity;
 
       cartItemsEl.innerHTML += `
@@ -73,7 +74,6 @@ window.loadCart = async function () {
     subtotalEl.textContent = `₹${subtotal}`;
     totalEl.textContent = `₹${subtotal}`;
 
-    // 🔄 update cart badge
     if (window.updateCartCount) updateCartCount();
 
   } catch (err) {
