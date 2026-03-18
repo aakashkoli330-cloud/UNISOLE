@@ -1,4 +1,5 @@
 const Product = require("../models/product");
+const path = require("path");
 
 /* =========================
    ADD PRODUCT (ADMIN)
@@ -13,10 +14,10 @@ exports.addProduct = async (req, res) => {
 
     const newProduct = new Product({
       name,
-      price,
+      price: Number(price),
       category: category.toLowerCase(),
       description: description || "",
-      image: req.file.filename
+      image: req.file.filename // just the filename
     });
 
     await newProduct.save();
@@ -28,12 +29,10 @@ exports.addProduct = async (req, res) => {
     });
   } catch (err) {
     console.error("ADD PRODUCT ERROR:", err);
-
     if (err.name === "ValidationError") {
       const messages = Object.values(err.errors).map(e => e.message);
       return res.status(400).json({ message: messages.join(", ") });
     }
-
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -105,12 +104,10 @@ exports.updateProduct = async (req, res) => {
     });
   } catch (err) {
     console.error("UPDATE PRODUCT ERROR:", err);
-
     if (err.name === "ValidationError") {
       const messages = Object.values(err.errors).map(e => e.message);
       return res.status(400).json({ message: messages.join(", ") });
     }
-
     res.status(500).json({ message: "Server error" });
   }
 };
