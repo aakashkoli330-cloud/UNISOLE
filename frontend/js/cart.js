@@ -1,6 +1,7 @@
 console.log("cart.js loaded");
 
-const IMAGE_URL = "/images";
+
+const IMAGE_URL = "/uploads"; 
 const CART_API = "/api/cart";
 
 /* ================= LOAD CART ================= */
@@ -45,13 +46,16 @@ window.loadCart = async function () {
     let subtotal = 0;
 
     items.forEach(({ product, quantity }) => {
-      if (!product) return; // ✅ Skip deleted products
+      if (!product) return; // Skip deleted or missing products
 
       subtotal += product.price * quantity;
 
+      // Fallback image if product.image is missing
+      const productImage = product.image ? `${IMAGE_URL}/${product.image}` : "/images/default-product.png";
+
       cartItemsEl.innerHTML += `
         <div class="cart-item">
-          <img src="${IMAGE_URL}/${product.image}" alt="${product.name}">
+          <img src="${productImage}" alt="${product.name}">
           
           <div class="cart-item-info">
             <h3>${product.name}</h3>
