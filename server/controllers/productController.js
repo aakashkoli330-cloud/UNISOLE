@@ -78,17 +78,24 @@ exports.deleteProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
   try {
     const { name, price, category, description } = req.body;
-    const updateData = { name, price, category, description };
 
-    if (req.file) {
-      updateData.image = req.file.filename;
-    }
+    const updateData = {
+      name,
+      price: Number(price), // convert to number
+      category,
+      description
+    };
+
+    if (req.file) updateData.image = req.file.filename;
 
     const updated = await Product.findByIdAndUpdate(
       req.params.id,
       updateData,
       { new: true }
     );
+
+    if (!updated) return res.status(404).json({ message: "Product not found" });
+
     res.json(updated);
   } catch (err) {
     console.error("UPDATE PRODUCT ERROR:", err);
