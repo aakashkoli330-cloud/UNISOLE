@@ -79,24 +79,26 @@ exports.updateProduct = async (req, res) => {
   try {
     const { name, price, category, description } = req.body;
 
-    const updateData = {
-      name,
-      price: Number(price), // convert to number
-      category,
-      description
-    };
+    // Fetch existing product first
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(404).json({ message: "Product not found" });
 
-    if (req.file) updateData.image = req.file.filename;
+    // Update fields only if they exist
+    if (name) product.name = name;
+    if (price) product.price = Number(price);
+    if (category) product.category = category;
+    if (description !== undefined) product.description = description;
 
-    const updated = await Product.findByIdAndUpdate(
-      req.params.id,
-      updateData,
-      { new: true }
-    );
+    // Update image only if new file uploaded
+    if (req.file) product.image = req.file.filename;
 
-    if (!updated) return res.status(404).json({ message: "Product not found" });
+    await product.save();
 
-    res.json(updated);
+    res.json({
+      success: true,
+      message: "Product updated successfully",
+      product
+    });
   } catch (err) {
     console.error("UPDATE PRODUCT ERROR:", err);
     res.status(500).json({ message: "Server error" });
