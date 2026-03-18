@@ -1,7 +1,7 @@
 console.log("cart.js loaded");
 
 
-const IMAGE_URL = "/uploads"; 
+const IMAGE_URL = "/images"; 
 const CART_API = "/api/cart";
 
 /* ================= LOAD CART ================= */
