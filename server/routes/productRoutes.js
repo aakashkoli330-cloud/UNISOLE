@@ -27,10 +27,9 @@ if (!fs.existsSync(imagesDir)) {
 // ================= MULTER CONFIG =================
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, imagesDir); // save images in /images folder
+    cb(null, imagesDir);
   },
   filename: (req, file, cb) => {
-    // unique filename with timestamp + original extension
     const uniqueName = Date.now() + "-" + file.originalname.replace(/\s+/g, "_");
     cb(null, uniqueName);
   }
@@ -39,13 +38,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // ================= PUBLIC ROUTES =================
-// Get all products
 router.get("/", getAllProducts);
-
-// Get products by category
 router.get("/category/:category", getProductsByCategory);
-
-// Get single product by ID
 router.get("/:id", async (req, res) => {
   try {
     const product = await require("../models/product").findById(req.params.id);
@@ -58,13 +52,8 @@ router.get("/:id", async (req, res) => {
 });
 
 // ================= ADMIN ROUTES =================
-// Add product (admin only)
 router.post("/", protect, adminOnly, upload.single("image"), addProduct);
-
-// Update product (admin only, image optional)
 router.put("/:id", protect, adminOnly, upload.single("image"), updateProduct);
-
-// Delete product (admin only)
 router.delete("/:id", protect, adminOnly, deleteProduct);
 
 module.exports = router;
