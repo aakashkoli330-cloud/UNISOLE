@@ -37,24 +37,20 @@
 
     <h2>Add Product</h2>
 
-    <!-- 🔹 Added name and autocomplete attributes -->
-    <input id="name" name="name" placeholder="Name" autocomplete="name">
+    <!-- Wrap inputs in a proper form -->
+    <form id="productForm" autocomplete="off">
+      <input id="name" name="name" placeholder="Name" required>
+      <input id="price" name="price" type="number" placeholder="Price" required>
+      <input id="image" name="image" type="file" accept="image/*">
+      <select id="category" name="category" required>
+        <option value="">Select Category</option>
+        <option value="men">Men</option>
+        <option value="women">Women</option>
+      </select>
+      <textarea id="description" name="description" placeholder="Description"></textarea>
 
-    <input id="price" name="price" type="number" placeholder="Price" autocomplete="off">
-
-    <input id="image" name="image" type="file" accept="image/*" autocomplete="off">
-
-    <select id="category" name="category" autocomplete="off">
-      <option value="">Select Category</option>
-      <option value="men">Men</option>
-      <option value="women">Women</option>
-    </select>
-
-    <textarea id="description" name="description" placeholder="Description" autocomplete="off"></textarea>
-
-    <button id="addBtn">
-      Add Product
-    </button>
+      <button type="submit" id="addBtn">Add Product</button>
+    </form>
 
     <hr>
 
@@ -67,15 +63,18 @@
   <section id="orders-section" class="tab-content">
 
     <h2>All Orders</h2>
-
-    <div id="admin-orders">
-      <!-- Orders rendered by admin.js -->
-    </div>
-
+    <div id="admin-orders"></div>
   </section>
 
   <!-- ADMIN JS -->
   <script src="js/admin.js"></script>
+  <script>
+    // Prevent default form submission
+    document.getElementById('productForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      addProduct();
+    });
+  </script>
 
 </body>
 </html>
