@@ -37,19 +37,20 @@
 
     <h2>Add Product</h2>
 
-    <input id="name" placeholder="Name">
+    <!-- 🔹 Added name and autocomplete attributes -->
+    <input id="name" name="name" placeholder="Name" autocomplete="name">
 
-    <input id="price" type="number" placeholder="Price">
+    <input id="price" name="price" type="number" placeholder="Price" autocomplete="off">
 
-    <input id="image" type="file" accept="image/*">
+    <input id="image" name="image" type="file" accept="image/*" autocomplete="off">
 
-    <select id="category">
+    <select id="category" name="category" autocomplete="off">
       <option value="">Select Category</option>
       <option value="men">Men</option>
       <option value="women">Women</option>
     </select>
 
-    <textarea id="description" placeholder="Description"></textarea>
+    <textarea id="description" name="description" placeholder="Description" autocomplete="off"></textarea>
 
     <button id="addBtn">
       Add Product
