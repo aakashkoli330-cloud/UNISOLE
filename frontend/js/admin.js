@@ -13,6 +13,7 @@ const PRODUCT_API = "/api/products";
 const ORDER_API = "/api/orders/admin";
 const IMAGE_BASE = "/images";
 let editingId = null;
+let currentImage = null; // store current image filename when editing
 
 /* ================= LOGOUT ================= */
 document.getElementById("logoutBtn").onclick = () => {
@@ -72,7 +73,8 @@ async function loadProducts() {
             '${p.name}',
             '${p.price}',
             '${p.category}',
-            \`${p.description || ""}\`
+            \`${p.description || ""}\`,
+            '${p.image}'
           )">Edit</button>
 
           <button class="danger" onclick="deleteProduct('${p._id}')">
@@ -99,13 +101,15 @@ async function addProduct() {
   const image = document.getElementById("image").files[0];
 
   if (!name || !price || !category) return alert("Fill all required fields");
-  if (!image && !editingId) return alert("Image required");
+  if (!image && !editingId) return alert("Image required"); // only required if new product
 
   const fd = new FormData();
   fd.append("name", name);
   fd.append("price", price);
   fd.append("category", category);
   fd.append("description", description);
+
+  // only append image if new one uploaded
   if (image) fd.append("image", image);
 
   const url = editingId ? `${PRODUCT_API}/${editingId}` : PRODUCT_API;
@@ -119,28 +123,27 @@ async function addProduct() {
     });
 
     if (!res.ok) {
-      const errMsg = await res.json();
-      throw new Error(errMsg.message || "Save failed");
+      const data = await res.json();
+      throw new Error(data.message || "Save failed");
     }
 
     resetForm();
     loadProducts();
   } catch (err) {
-    console.error("Product save failed:", err);
-    alert(`Product save failed: ${err.message}`);
+    console.error(err);
+    alert("Product save failed: " + err.message);
   }
 }
 
 /* ================= EDIT PRODUCT ================= */
-function editProduct(id, name, price, category, description) {
+function editProduct(id, name, price, category, description, image) {
   editingId = id;
+  currentImage = image; // store existing image
   document.getElementById("name").value = name;
   document.getElementById("price").value = price;
   document.getElementById("category").value = category;
   document.getElementById("description").value = description;
   document.getElementById("addBtn").innerText = "Update Product";
-  // Scroll to form
-  document.getElementById("name").scrollIntoView({ behavior: "smooth" });
 }
 
 /* ================= DELETE PRODUCT ================= */
@@ -157,7 +160,7 @@ async function deleteProduct(id) {
 
     loadProducts();
   } catch (err) {
-    console.error("Delete failed:", err);
+    console.error(err);
     alert("Delete failed");
   }
 }
@@ -165,6 +168,7 @@ async function deleteProduct(id) {
 /* ================= RESET FORM ================= */
 function resetForm() {
   editingId = null;
+  currentImage = null;
   document.getElementById("addBtn").innerText = "Add Product";
 
   ["name", "price", "category", "description", "image"].forEach(id => {
@@ -203,13 +207,11 @@ async function loadOrders() {
 
       const shipping = order.shipping || {};
       const shippingHTML = `${shipping.fullName || ""}, ${shipping.phone || ""}, ${shipping.address || ""}, ${shipping.city || ""}, ${shipping.state || ""}, ${shipping.pincode || ""}`;
-
       const status = order.status || "Processing";
 
       div.innerHTML = `
         <div class="order-top">
           <span class="order-id">Order #${order._id.slice(-6).toUpperCase()}</span>
-
           <select class="order-status-select" data-id="${order._id}">
             <option value="Processing" ${status === "Processing" ? "selected" : ""}>Processing</option>
             <option value="Shipped" ${status === "Shipped" ? "selected" : ""}>Shipped</option>
@@ -217,7 +219,6 @@ async function loadOrders() {
             <option value="Cancelled" ${status === "Cancelled" ? "selected" : ""}>Cancelled</option>
           </select>
         </div>
-
         <div class="order-details">
           <p><strong>User:</strong> ${order.user?.name || "N/A"} (${order.user?.email || "N/A"})</p>
           <p><strong>Items:</strong></p>
@@ -266,6 +267,5 @@ async function loadOrders() {
 }
 
 /* ================= INIT ================= */
-document.getElementById("addBtn").onclick = addProduct; // critical!
 loadProducts();
 loadOrders();
