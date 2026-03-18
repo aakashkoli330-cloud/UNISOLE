@@ -18,7 +18,7 @@ const {
 } = require("../controllers/productController");
 
 // ================= CREATE IMAGES FOLDER IF NOT EXISTS =================
-const imagesDir = path.join(__dirname, "../images");
+const imagesDir = path.join(process.cwd(), "server/images");
 if (!fs.existsSync(imagesDir)) {
   fs.mkdirSync(imagesDir);
   console.log("Created images folder:", imagesDir);
