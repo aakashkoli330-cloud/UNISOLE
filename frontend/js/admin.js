@@ -61,7 +61,7 @@ async function loadProducts() {
       div.className = "product";
 
       div.innerHTML = `
-        <img src="${IMAGE_BASE}/${p.image}">
+        <img src="${IMAGE_BASE}/${p.image}" alt="${p.name}">
         <strong>${p.name}</strong>
         <p>₹${p.price}</p>
         <small>${p.category}</small>
@@ -118,13 +118,16 @@ async function addProduct() {
       body: fd
     });
 
-    if (!res.ok) throw new Error("Save failed");
+    if (!res.ok) {
+      const errMsg = await res.json();
+      throw new Error(errMsg.message || "Save failed");
+    }
 
     resetForm();
     loadProducts();
   } catch (err) {
-    console.error(err);
-    alert("Product save failed");
+    console.error("Product save failed:", err);
+    alert(`Product save failed: ${err.message}`);
   }
 }
 
@@ -136,6 +139,8 @@ function editProduct(id, name, price, category, description) {
   document.getElementById("category").value = category;
   document.getElementById("description").value = description;
   document.getElementById("addBtn").innerText = "Update Product";
+  // Scroll to form
+  document.getElementById("name").scrollIntoView({ behavior: "smooth" });
 }
 
 /* ================= DELETE PRODUCT ================= */
@@ -152,7 +157,7 @@ async function deleteProduct(id) {
 
     loadProducts();
   } catch (err) {
-    console.error(err);
+    console.error("Delete failed:", err);
     alert("Delete failed");
   }
 }
@@ -192,12 +197,10 @@ async function loadOrders() {
       const div = document.createElement("div");
       div.className = "order-item";
 
-      // Build HTML for items
       const itemsHTML = order.items.map(item => `
         <li>${item.name} - ₹${item.price} × ${item.quantity}</li>
       `).join("");
 
-      // Shipping info
       const shipping = order.shipping || {};
       const shippingHTML = `${shipping.fullName || ""}, ${shipping.phone || ""}, ${shipping.address || ""}, ${shipping.city || ""}, ${shipping.state || ""}, ${shipping.pincode || ""}`;
 
@@ -263,5 +266,6 @@ async function loadOrders() {
 }
 
 /* ================= INIT ================= */
+document.getElementById("addBtn").onclick = addProduct; // critical!
 loadProducts();
 loadOrders();
