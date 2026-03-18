@@ -8,18 +8,18 @@ dotenv.config();
 
 const app = express();
 
-// Debug check
+// ================= DEBUG CHECK =================
 console.log("MONGO_URI:", process.env.MONGO_URI ? "OK" : "MISSING");
 console.log("JWT_SECRET:", process.env.JWT_SECRET ? "OK" : "MISSING");
 
-// Middleware
+// ================= MIDDLEWARE =================
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // ================= STATIC FILES =================
 
-// Serve images
+// Serve images from /images
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 // Serve frontend (HTML, CSS, JS)
@@ -27,36 +27,30 @@ const frontendPath = path.join(__dirname, "../frontend");
 app.use(express.static(frontendPath));
 
 // ================= API ROUTES =================
-
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/products", require("./routes/productRoutes"));
 app.use("/api/cart", require("./routes/cartRoutes"));
 app.use("/api/orders", require("./routes/orderRoutes"));
 
-// ================= ROUTES =================
-
-// Homepage
+// ================= HOMEPAGE ROUTE =================
 app.get("/", (req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
 
-// ⚠️ IMPORTANT: fallback for all routes (MUST BE LAST)
+// Fallback route for SPA routing
 app.use((req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
 
 // ================= DATABASE =================
-
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error("MongoDB connection failed:", err.message));
 
 // ================= SERVER =================
-
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
