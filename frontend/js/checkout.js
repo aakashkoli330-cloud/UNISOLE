@@ -84,10 +84,10 @@ function validateAddress(address) {
 function populateStates() {
   const stateSelect = document.getElementById("state");
   if (!stateSelect) return;
-  
+
   stateSelect.innerHTML = '<option value="">Select State</option>';
-  
-  STATES.forEach(state => {
+
+  STATES.forEach((state) => {
     const option = document.createElement("option");
     option.value = state;
     option.textContent = state;
@@ -98,22 +98,22 @@ function populateStates() {
 function populateDistricts(state) {
   const districtSelect = document.getElementById("district");
   if (!districtSelect) return;
-  
+
   districtSelect.innerHTML = '<option value="">Select District</option>';
-  
+
   if (!state || !DISTRICTS[state]) {
     districtSelect.disabled = true;
     return;
   }
-  
+
   const districts = DISTRICTS[state].sort();
-  districts.forEach(district => {
+  districts.forEach((district) => {
     const option = document.createElement("option");
     option.value = district;
     option.textContent = district;
     districtSelect.appendChild(option);
   });
-  
+
   districtSelect.disabled = false;
 }
 
@@ -128,14 +128,14 @@ function handleStateChange() {
   const stateSelect = document.getElementById("state");
   const districtSelect = document.getElementById("district");
   const pincodeHint = document.getElementById("pincodeHint");
-  
+
   const selectedState = stateSelect.value;
-  
+
   populateDistricts(selectedState);
-  
+
   clearError("state");
   clearError("district");
-  
+
   districtSelect.value = "";
   pincodeHint.textContent = "";
   pincodeHint.style.display = "none";
@@ -145,15 +145,15 @@ function handlePincodeInput(pincode) {
   const stateSelect = document.getElementById("state");
   const districtSelect = document.getElementById("district");
   const pincodeHint = document.getElementById("pincodeHint");
-  
+
   pincode = pincode.replace(/\D/g, "");
-  
+
   if (pincode.length === 6) {
     const lookup = lookupPincode(pincode);
-    
+
     if (lookup) {
       const [district, state] = lookup;
-      
+
       if (stateSelect.value === state) {
         districtSelect.value = district;
         pincodeHint.textContent = `${district}, ${state}`;
@@ -173,7 +173,7 @@ function handlePincodeInput(pincode) {
   } else {
     pincodeHint.style.display = "none";
   }
-  
+
   return pincode;
 }
 
@@ -200,7 +200,6 @@ async function loadCheckoutSummary() {
     if (typeof window.updateCartCount === "function") {
       window.updateCartCount();
     }
-
   } catch (err) {
     console.error("Checkout load error:", err);
     alert("Failed to load checkout. Please try again.");
@@ -210,15 +209,15 @@ async function loadCheckoutSummary() {
 function renderCartItems() {
   const container = document.getElementById("cartItems");
   if (!container) return;
-  
+
   container.innerHTML = "";
-  
-  cartItems.forEach(item => {
+
+  cartItems.forEach((item) => {
     if (!item.product) return;
-    
+
     const product = item.product;
     const price = product.price * item.quantity;
-    
+
     container.innerHTML += `
       <div class="cart-item-summary">
         <img src="${getImageSrc(product.image)}" alt="${product.name}">
@@ -241,14 +240,16 @@ function getImageSrc(image) {
 
 function updateTotals() {
   let subtotal = 0;
-  cartItems.forEach(item => {
+  cartItems.forEach((item) => {
     if (item.product) {
       subtotal += item.product.price * item.quantity;
     }
   });
-  
-  document.getElementById("subtotal").textContent = `₹${subtotal.toLocaleString()}`;
-  document.getElementById("total").textContent = `₹${subtotal.toLocaleString()}`;
+
+  document.getElementById("subtotal").textContent =
+    `₹${subtotal.toLocaleString()}`;
+  document.getElementById("total").textContent =
+    `₹${subtotal.toLocaleString()}`;
 }
 
 async function placeOrder() {
@@ -335,7 +336,7 @@ async function placeOrder() {
         },
         body: JSON.stringify({
           shipping,
-          paymentMethod: "cod"
+          paymentMethod: "cod",
         }),
       });
 
@@ -345,7 +346,11 @@ async function placeOrder() {
         throw new Error(data.message || "Order failed");
       }
 
-      alert("Order placed successfully! You will pay ₹" + data.order.totalAmount.toLocaleString() + " on delivery.");
+      alert(
+        "Order placed successfully! You will pay ₹" +
+          data.order.totalAmount.toLocaleString() +
+          " on delivery.",
+      );
       window.location.href = "orders.html";
     } else {
       const res = await fetch(ORDER_API + "/create-order", {
@@ -367,16 +372,15 @@ async function placeOrder() {
       currentRazorpayOrder = {
         id: data.razorpayOrderId,
         amount: data.amount,
-        currency: data.currency
+        currency: data.currency,
       };
 
       openRazorpayCheckout(data);
     }
-
   } catch (err) {
     console.error("Checkout error:", err);
     alert(err.message || "Failed to place order. Please try again.");
-    
+
     if (placeBtn) {
       placeBtn.disabled = false;
       updateButtonText();
@@ -388,7 +392,7 @@ function openRazorpayCheckout(orderData) {
   const options = {
     key: RAZORPAY_KEY_ID,
     amount: orderData.amount,
-    currency: orderData.currency,
+    currency: "INR",
     name: "UNISOLE",
     description: `Order #${currentOrder._id.slice(-8).toUpperCase()}`,
     image: "/images/logo.png",
@@ -399,14 +403,23 @@ function openRazorpayCheckout(orderData) {
     prefill: {
       name: currentOrder.shipping.fullName,
       email: "",
-      contact: currentOrder.shipping.phone
+      contact: currentOrder.shipping.phone,
     },
     notes: {
-      order_id: currentOrder._id
+      order_id: currentOrder._id,
     },
     theme: {
-      color: "#1a6fba"
-    }
+      color: "#1a6fba",
+    },
+    modal: {
+      ondismiss: function () {
+        const placeBtn = document.getElementById("placeOrderBtn");
+        if (placeBtn) {
+          placeBtn.disabled = false;
+          updateButtonText();
+        }
+      },
+    },
   };
 
   try {
@@ -442,7 +455,7 @@ async function verifyPayment(response) {
       body: JSON.stringify({
         razorpay_order_id: response.razorpay_order_id,
         razorpay_payment_id: response.razorpay_payment_id,
-        razorpay_signature: response.razorpay_signature
+        razorpay_signature: response.razorpay_signature,
       }),
     });
 
@@ -454,11 +467,15 @@ async function verifyPayment(response) {
 
     alert("Payment successful! Your order has been placed.");
     window.location.href = "orders.html";
-
   } catch (err) {
     console.error("Payment verification error:", err);
-    alert("Payment verification failed: " + err.message + ". Please contact support with your payment ID: " + response.razorpay_payment_id);
-    
+    alert(
+      "Payment verification failed: " +
+        err.message +
+        ". Please contact support with your payment ID: " +
+        response.razorpay_payment_id,
+    );
+
     const placeBtn = document.getElementById("placeOrderBtn");
     if (placeBtn) {
       placeBtn.disabled = false;
@@ -481,7 +498,8 @@ function updateButtonText() {
     if (selectedPayment === "razorpay") {
       placeBtn.innerHTML = '<i class="fas fa-lock"></i> Proceed to Pay';
     } else {
-      placeBtn.innerHTML = '<i class="fas fa-money-bill"></i> Place Order (Pay on Delivery)';
+      placeBtn.innerHTML =
+        '<i class="fas fa-money-bill"></i> Place Order (Pay on Delivery)';
     }
   }
 }
@@ -492,14 +510,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const btn = document.getElementById("placeOrderBtn");
   if (btn) btn.addEventListener("click", placeOrder);
-  
+
   const paymentOptions = document.querySelectorAll('input[name="payment"]');
-  paymentOptions.forEach(option => {
+  paymentOptions.forEach((option) => {
     option.addEventListener("change", updatePaymentSelection);
   });
-  
+
   updatePaymentSelection();
-  
+
   const stateSelect = document.getElementById("state");
   if (stateSelect) {
     stateSelect.addEventListener("change", handleStateChange);
