@@ -19,7 +19,10 @@ const app = express();
 // Debug env check
 console.log("MONGO_URI:", process.env.MONGO_URI ? "OK" : "MISSING");
 console.log("JWT_SECRET:", process.env.JWT_SECRET ? "OK" : "MISSING");
-console.log("CLOUDINARY_CLOUD_NAME:", process.env.CLOUDINARY_CLOUD_NAME ? "OK" : "MISSING");
+console.log(
+  "CLOUDINARY_CLOUD_NAME:",
+  process.env.CLOUDINARY_CLOUD_NAME ? "OK" : "MISSING",
+);
 console.log("RAZORPAY_KEY_ID:", process.env.RAZORPAY_KEY_ID ? "OK" : "MISSING");
 
 // =================== CORS ===================
@@ -39,7 +42,7 @@ app.use(
       callback(new Error(`CORS blocked: ${origin}`));
     },
     credentials: true,
-  })
+  }),
 );
 
 // =================== MIDDLEWARE ===================
@@ -51,21 +54,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 // Serve frontend
-const frontendPath = path.join(__dirname, "../frontend");
+const frontendPath = path.join(__dirname, "frontend");
 app.use(express.static(frontendPath));
 
 // =================== ROUTES ===================
-const authRoutes    = require("./routes/authRoutes");
-const userRoutes    = require("./routes/userRoutes");
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
-const cartRoutes    = require("./routes/cartRoutes");
-const orderRoutes   = require("./routes/orderRoutes");
+const cartRoutes = require("./routes/cartRoutes");
+const orderRoutes = require("./routes/orderRoutes");
 
-app.use("/api/auth",     authRoutes);
-app.use("/api/users",    userRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
-app.use("/api/cart",     cartRoutes);
-app.use("/api/orders",   orderRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/api/orders", orderRoutes);
 
 // =================== SPA FALLBACK ===================
 // FIX: This was missing — without it, refreshing any page (e.g. /cart.html)
