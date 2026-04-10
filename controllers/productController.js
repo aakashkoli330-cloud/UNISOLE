@@ -91,11 +91,39 @@ exports.getProductsByCategory = async (req, res) => {
   try {
     const category = req.params.category;
     const products = await Product.find({
-      category: { $regex: `^${category}$`, $options: "i" }
+      category: { $regex: `^${category}$`, $options: "i" },
     });
     res.json(products);
   } catch (err) {
     console.error("GET CATEGORY ERROR:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+/* =========================
+   SEARCH PRODUCTS
+========================= */
+exports.searchProducts = async (req, res) => {
+  try {
+    const query = req.query.q || "";
+
+    if (!query || query.length < 2) {
+      return res.json([]);
+    }
+
+    const products = await Product.find({
+      $or: [
+        { name: { $regex: query, $options: "i" } },
+        { category: { $regex: query, $options: "i" } },
+        { description: { $regex: query, $options: "i" } },
+      ],
+    })
+      .select("name category price image stock")
+      .limit(8);
+
+    res.json(products);
+  } catch (err) {
+    console.error("SEARCH ERROR:", err);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -179,7 +207,9 @@ exports.autoUploadExistingImages = async () => {
 
       const localPath = findLocalFile(product.image);
       if (!localPath) {
-        console.warn(`⚠️ Local image not found for product: ${product.name} (${product.image})`);
+        console.warn(
+          `⚠️ Local image not found for product: ${product.name} (${product.image})`,
+        );
         continue;
       }
 
@@ -190,7 +220,10 @@ exports.autoUploadExistingImages = async () => {
         await product.save();
         uploadedCount++;
       } catch (uploadErr) {
-        console.warn(`⚠️ Upload failed for ${product.name}:`, uploadErr.message);
+        console.warn(
+          `⚠️ Upload failed for ${product.name}:`,
+          uploadErr.message,
+        );
       }
     }
 
@@ -225,12 +258,17 @@ exports.resetAndUploadImages = async () => {
         uploadedCount++;
         console.log(`✅ Uploaded: ${product.name}`);
       } catch (uploadErr) {
-        console.warn(`⚠️ Upload failed for ${product.name}:`, uploadErr.message);
+        console.warn(
+          `⚠️ Upload failed for ${product.name}:`,
+          uploadErr.message,
+        );
         failedCount++;
       }
     }
 
-    console.log(`🎉 Done! Uploaded ${uploadedCount} images, ${failedCount} failed`);
+    console.log(
+      `🎉 Done! Uploaded ${uploadedCount} images, ${failedCount} failed`,
+    );
   } catch (err) {
     console.error("Reset upload error:", err);
   }

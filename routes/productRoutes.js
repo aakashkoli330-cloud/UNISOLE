@@ -13,8 +13,9 @@ const {
   addProduct,
   getAllProducts,
   getProductsByCategory,
+  searchProducts,
   deleteProduct,
-  updateProduct
+  updateProduct,
 } = require("../controllers/productController");
 
 const Product = require("../models/product");
@@ -50,13 +51,14 @@ if (cloudinaryConfigured) {
 }
 
 router.get("/", getAllProducts);
+router.get("/search", searchProducts);
 router.get("/category/:category", getProductsByCategory);
 router.get("/test", (req, res) => {
-  res.json({ 
+  res.json({
     cloudinaryConfigured,
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME ? "set" : "missing",
     api_key: process.env.CLOUDINARY_API_KEY ? "set" : "missing",
-    api_secret: process.env.CLOUDINARY_API_SECRET ? "set" : "missing"
+    api_secret: process.env.CLOUDINARY_API_SECRET ? "set" : "missing",
   });
 });
 
@@ -83,31 +85,47 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", protect, adminOnly, (req, res, next) => {
-  if (!upload) {
-    return res.status(500).json({ message: "Upload not configured" });
-  }
-  upload.single("image")(req, res, (err) => {
-    if (err) {
-      console.error("Upload error:", err);
-      return res.status(400).json({ message: err.message || "Upload failed" });
+router.post(
+  "/",
+  protect,
+  adminOnly,
+  (req, res, next) => {
+    if (!upload) {
+      return res.status(500).json({ message: "Upload not configured" });
     }
-    next();
-  });
-}, addProduct);
+    upload.single("image")(req, res, (err) => {
+      if (err) {
+        console.error("Upload error:", err);
+        return res
+          .status(400)
+          .json({ message: err.message || "Upload failed" });
+      }
+      next();
+    });
+  },
+  addProduct,
+);
 
-router.put("/:id", protect, adminOnly, (req, res, next) => {
-  if (!upload) {
-    return res.status(500).json({ message: "Upload not configured" });
-  }
-  upload.single("image")(req, res, (err) => {
-    if (err) {
-      console.error("Upload error:", err);
-      return res.status(400).json({ message: err.message || "Upload failed" });
+router.put(
+  "/:id",
+  protect,
+  adminOnly,
+  (req, res, next) => {
+    if (!upload) {
+      return res.status(500).json({ message: "Upload not configured" });
     }
-    next();
-  });
-}, updateProduct);
+    upload.single("image")(req, res, (err) => {
+      if (err) {
+        console.error("Upload error:", err);
+        return res
+          .status(400)
+          .json({ message: err.message || "Upload failed" });
+      }
+      next();
+    });
+  },
+  updateProduct,
+);
 router.delete("/:id", protect, adminOnly, deleteProduct);
 
 module.exports = router;
