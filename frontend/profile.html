@@ -1,74 +1,89 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <title>My Account | UNISOLE</title>
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/navbar.css">
-  <link rel="stylesheet" href="css/profile.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+  <head>
+    <title>My Account | UNISOLE</title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a class="brand" href="index.html">UNISOLE</a>
 
-<nav class="navbar">
-  <div class="nav-container">
-    <a class="brand" href="index.html">UNISOLE</a>
+        <nav class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="mens.html">Men</a>
+          <a href="womens.html">Women</a>
+          <a href="orders.html">Orders</a>
+        </nav>
 
-    <!-- HAMBURGER-->
-     <div class="hamburger">
-  <span></span><span></span><span></span>
-</div>
+        <div class="nav-actions">
+          <a href="cart.html" class="cart-btn">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span id="cart-count" class="cart-count">0</span>
+          </a>
+          <button id="logoutBtnNav" class="logout-btn-small">Logout</button>
+        </div>
 
-    <!-- Changed ID -->
-    <button id="logoutBtnNav" class="logout-btn">Logout</button>
-  </div>
-</nav>
+        <div class="hamburger"><span></span><span></span><span></span></div>
+      </div>
+    </nav>
 
-<section class="profile-page">
-  <div class="profile-container">
+    <section class="profile-page">
+      <div class="profile-container">
+        <!-- Profile Card (Display only) -->
+        <div class="profile-card">
+          <h2>Your Profile</h2>
+          <p><strong>Name:</strong> <span id="userName"></span></p>
+          <p><strong>Email:</strong> <span id="userEmail"></span></p>
+          <p><strong>Phone:</strong> <span id="userPhone"></span></p>
+          <p><strong>Address:</strong> <span id="userAddress"></span></p>
 
-    <!-- Profile Card (Display only) -->
-    <div class="profile-card">
-      <h2>Your Profile</h2>
-      <p><strong>Name:</strong> <span id="userName"></span></p>
-      <p><strong>Email:</strong> <span id="userEmail"></span></p>
-      <p><strong>Phone:</strong> <span id="userPhone"></span></p>
-      <p><strong>Address:</strong> <span id="userAddress"></span></p>
+          <!-- Changed ID -->
+          <button class="logout-btn" id="logoutBtnCard">Logout</button>
+        </div>
 
-      <!-- Changed ID -->
-      <button class="logout-btn" id="logoutBtnCard">Logout</button>
-    </div>
+        <!-- Profile Form (Edit info) -->
+        <div class="profile-form">
+          <h3>Update Profile</h3>
+          <input type="text" id="name" placeholder="Full Name" />
+          <input type="text" id="phone" placeholder="Phone Number" />
+          <input type="text" id="street" placeholder="Street" />
+          <input type="text" id="city" placeholder="City" />
+          <input type="text" id="state" placeholder="State" />
+          <input type="text" id="pincode" placeholder="Pincode" />
+          <button onclick="updateProfile()">Save Changes</button>
 
-    <!-- Profile Form (Edit info) -->
-    <div class="profile-form">
-      <h3>Update Profile</h3>
-      <input type="text" id="name" placeholder="Full Name">
-      <input type="text" id="phone" placeholder="Phone Number">
-      <input type="text" id="street" placeholder="Street">
-      <input type="text" id="city" placeholder="City">
-      <input type="text" id="state" placeholder="State">
-      <input type="text" id="pincode" placeholder="Pincode">
-      <button onclick="updateProfile()">Save Changes</button>
+          <h3>Change Password</h3>
+          <input
+            type="password"
+            id="currentPassword"
+            placeholder="Current Password"
+          />
+          <input type="password" id="newPassword" placeholder="New Password" />
+          <button class="danger" onclick="changePassword()">
+            Change Password
+          </button>
+        </div>
+      </div>
+    </section>
 
-      <h3>Change Password</h3>
-      <input type="password" id="currentPassword" placeholder="Current Password">
-      <input type="password" id="newPassword" placeholder="New Password">
-      <button class="danger" onclick="changePassword()">Change Password</button>
-    </div>
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <p>© 2026 UNISOLE — Designed for Motion</p>
+      <p>
+        Contact us -
+        <a href="mailto:unisole.store@gmail.com">unisole.store@gmail.com</a>
+      </p>
+    </footer>
 
-  </div>
-</section>
-
-<!-- ================= FOOTER ================= -->
-<footer class="footer">
-  <p>© 2026 UNISOLE — Designed for Motion</p>
-  <p>
-  Contact us - <a href="mailto:unisole.store@gmail.com">unisole.store@gmail.com</a> 
-</p>
-</footer>
-
-
-<script src="js/profile.js"></script>
-<script src="js/enhancements.js" defer></script>
-
-</body>
+    <script src="js/profile.js"></script>
+    <script src="js/enhancements.js" defer></script>
+  </body>
 </html>
