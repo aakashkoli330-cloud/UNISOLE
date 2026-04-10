@@ -1,0 +1,276 @@
+/* ==========================================================
+   UNISOLE — NAVBAR.CSS
+   Sticky · Glassmorphic · Animated · Mobile-first
+   ========================================================== */
+
+/* ── Navbar shell ── */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  background: rgba(6, 7, 10, 0.75);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--t-md), box-shadow var(--t-md);
+}
+
+.navbar.scrolled {
+  background: rgba(6, 7, 10, 0.96);
+  box-shadow: 0 4px 40px rgba(0,0,0,0.6);
+}
+
+/* ── Container ── */
+.nav-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 var(--sp-8);
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+}
+
+/* ── Brand ── */
+.brand {
+  font-family: var(--f-display);
+  font-size: 28px;
+  letter-spacing: 5px;
+  color: var(--white) !important;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  transition: letter-spacing var(--t-md) var(--ease-out), opacity var(--t-sm);
+}
+
+.brand::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--yellow));
+  border-radius: 2px;
+  transition: width var(--t-md) var(--ease-out);
+}
+
+.brand:hover { letter-spacing: 7px; }
+.brand:hover::after { width: 100%; }
+
+/* ── Nav links ── */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-8);
+}
+
+.nav-links a {
+  font-family: var(--f-head);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  position: relative;
+  padding-bottom: 3px;
+  transition: color var(--t-sm);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--yellow);
+  border-radius: 1px;
+  transition: width var(--t-md) var(--ease-spring);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--white);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+/* ── Nav actions ── */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+}
+
+/* Cart button */
+.cart-btn {
+  position: relative;
+  color: var(--text-hi);
+  font-size: 19px;
+  display: flex;
+  align-items: center;
+  transition: color var(--t-sm), transform var(--t-sm) var(--ease-spring);
+}
+
+.cart-btn:hover {
+  color: var(--yellow);
+  transform: translateY(-2px) scale(1.12);
+}
+
+/* Cart badge */
+.cart-count {
+  position: absolute;
+  top: -7px; right: -10px;
+  min-width: 18px; height: 18px;
+  background: var(--yellow);
+  color: #000;
+  font-family: var(--f-head);
+  font-size: 9px;
+  font-weight: 900;
+  border-radius: var(--r-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  box-shadow: 0 2px 10px var(--yellow-glow);
+  animation: badge-pop 0.3s var(--ease-spring);
+}
+
+@keyframes badge-pop {
+  0%   { transform: scale(0) rotate(-20deg); }
+  70%  { transform: scale(1.2) rotate(5deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+/* Login button */
+.login-btn {
+  padding: 8px 20px;
+  border-radius: var(--r-full);
+  border: 1.5px solid var(--blue);
+  color: var(--blue);
+  font-family: var(--f-head);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all var(--t-md) var(--ease-out);
+  white-space: nowrap;
+}
+
+.login-btn:hover {
+  background: var(--blue);
+  color: var(--white);
+  box-shadow: var(--shadow-blue);
+  transform: translateY(-1px);
+}
+
+/* Profile icon */
+.profile-avatar,
+.profile-icon {
+  all: unset;
+  cursor: pointer;
+  color: var(--text-hi);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  transition: color var(--t-sm), transform var(--t-sm) var(--ease-spring);
+}
+
+.profile-avatar:hover,
+.profile-icon:hover {
+  color: var(--yellow);
+  transform: scale(1.12);
+}
+
+/* Logout button (used in profile navbar) */
+.logout-btn {
+  padding: 8px 20px;
+  border-radius: var(--r-full);
+  border: 1.5px solid rgba(245,208,0,0.4);
+  background: transparent;
+  color: var(--yellow);
+  font-family: var(--f-head);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all var(--t-md) var(--ease-out);
+}
+
+.logout-btn:hover {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: #000;
+  box-shadow: var(--shadow-yel);
+  transform: translateY(-1px);
+}
+
+/* ── Hamburger ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px; height: 38px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  background: var(--text-hi);
+  border-radius: 2px;
+  transition: all var(--t-md) var(--ease-out);
+}
+
+.hamburger span:nth-child(1) { width: 24px; }
+.hamburger span:nth-child(2) { width: 16px; }
+.hamburger span:nth-child(3) { width: 24px; }
+
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); width: 24px; }
+.hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Mobile nav ── */
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+
+  .nav-links {
+    position: absolute;
+    top: 68px; left: 0; right: 0;
+    background: rgba(6, 7, 10, 0.98);
+    backdrop-filter: blur(24px);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    overflow: hidden;
+    max-height: 0;
+    border-bottom: 0 solid var(--border);
+    transition: max-height var(--t-md) var(--ease-out), border-width var(--t-sm);
+  }
+
+  .nav-links.open {
+    max-height: 260px;
+    border-bottom-width: 1px;
+  }
+
+  .nav-links a {
+    width: 100%;
+    padding: 15px 32px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-links a::after { display: none; }
+  .nav-links a:last-child { border-bottom: none; }
+
+  .nav-container { padding: 0 var(--sp-5); }
+  .brand { font-size: 24px; letter-spacing: 4px; }
+  .login-btn { display: none; }
+}
+
+@media (max-width: 480px) {
+  .nav-actions { gap: var(--sp-4); }
+}

@@ -1,0 +1,205 @@
+/* ==========================================================
+   UNISOLE — ORDER.CSS
+   orders.html · .orders-page · .order-item · status badges
+   ========================================================== */
+
+/* ── Page ── */
+.orders-page {
+  background: var(--bg);
+  color: var(--text-hi);
+  min-height: 100vh;
+  padding: var(--sp-20) 6% var(--sp-16);
+}
+
+/* ── Title ── */
+.page-title {
+  font-family: var(--f-display);
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  letter-spacing: 3px;
+  color: var(--white);
+  margin-bottom: var(--sp-12);
+  display: inline-block;
+  position: relative;
+  animation: fadeUp 0.5s var(--ease-out) both;
+}
+
+.page-title::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -10px;
+  width: 52px; height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--yellow));
+  border-radius: 2px;
+}
+
+/* ── Orders list ── */
+.orders-list {
+  max-width: 960px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+/* ── Order card ── */
+.order-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  border-left: 4px solid var(--border-hi);
+  padding: var(--sp-6);
+  box-shadow: var(--shadow-md);
+  transition:
+    transform var(--t-md) var(--ease-out),
+    box-shadow var(--t-md),
+    border-color var(--t-md);
+  animation: fadeUp 0.45s var(--ease-out) both;
+}
+
+.order-item:hover {
+  transform: translateY(-4px) translateX(5px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Status accent borders */
+.order-item.processing { border-left-color: var(--amber); }
+.order-item.shipped    { border-left-color: var(--sky); }
+.order-item.delivered  { border-left-color: var(--green); }
+.order-item.cancelled  { border-left-color: var(--red); }
+
+/* ── Top row ── */
+.order-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-5);
+}
+
+.order-id {
+  font-family: var(--f-head);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-mid);
+  letter-spacing: 1px;
+}
+
+/* ── Status badge ── */
+.order-status {
+  font-family: var(--f-head);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: var(--r-full);
+}
+
+.order-status.processing { background: var(--amber);  color: #000; }
+.order-status.shipped    { background: var(--sky);    color: #000; }
+.order-status.delivered  { background: var(--green);  color: #000; }
+.order-status.cancelled  { background: var(--red);    color: var(--white); }
+
+/* ── Order details grid ── */
+.order-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--sp-3);
+  background: var(--bg-3);
+  border-radius: var(--r-md);
+  padding: var(--sp-4) var(--sp-5);
+  margin-bottom: var(--sp-4);
+  font-size: 13px;
+  color: var(--text-mid);
+  border: 1px solid var(--border);
+}
+
+.order-shipping {
+  font-size: 13px;
+  color: var(--text-mid);
+  margin-bottom: var(--sp-4);
+}
+
+/* ── Products list in order ── */
+.order-products {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  margin-top: var(--sp-4);
+}
+
+/* ── Product row ── */
+.order-product {
+  display: flex;
+  gap: var(--sp-4);
+  align-items: center;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: var(--sp-3) var(--sp-4);
+  transition: background var(--t-sm), border-color var(--t-sm), transform var(--t-sm);
+}
+
+.order-product:hover {
+  background: rgba(26,111,186,0.07);
+  border-color: rgba(26,111,186,0.25);
+  transform: translateX(5px);
+}
+
+.order-product img {
+  width: 68px; height: 68px;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+  background: #0A0D15;
+}
+
+.order-product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+}
+
+.order-product-info h4 {
+  font-family: var(--f-head);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+  margin: 0;
+}
+
+.order-product-info p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-lo);
+}
+
+/* ── Total ── */
+.order-total {
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border);
+  font-family: var(--f-head);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--yellow);
+  text-align: right;
+}
+
+/* ── Empty state ── */
+.empty-text {
+  text-align: center;
+  margin-top: var(--sp-20);
+  color: var(--text-lo);
+  font-size: 17px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .orders-page { padding: var(--sp-16) var(--sp-4); }
+  .page-title  { font-size: 2.4rem; }
+  .order-product img { width: 54px; height: 54px; }
+  .order-item { padding: var(--sp-5) var(--sp-4); }
+}

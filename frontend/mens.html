@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Men — UNISOLE</title>
+<link rel="stylesheet" href="css/stock-patch.css">
+  <link rel="stylesheet" href="css/product.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/cart.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/checkout.css">
+  <link rel="stylesheet" href="css/profile.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body class="men-page">
+
+<!-- ================= NAVBAR ================= -->
+<header class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="brand">UNISOLE</a>
+
+    <!-- HAMBURGER-->
+     <div class="hamburger">
+  <span></span><span></span><span></span>
+</div>
+
+
+    <nav class="nav-links">
+      <a href="mens.html" class="active">Men</a>
+      <a href="womens.html">Women</a>
+      <a href="orders.html">Orders</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="cart.html" class="cart-btn">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span id="cart-count" class="cart-count">0</span>
+      </a>
+
+      <a href="login.html" class="login-btn">Login</a>
+
+      <a href="profile.html" class="profile-avatar" id="profile-btn" style="display:none;">
+        <i class="fa-solid fa-user"></i>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="gradient-hero">
+  <div class="hero-content">
+    <h1>MOVE WITH CONFIDENCE</h1>
+    <p>Engineered for speed. Designed for everyday dominance.</p>
+    <a href="#products" class="hero-btn">Shop Men</a>
+  </div>
+</section>
+
+<!-- ================= PRODUCTS ================= -->
+<section class="products-section mens-section" id="products">
+  <h2 class="section-title">Men’s Sneakers</h2>
+  <div class="products-grid products-container"></div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <p>© 2026 UNISOLE — Designed for Motion</p>
+  <p>
+  Contact us - <a href="mailto:unisole.store@gmail.com">unisole.store@gmail.com</a> 
+</p>
+</footer>
+
+<script src="js/cartActions.js"></script>
+<script src="js/product.js" defer></script>
+<script src="js/authNavbar.js"></script>
+<script src="js/headerAuth.js"></script>
+<script src="js/enhancements.js" defer></script>
+
+</body>
+</html>

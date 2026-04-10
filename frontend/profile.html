@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Account | UNISOLE</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/profile.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a class="brand" href="index.html">UNISOLE</a>
+
+    <!-- HAMBURGER-->
+     <div class="hamburger">
+  <span></span><span></span><span></span>
+</div>
+
+    <!-- Changed ID -->
+    <button id="logoutBtnNav" class="logout-btn">Logout</button>
+  </div>
+</nav>
+
+<section class="profile-page">
+  <div class="profile-container">
+
+    <!-- Profile Card (Display only) -->
+    <div class="profile-card">
+      <h2>Your Profile</h2>
+      <p><strong>Name:</strong> <span id="userName"></span></p>
+      <p><strong>Email:</strong> <span id="userEmail"></span></p>
+      <p><strong>Phone:</strong> <span id="userPhone"></span></p>
+      <p><strong>Address:</strong> <span id="userAddress"></span></p>
+
+      <!-- Changed ID -->
+      <button class="logout-btn" id="logoutBtnCard">Logout</button>
+    </div>
+
+    <!-- Profile Form (Edit info) -->
+    <div class="profile-form">
+      <h3>Update Profile</h3>
+      <input type="text" id="name" placeholder="Full Name">
+      <input type="text" id="phone" placeholder="Phone Number">
+      <input type="text" id="street" placeholder="Street">
+      <input type="text" id="city" placeholder="City">
+      <input type="text" id="state" placeholder="State">
+      <input type="text" id="pincode" placeholder="Pincode">
+      <button onclick="updateProfile()">Save Changes</button>
+
+      <h3>Change Password</h3>
+      <input type="password" id="currentPassword" placeholder="Current Password">
+      <input type="password" id="newPassword" placeholder="New Password">
+      <button class="danger" onclick="changePassword()">Change Password</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <p>© 2026 UNISOLE — Designed for Motion</p>
+  <p>
+  Contact us - <a href="mailto:unisole.store@gmail.com">unisole.store@gmail.com</a> 
+</p>
+</footer>
+
+
+<script src="js/profile.js"></script>
+<script src="js/enhancements.js" defer></script>
+
+</body>
+</html>

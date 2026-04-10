@@ -1,0 +1,211 @@
+/* ==========================================================
+   UNISOLE — AUTH.CSS
+   Login & Register Pages · .auth-page · .auth-box
+   ========================================================== */
+
+/* ── Page wrapper ── */
+.auth-page {
+  min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: var(--sp-6);
+}
+
+/* Ambient glows */
+.auth-page::before {
+  content: '';
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(26,111,186,0.18) 0%, transparent 68%);
+  top: -200px; left: -180px;
+  pointer-events: none;
+}
+
+.auth-page::after {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,208,0,0.1) 0%, transparent 65%);
+  bottom: -150px; right: -100px;
+  pointer-events: none;
+}
+
+/* ── Container ── */
+.auth-container {
+  width: 100%;
+  max-width: 440px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  animation: fadeUp 0.65s var(--ease-out) both;
+}
+
+/* Brand in auth pages */
+.auth-container .brand {
+  display: block;
+  font-family: var(--f-display);
+  font-size: 48px;
+  letter-spacing: 8px;
+  color: var(--white);
+  margin-bottom: var(--sp-8);
+  cursor: default;
+  transition: none;
+}
+
+.auth-container .brand::after { display: none; }
+
+/* ── Auth box ── */
+.auth-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-hi);
+  border-radius: var(--r-xl);
+  padding: 42px 38px;
+  box-shadow:
+    0 32px 80px rgba(0,0,0,0.55),
+    0 0 0 1px rgba(255,255,255,0.04) inset;
+  backdrop-filter: blur(10px);
+}
+
+.auth-box h2 {
+  font-family: var(--f-head);
+  font-size: 27px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: var(--sp-2);
+}
+
+.auth-box .subtitle {
+  font-size: 14px;
+  color: var(--text-lo);
+  margin-bottom: var(--sp-6);
+}
+
+/* ── Inputs ── */
+.auth-box form { display: flex; flex-direction: column; gap: 0; }
+
+.auth-box input {
+  background: var(--bg-3);
+  border: 1.5px solid var(--border);
+  color: var(--white);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+  margin-bottom: var(--sp-4);
+  font-size: 14px;
+  transition:
+    border-color var(--t-sm),
+    box-shadow var(--t-sm),
+    background var(--t-sm),
+    transform var(--t-sm);
+}
+
+.auth-box input:focus {
+  border-color: var(--blue);
+  background: var(--bg-card);
+  box-shadow: 0 0 0 3px var(--blue-glow);
+  transform: translateY(-1px);
+}
+
+/* ── Submit button ── */
+.auth-box button[type="submit"],
+.auth-box button:not(.google-btn) {
+  width: 100%;
+  padding: 15px;
+  border-radius: var(--r-md);
+  background: linear-gradient(135deg, var(--yellow), var(--orange));
+  border: none;
+  font-family: var(--f-head);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--t-md) var(--ease-out);
+  margin-top: var(--sp-2);
+}
+
+.auth-box button[type="submit"]::before,
+.auth-box button:not(.google-btn)::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left var(--t-md);
+}
+
+.auth-box button[type="submit"]:hover,
+.auth-box button:not(.google-btn):hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-yel);
+}
+
+.auth-box button[type="submit"]:hover::before { left: 100%; }
+
+/* "or" divider */
+.auth-box p[style*="text-align:center"] {
+  color: var(--text-lo);
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: var(--sp-4) 0;
+  position: relative;
+}
+
+.auth-box p[style*="text-align:center"]::before,
+.auth-box p[style*="text-align:center"]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 38%;
+  height: 1px;
+  background: var(--border-hi);
+}
+
+.auth-box p[style*="text-align:center"]::before { left: 0; }
+.auth-box p[style*="text-align:center"]::after  { right: 0; }
+
+/* Google sign-in button container */
+#googleSignInButton {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--sp-4);
+}
+
+/* Error message */
+#error {
+  font-size: 13px;
+  color: var(--red) !important;
+  margin-top: var(--sp-3);
+  min-height: 18px;
+}
+
+/* ── Auth switch ── */
+.auth-switch {
+  margin-top: var(--sp-5);
+  font-size: 14px;
+  color: var(--text-lo);
+}
+
+.auth-switch a {
+  color: var(--blue-lt);
+  font-weight: 700;
+  margin-left: 4px;
+  transition: color var(--t-sm);
+}
+
+.auth-switch a:hover { color: var(--yellow); }
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .auth-box { padding: 32px 22px; }
+  .auth-container .brand { font-size: 38px; }
+}

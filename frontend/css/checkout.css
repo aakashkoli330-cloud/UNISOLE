@@ -1,0 +1,391 @@
+/* ==========================================================
+   UNISOLE — CHECKOUT.CSS
+   checkout.html · shipping form · payment · order summary
+   ========================================================== */
+
+/* ── Page ── */
+.checkout-page {
+  background: var(--bg);
+  color: var(--white);
+  padding: var(--sp-20) 6% var(--sp-16);
+  min-height: 100vh;
+}
+
+/* ── Title ── */
+.checkout-title {
+  font-family: var(--f-display);
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  letter-spacing: 3px;
+  margin-bottom: var(--sp-12);
+  display: inline-block;
+  position: relative;
+  animation: fadeUp 0.5s var(--ease-out) both;
+}
+
+.checkout-title::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -10px;
+  width: 52px; height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--yellow));
+  border-radius: 2px;
+}
+
+/* ── Layout ── */
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--sp-8);
+  align-items: flex-start;
+}
+
+/* ── Form panel ── */
+.checkout-form {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: var(--sp-8) var(--sp-8) var(--sp-8);
+  box-shadow: var(--shadow-md);
+}
+
+/* Section label */
+.checkout-form h2 {
+  font-family: var(--f-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  margin-bottom: var(--sp-5);
+  padding-left: var(--sp-3);
+  border-left: 3px solid var(--blue);
+}
+
+.section-gap {
+  margin-top: var(--sp-8);
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--border);
+}
+
+/* Field wrapper */
+.field-wrapper {
+  margin-bottom: var(--sp-4);
+}
+
+.field-wrapper label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-mid);
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+/* Inputs & Selects */
+.checkout-form input,
+.checkout-form select,
+.checkout-form textarea {
+  width: 100%;
+  background: var(--bg-3);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-md);
+  color: var(--white);
+  padding: 14px 16px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color var(--t-sm), box-shadow var(--t-sm), background var(--t-sm);
+  box-sizing: border-box;
+}
+
+.checkout-form input:focus,
+.checkout-form select:focus,
+.checkout-form textarea:focus {
+  background: var(--bg-card);
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px var(--blue-glow);
+  outline: none;
+}
+
+.checkout-form input::placeholder,
+.checkout-form textarea::placeholder {
+  color: var(--text-lo);
+}
+
+.checkout-form input:disabled,
+.checkout-form select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--bg-2);
+}
+
+/* Select dropdown arrow */
+.checkout-form select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%239ca3af' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 16px) center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+/* Textarea */
+.checkout-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Pincode wrapper */
+.pincode-wrapper {
+  position: relative;
+}
+
+.pincode-wrapper input {
+  padding-right: 180px;
+}
+
+.pincode-hint {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: var(--text-mid);
+  display: none;
+  max-width: 170px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pincode-hint.success {
+  color: #10b981;
+}
+
+/* Field error */
+.field-error {
+  display: none;
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 6px;
+  padding-left: 4px;
+}
+
+/* Two-column form row */
+.form-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-4);
+}
+
+/* ── Payment methods ── */
+.payment-method {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.payment-method label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  background: var(--bg-3);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 15px 18px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-hi);
+  transition:
+    border-color var(--t-sm),
+    background var(--t-sm),
+    transform var(--t-sm);
+}
+
+.payment-method label:hover {
+  border-color: var(--blue);
+  background: rgba(26,111,186,0.08);
+  transform: translateX(5px);
+}
+
+.payment-method input[type="radio"] {
+  width: 18px; height: 18px;
+  accent-color: var(--blue);
+  flex-shrink: 0;
+}
+
+/* Disabled payment option */
+.payment-method label:has(input:disabled) {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.payment-method label:has(input:disabled):hover {
+  border-color: var(--border);
+  background: var(--bg-3);
+  transform: none;
+}
+
+/* ── Order Summary ── */
+.order-summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border-hi);
+  border-radius: var(--r-xl);
+  padding: var(--sp-6);
+  height: fit-content;
+  position: sticky;
+  top: 90px;
+  box-shadow: var(--shadow-md);
+}
+
+.order-summary h2 {
+  font-family: var(--f-head);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: var(--sp-5);
+  padding-bottom: var(--sp-4);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Summary rows */
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--sp-3);
+  font-size: 14px;
+  color: var(--text-mid);
+}
+
+.summary-row.total {
+  color: var(--white);
+  font-family: var(--f-head);
+  font-size: 18px;
+  font-weight: 800;
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border);
+  margin-bottom: 0;
+}
+
+.summary-row.total span:last-child { color: var(--yellow); }
+
+/* Place order button */
+.place-order-btn {
+  width: 100%;
+  margin-top: var(--sp-6);
+  padding: 16px;
+  border-radius: var(--r-md);
+  background: linear-gradient(135deg, var(--yellow), var(--orange));
+  color: #000;
+  font-family: var(--f-head);
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--t-md) var(--ease-out);
+}
+
+.place-order-btn::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  transition: left var(--t-md);
+}
+
+.place-order-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-yel);
+}
+
+.place-order-btn:hover::after { left: 100%; }
+.place-order-btn:active { transform: scale(0.97); }
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .checkout-layout { grid-template-columns: 1fr; }
+  .order-summary { position: static; }
+}
+
+@media (max-width: 600px) {
+  .checkout-page { padding: var(--sp-16) var(--sp-5); }
+  .checkout-title { font-size: 2.4rem; }
+  .checkout-form { padding: var(--sp-6) var(--sp-5); }
+  .form-group { grid-template-columns: 1fr; gap: 0; }
+}
+
+/* ── Test Card Info ── */
+.test-card-info {
+  margin-top: var(--sp-4);
+  padding: 12px 16px;
+  background: rgba(26, 111, 186, 0.15);
+  border: 1px solid rgba(26, 111, 186, 0.3);
+  border-radius: var(--r-md);
+  font-size: 12px;
+  color: var(--text-mid);
+  text-align: center;
+}
+
+.test-card-info i {
+  color: var(--blue);
+  margin-right: 6px;
+}
+
+/* ── Cart Items in Summary ── */
+.cart-items-summary {
+  max-height: 250px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cart-item-summary {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.cart-item-summary img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cart-item-summary .info {
+  flex: 1;
+}
+
+.cart-item-summary .info h4 {
+  color: var(--white);
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.cart-item-summary .info p {
+  color: var(--text-mid);
+  font-size: 12px;
+}
+
+.cart-item-summary .price {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+/* ── Payment Radio Active State ── */
+.payment-option input:checked + i {
+  color: var(--yellow);
+}
+
+.payment-option:has(input:checked) {
+  border-color: var(--yellow);
+  background: rgba(234, 179, 8, 0.1);
+}

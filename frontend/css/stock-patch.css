@@ -1,0 +1,60 @@
+/* ============================================================
+   frontend/css/stock-patch.css
+   Add this <link> to index.html, mens.html, womens.html, product.html
+
+   These styles replace the inline style.color that product.js
+   was previously setting directly. Now product.js uses CSS classes:
+   .stock.in / .stock.low / .stock.out
+
+   Also adds styles for the product-stock element on the single
+   product page (.product-stock.in / .low / .out)
+   ============================================================ */
+
+/* ── Product card stock badge ── */
+.product-info .stock,
+.product-stock {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--f-sans, 'Outfit', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin: 4px 0 8px;
+  width: fit-content;
+}
+
+/* In stock — green */
+.stock.in,
+.product-stock.in {
+  background: rgba(29, 184, 112, 0.12);
+  color: #1DB870;
+  border: 1px solid rgba(29, 184, 112, 0.3);
+}
+
+/* Low stock — amber */
+.stock.low,
+.product-stock.low {
+  background: rgba(232, 160, 32, 0.12);
+  color: #E8A020;
+  border: 1px solid rgba(232, 160, 32, 0.3);
+}
+
+/* Out of stock — red */
+.stock.out,
+.product-stock.out {
+  background: rgba(224, 69, 58, 0.1);
+  color: #E0453A;
+  border: 1px solid rgba(224, 69, 58, 0.25);
+}
+
+/* Disabled Add to Cart button */
+.add-cart-btn:disabled,
+.btn-cart:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}

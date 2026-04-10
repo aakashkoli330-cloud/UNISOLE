@@ -1,0 +1,241 @@
+/* ==========================================================
+   UNISOLE — BASE.CSS
+   Design System · Tokens · Reset · Shared Components
+   ========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
+
+/* ── Design Tokens ── */
+:root {
+  /* Brand */
+  --blue:          #1A6FBA;
+  --blue-lt:       #3B9AE8;
+  --blue-glow:     rgba(26,111,186,0.28);
+  --yellow:        #F5D000;
+  --orange:        #EE8C1A;
+  --yellow-glow:   rgba(245,208,0,0.32);
+
+  /* Surfaces */
+  --bg:            #06070A;
+  --bg-2:          #0D1018;
+  --bg-3:          #141820;
+  --bg-card:       #111521;
+  --border:        rgba(255,255,255,0.06);
+  --border-hi:     rgba(255,255,255,0.12);
+
+  /* Text */
+  --text-hi:       #F0F2F7;
+  --text-mid:      #8C93A8;
+  --text-lo:       #474E63;
+  --white:         #FFFFFF;
+
+  /* Status */
+  --green:         #22C55E;
+  --red:           #EF4444;
+  --amber:         #F59E0B;
+  --sky:           #38BDF8;
+
+  /* Typography */
+  --f-display:     'Bebas Neue', sans-serif;
+  --f-head:        'Syne', sans-serif;
+  --f-body:        'DM Sans', sans-serif;
+
+  /* Spacing scale */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px;  --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px; --sp-8: 32px;  --sp-10: 40px;
+  --sp-12: 48px; --sp-16: 64px; --sp-20: 80px;
+
+  /* Radii */
+  --r-xs: 6px; --r-sm: 10px; --r-md: 14px;
+  --r-lg: 20px; --r-xl: 28px; --r-full: 999px;
+
+  /* Shadows */
+  --shadow-sm:   0 2px 12px rgba(0,0,0,0.35);
+  --shadow-md:   0 8px 32px rgba(0,0,0,0.5);
+  --shadow-lg:   0 20px 60px rgba(0,0,0,0.65);
+  --shadow-blue: 0 12px 40px var(--blue-glow);
+  --shadow-yel:  0 12px 36px var(--yellow-glow);
+
+  /* Easing */
+  --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Durations */
+  --t-xs:  0.12s; --t-sm: 0.2s;
+  --t-md:  0.32s; --t-lg: 0.55s;
+
+  /* Layout */
+  --max-w: 1240px;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--f-body);
+  background: var(--bg);
+  color: var(--text-hi);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+a { text-decoration: none; color: inherit; transition: color var(--t-sm) var(--ease-out); }
+
+button {
+  font-family: var(--f-head);
+  border: none; outline: none;
+  cursor: pointer;
+  transition: all var(--t-md) var(--ease-out);
+}
+
+input, select, textarea {
+  font-family: var(--f-body);
+  width: 100%;
+  background: var(--bg-3);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--text-hi);
+  padding: 13px 16px;
+  font-size: 14px;
+  transition: border-color var(--t-sm), box-shadow var(--t-sm), background var(--t-sm);
+  outline: none;
+}
+
+input::placeholder, textarea::placeholder { color: var(--text-lo); }
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--blue);
+  background: var(--bg-card);
+  box-shadow: 0 0 0 3px var(--blue-glow);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+
+/* ── Container ── */
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+}
+
+/* ── Typography ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--f-head);
+  color: var(--white);
+  line-height: 1.15;
+  font-weight: 800;
+}
+
+p { color: var(--text-mid); font-size: 15px; line-height: 1.7; }
+
+/* ── Shared Buttons ── */
+.btn, .btn-primary, .btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 13px 28px;
+  border-radius: var(--r-full);
+  font-family: var(--f-head);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--t-md) var(--ease-out);
+}
+
+.btn-primary, .btn.primary {
+  background: var(--blue);
+  color: var(--white);
+}
+.btn-primary:hover, .btn.primary:hover {
+  background: var(--blue-lt);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-blue);
+}
+
+.btn-accent, .btn.accent {
+  background: linear-gradient(135deg, var(--yellow), var(--orange));
+  color: #000;
+}
+.btn-accent:hover, .btn.accent:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-yel);
+}
+
+/* ── Card ── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--sp-6);
+}
+
+/* ── Footer ── */
+.footer {
+  background: #030407;
+  border-top: 1px solid var(--border);
+  padding: var(--sp-12) 0;
+  margin-top: var(--sp-20);
+  text-align: center;
+}
+
+.footer p {
+  font-size: 13px;
+  color: var(--text-lo);
+  margin-bottom: var(--sp-2);
+}
+
+.footer a { color: var(--text-mid); transition: color var(--t-sm); }
+.footer a:hover { color: var(--yellow); }
+
+/* ── Hidden ── */
+.hidden { display: none !important; }
+
+/* ── Scroll Reveal ── */
+.sr {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+.sr.visible { opacity: 1; transform: none; }
+.sr-d1 { transition-delay: 0.08s; }
+.sr-d2 { transition-delay: 0.16s; }
+.sr-d3 { transition-delay: 0.26s; }
+.sr-d4 { transition-delay: 0.36s; }
+
+/* ── Keyframes ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 var(--blue-glow); }
+  70%  { box-shadow: 0 0 0 12px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
