@@ -44,9 +44,18 @@ function validatePhone(phone) {
   if (!phone || phone.trim() === "") {
     return "Please enter your phone number";
   }
-  if (!/^\d{10}$/.test(phone.trim())) {
+
+  const cleaned = phone.replace(/\D/g, "");
+
+  if (cleaned.length !== 10) {
     return "Phone number must be exactly 10 digits";
   }
+
+  const firstDigit = cleaned[0];
+  if (!["6", "7", "8", "9"].includes(firstDigit)) {
+    return "Phone number must start with 6, 7, 8, or 9 (valid Indian mobile)";
+  }
+
   return null;
 }
 
@@ -61,6 +70,17 @@ function validateDistrict(district) {
   if (!district || district === "") {
     return "Please select your district";
   }
+
+  const selectedState = document.getElementById("state")?.value;
+  const pincode = document.getElementById("pincode")?.value.trim();
+
+  if (pincode && PINCODE_DATA[pincode]) {
+    const [pinDistrict, pinState] = PINCODE_DATA[pincode];
+    if (district !== pinDistrict) {
+      return `District should be ${pinDistrict} for this pincode`;
+    }
+  }
+
   return null;
 }
 
@@ -68,9 +88,25 @@ function validatePincode(pincode) {
   if (!pincode || pincode.trim() === "") {
     return "Please enter your pincode";
   }
-  if (!/^\d{6}$/.test(pincode.trim())) {
+
+  const cleaned = pincode.replace(/\D/g, "");
+
+  if (cleaned.length !== 6) {
     return "Pincode must be exactly 6 digits";
   }
+
+  if (!/^[1-9]\d{5}$/.test(cleaned)) {
+    return "Invalid Indian pincode format";
+  }
+
+  const selectedState = document.getElementById("state")?.value;
+  if (selectedState && PINCODE_DATA[cleaned]) {
+    const [district, state] = PINCODE_DATA[cleaned];
+    if (state !== selectedState) {
+      return `Pincode ${cleaned} doesn't belong to ${selectedState}`;
+    }
+  }
+
   return null;
 }
 
