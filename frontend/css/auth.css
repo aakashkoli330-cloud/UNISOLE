@@ -6,18 +6,21 @@
 /* ── Page wrapper ── */
 .auth-page {
   min-height: 100vh;
+  min-height: 100dvh;
   background: var(--bg);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   position: relative;
   overflow-x: hidden;
-  padding: 80px var(--sp-6) var(--sp-10);
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 @media (max-width: 600px) {
   .auth-page {
-    padding-top: 60px;
+    padding: 70px 16px 20px;
+    align-items: flex-start;
   }
 }
 
@@ -82,10 +85,10 @@
 .auth-container .brand {
   display: block;
   font-family: var(--f-display);
-  font-size: 48px;
-  letter-spacing: 8px;
+  font-size: 36px;
+  letter-spacing: 6px;
   color: var(--white);
-  margin-bottom: var(--sp-8);
+  margin-bottom: 24px;
   cursor: default;
   transition: none;
 }
@@ -99,11 +102,28 @@
   background: var(--bg-card);
   border: 1px solid var(--border-hi);
   border-radius: var(--r-xl);
-  padding: 42px 38px;
+  padding: 28px 32px;
   box-shadow:
-    0 32px 80px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+    0 32px 80px rgba(0,0,0,0.55),
+    0 0 0 1px rgba(255,255,255,0.04) inset;
   backdrop-filter: blur(10px);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+.auth-box h2 {
+  font-family: var(--f-head);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.auth-box .subtitle {
+  font-size: 13px;
+  color: var(--text-lo);
+  margin-bottom: 20px;
 }
 
 .auth-box h2 {
@@ -121,10 +141,21 @@
 }
 
 /* ── Inputs ── */
-.auth-box form {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+.auth-box form { display: flex; flex-direction: column; gap: 0; }
+
+.auth-box input {
+  background: var(--bg-3);
+  border: 1.5px solid var(--border);
+  color: var(--white);
+  border-radius: var(--r-sm);
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  transition:
+    border-color var(--t-sm),
+    box-shadow var(--t-sm),
+    background var(--t-sm),
+    transform var(--t-sm);
 }
 
 .auth-box input {
@@ -153,21 +184,21 @@
 .auth-box button[type="submit"],
 .auth-box button:not(.google-btn) {
   width: 100%;
-  padding: 15px;
+  padding: 13px;
   border-radius: var(--r-md);
   background: linear-gradient(135deg, var(--yellow), var(--orange));
   border: none;
   font-family: var(--f-head);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 900;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   color: #000;
   cursor: pointer;
   position: relative;
   overflow: hidden;
   transition: all var(--t-md) var(--ease-out);
-  margin-top: var(--sp-2);
+  margin-top: 8px;
 }
 
 .auth-box button[type="submit"]::before,
@@ -200,10 +231,10 @@
 /* "or" divider */
 .auth-box p[style*="text-align:center"] {
   color: var(--text-lo);
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  margin: var(--sp-4) 0;
+  margin: 12px 0;
   position: relative;
 }
 
@@ -241,8 +272,8 @@
 
 /* ── Auth switch ── */
 .auth-switch {
-  margin-top: var(--sp-5);
-  font-size: 14px;
+  margin-top: 16px;
+  font-size: 13px;
   color: var(--text-lo);
 }
 
