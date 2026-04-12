@@ -1,0 +1,186 @@
+/* ==========================================================
+   UNISOLE — BOTTOM NAVIGATION (Mobile Only)
+   Fixed bottom nav bar for app-like mobile experience
+   ========================================================== */
+
+/* ── Bottom Navigation Bar ── */
+.bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(6, 7, 10, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  padding: 8px 0;
+  padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  z-index: 999;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Nav Items ── */
+.bottom-nav-items {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 12px;
+  color: var(--text-lo);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+  min-width: 60px;
+}
+
+.bottom-nav-item:active {
+  transform: scale(0.92);
+}
+
+.bottom-nav-item i {
+  font-size: 22px;
+  transition: transform 0.2s ease;
+}
+
+.bottom-nav-item span {
+  font-family: var(--f-head);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* ── Active State ── */
+.bottom-nav-item.active {
+  color: var(--yellow);
+}
+
+.bottom-nav-item.active i {
+  transform: scale(1.1);
+}
+
+/* ── Cart Badge on Bottom Nav ── */
+.bottom-nav-item .nav-badge {
+  position: absolute;
+  top: 2px;
+  right: 8px;
+  min-width: 18px;
+  height: 18px;
+  background: var(--yellow);
+  color: #000;
+  font-family: var(--f-head);
+  font-size: 10px;
+  font-weight: 900;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  box-shadow: 0 2px 8px var(--yellow-glow);
+}
+
+/* ── Home Icon (Special) ── */
+.bottom-nav-item.home-icon {
+  position: relative;
+}
+
+.bottom-nav-item.home-icon::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  background: var(--yellow);
+  border-radius: 0 0 4px 4px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.bottom-nav-item.home-icon.active::before {
+  opacity: 1;
+}
+
+/* ── Show Bottom Nav on Mobile Only ── */
+@media (max-width: 767px) {
+  .bottom-nav {
+    display: block;
+  }
+
+  /* Add padding to main content to avoid bottom nav overlap */
+  main,
+  .product-page,
+  .cart-page,
+  .checkout-page,
+  .orders-page,
+  .profile-page,
+  .gradient-hero + .products-section,
+  .products-section {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 20px));
+  }
+
+  /* Adjust footer margin for mobile */
+  .footer {
+    margin-bottom: 0;
+    padding-bottom: calc(var(--sp-12) + env(safe-area-inset-bottom, 20px));
+  }
+
+  /* Auth pages don't need bottom nav padding */
+  .auth-page {
+    padding-bottom: 20px;
+  }
+}
+
+/* ── Touch Feedback Animation ── */
+@keyframes navTap {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.88);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.bottom-nav-item:active i {
+  animation: navTap 0.15s ease;
+}
+
+/* ── Safe Area for iPhone X and newer ── */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .bottom-nav {
+    padding-bottom: calc(8px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ── Tablet (768px - 1024px) - Hide bottom nav ── */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .bottom-nav {
+    display: none;
+  }
+}
+
+/* ── Notification Dot ── */
+.bottom-nav-item .nav-dot {
+  position: absolute;
+  top: 6px;
+  right: 14px;
+  width: 8px;
+  height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+}

@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/toast.css" />
+    <link rel="stylesheet" href="css/bottom-nav.css" />
+    <link rel="stylesheet" href="css/touch.css" />
     <link rel="stylesheet" href="css/cart.css" />
     <link rel="stylesheet" href="css/auth.css" />
     <link rel="stylesheet" href="css/checkout.css" />
@@ -132,8 +134,40 @@
         <a href="mailto:unisole.store@gmail.com">unisole.store@gmail.com</a>
       </p>
     </footer>
+
+    <!-- ================= BOTTOM NAVIGATION (Mobile) ================= -->
+    <nav class="bottom-nav">
+      <div class="bottom-nav-items">
+        <a href="index.html" class="bottom-nav-item" data-page="home">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+        <a href="mens.html" class="bottom-nav-item" data-page="men">
+          <i class="fas fa-person"></i>
+          <span>Men</span>
+        </a>
+        <a href="womens.html" class="bottom-nav-item" data-page="women">
+          <i class="fas fa-person-dress"></i>
+          <span>Women</span>
+        </a>
+        <a
+          href="cart.html"
+          class="bottom-nav-item home-icon active"
+          data-page="cart"
+        >
+          <i class="fas fa-bag-shopping"></i>
+          <span>Cart</span>
+        </a>
+        <a href="profile.html" class="bottom-nav-item" data-page="profile">
+          <i class="fas fa-user"></i>
+          <span>Profile</span>
+        </a>
+      </div>
+    </nav>
+
     <!-- JS -->
     <script src="js/toast.js"></script>
+    <script src="js/bottom-nav.js"></script>
     <script src="js/cartActions.js" defer></script>
     <script src="js/cart.js" defer></script>
     <script src="js/authNavbar.js"></script>

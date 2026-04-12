@@ -1,0 +1,246 @@
+/* ==========================================================
+   UNISOLE — TOUCH OPTIMIZATION
+   Mobile-specific touch improvements
+   ========================================================== */
+
+/* ── Touch Feedback for Buttons ── */
+@media (max-width: 767px) {
+  /* Prevent text selection on interactive elements */
+  button,
+  .btn,
+  .btn-primary,
+  .btn-accent,
+  .hero-btn,
+  .btn-view,
+  .btn-cart,
+  .add-cart-btn,
+  .checkout-btn,
+  .place-order-btn,
+  .remove-btn,
+  .login-btn {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* Touch-friendly button sizing */
+  .hero-btn,
+  .btn-view,
+  .btn-cart,
+  .add-cart-btn,
+  .checkout-btn,
+  .place-order-btn {
+    min-height: 48px;
+  }
+
+  /* Remove hover effects on touch devices */
+  .product-card:hover {
+    transform: none;
+  }
+
+  .product-card:hover::before {
+    opacity: 0;
+  }
+
+  .product-card:hover img {
+    transform: none;
+  }
+
+  .product-card:hover .product-img::after {
+    transform: translateY(100%);
+  }
+
+  /* Disable hover underlines on links */
+  .nav-links a:hover::after {
+    width: 0;
+  }
+
+  .brand:hover {
+    letter-spacing: 5px;
+  }
+
+  .brand:hover::after {
+    width: 0;
+  }
+
+  /* Better touch targets for quantity controls */
+  .qty-controls button {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+
+  /* Swipe to delete hint */
+  .cart-item {
+    position: relative;
+  }
+
+  /* Payment options touch friendly */
+  .payment-option {
+    min-height: 56px;
+    padding: 16px 18px;
+  }
+
+  /* Form inputs - larger touch targets */
+  .checkout-form input,
+  .checkout-form select,
+  .checkout-form textarea,
+  .profile-form input {
+    min-height: 48px;
+  }
+
+  /* Better checkbox/radio touch */
+  .payment-method input[type="radio"] {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* ── Active State for Touch ── */
+@media (max-width: 767px) {
+  .btn:active,
+  .btn-primary:active,
+  .btn-accent:active,
+  .hero-btn:active,
+  .btn-view:active,
+  .btn-cart:active,
+  .add-cart-btn:active,
+  .checkout-btn:active,
+  .place-order-btn:active,
+  button:active {
+    transform: scale(0.97);
+    opacity: 0.9;
+  }
+
+  /* Cart item remove animation */
+  .remove-btn:active {
+    transform: scale(0.95);
+    background: rgba(239, 68, 68, 0.2);
+  }
+
+  /* Bottom nav active state */
+  .bottom-nav-item:active {
+    opacity: 0.7;
+  }
+
+  /* Product card tap */
+  .product-card:active {
+    opacity: 0.9;
+  }
+}
+
+/* ── Smooth Scrolling Enhancement ── */
+@media (max-width: 767px) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Momentum scrolling */
+  .products-container,
+  .products-grid,
+  .orders-list,
+  .cart-items {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  /* Better scrollbar for touch */
+  .products-container::-webkit-scrollbar,
+  .products-grid::-webkit-scrollbar,
+  .orders-list::-webkit-scrollbar,
+  .cart-items::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ── Viewport Height Fix for Mobile ── */
+@supports (height: 100dvh) {
+  @media (max-width: 767px) {
+    .gradient-hero {
+      min-height: 100dvh;
+    }
+  }
+}
+
+/* ── iOS-Specific Fixes ── */
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 767px) {
+    /* Fix for iOS Safari viewport height */
+    .gradient-hero {
+      min-height: -webkit-fill-available;
+    }
+
+    /* Prevent iOS zoom on inputs */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    input[type="number"],
+    select,
+    textarea {
+      font-size: 16px !important;
+    }
+  }
+}
+
+/* ── Input Zoom Prevention on Focus ── */
+@media (max-width: 767px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+/* ── Hide scrollbar but keep functionality ── */
+@media (max-width: 767px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* ── Loading States ── */
+@media (max-width: 767px) {
+  .skeleton-card {
+    min-height: 300px;
+  }
+
+  .skeleton-image {
+    height: 180px;
+  }
+}
+
+/* ── Image Optimization for Mobile ── */
+@media (max-width: 767px) {
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .product-img img {
+    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.4));
+  }
+}
+
+/* ── Better Focus States for Accessibility ── */
+@media (max-width: 767px) {
+  *:focus {
+    outline: none;
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+}
+
+/* ── Prevent pull-to-refresh on main content ── */
+@media (max-width: 767px) {
+  body {
+    overscroll-behavior-y: contain;
+  }
+}
