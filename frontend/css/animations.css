@@ -624,9 +624,75 @@
   animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* ── Cursor Effects ── */
-.cursor-grow {
+/* ── Custom Cursor ── */
+body {
+  cursor: none;
+}
+
+a,
+button,
+.btn,
+[role="button"],
+input,
+textarea,
+select {
   cursor: pointer;
+}
+
+.custom-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.05s linear;
+  display: none;
+}
+
+.custom-cursor.active {
+  display: block;
+}
+
+.custom-cursor svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--yellow);
+  filter: drop-shadow(0 0 8px rgba(245, 208, 0, 0.5));
+}
+
+.custom-cursor.hover {
+  transform: translate(-50%, -50%) scale(1.4);
+}
+
+.custom-cursor.hover svg {
+  fill: var(--white);
+}
+
+@media (max-width: 768px) {
+  body {
+    cursor: auto;
+  }
+  a,
+  button,
+  .btn,
+  [role="button"],
+  input,
+  textarea,
+  select {
+    cursor: auto;
+  }
+  .custom-cursor {
+    display: none !important;
+  }
+}
+
+* {
+  cursor: none;
+}
+
+input,
+textarea,
+select {
+  cursor: text;
 }
 
 /* ── Mobile Animations ── */
