@@ -109,22 +109,21 @@
 
   /* ── Hero Text Animation ── */
   function initHeroTextAnimation() {
-    const heroTitle = document.querySelector(".hero-content h1");
-    if (!heroTitle) return;
-
-    const text = heroTitle.textContent;
-    heroTitle.innerHTML = "";
-
-    const words = text.split(" ");
-    words.forEach((word, i) => {
-      const span = document.createElement("span");
-      span.className = "hero-title-word";
-      span.textContent = word;
-      span.style.animationDelay = `${i * 0.15 + 0.3}s`;
-      heroTitle.appendChild(span);
-      if (i < words.length - 1)
-        heroTitle.appendChild(document.createTextNode(" "));
-    });
+    // Disabled - using CSS animation instead
+    // const heroTitle = document.querySelector(".hero-content h1");
+    // if (!heroTitle) return;
+    // const text = heroTitle.textContent;
+    // heroTitle.innerHTML = "";
+    // const words = text.split(" ");
+    // words.forEach((word, i) => {
+    //   const span = document.createElement("span");
+    //   span.className = "hero-title-word";
+    //   span.textContent = word;
+    //   span.style.animationDelay = `${i * 0.15 + 0.3}s`;
+    //   heroTitle.appendChild(span);
+    //   if (i < words.length - 1)
+    //     heroTitle.appendChild(document.createTextNode(" "));
+    // });
   }
 
   /* ── Parallax Effect for Hero ── */
