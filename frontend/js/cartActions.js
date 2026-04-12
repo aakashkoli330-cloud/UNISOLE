@@ -84,7 +84,7 @@
       });
 
       const data = await res.json();
-      
+
       if (!res.ok) {
         if (window.showToast) {
           window.showToast.error(data.message || "Failed to add to cart");
@@ -100,19 +100,12 @@
       } else {
         alert("Added to cart");
       }
-
     } catch {
       if (window.showToast) {
         window.showToast.error("Failed to add to cart");
       } else {
         alert("Failed to add to cart");
       }
-    }
-
-      await window.updateCartCount();
-      alert("Added to cart");
-    } catch {
-      alert("Failed to add to cart");
     }
   };
 
@@ -144,14 +137,14 @@
 
     await fetch(`${API_URL}/remove/${productId}`, {
       method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
     });
 
     if (typeof window.loadCart === "function") {
       window.loadCart();
     }
     window.updateCartCount();
-    
+
     if (window.showToast) {
       window.showToast.info("Item removed from cart");
     }
