@@ -680,19 +680,6 @@ select {
   select {
     cursor: auto;
   }
-  .custom-cursor {
-    display: none !important;
-  }
-}
-
-* {
-  cursor: none;
-}
-
-input,
-textarea,
-select {
-  cursor: text;
 }
 
 /* ── Mobile Animations ── */
