@@ -9,7 +9,7 @@
 console.log("product.js loaded");
 
 (() => {
-  const PRODUCT_API     = "/api/products";
+  const PRODUCT_API = "/api/products";
   const PLACEHOLDER_IMG = "/images/placeholder.png";
 
   /* ── Safe add to cart ── */
@@ -74,16 +74,16 @@ console.log("product.js loaded");
 
       const token = localStorage.getItem("token");
       let cartItems = {};
-      
+
       if (token) {
         try {
           const cartRes = await fetch("/api/cart", {
-            headers: { Authorization: `Bearer ${token}` }
+            headers: { Authorization: `Bearer ${token}` },
           });
           if (cartRes.ok) {
             const cartData = await cartRes.json();
             if (cartData.items) {
-              cartData.items.forEach(item => {
+              cartData.items.forEach((item) => {
                 const pid = item.product?._id || item.product;
                 cartItems[pid.toString()] = item.quantity;
               });
@@ -97,12 +97,12 @@ console.log("product.js loaded");
       products.forEach((p) => {
         const card = document.createElement("div");
         card.className = "product-card";
-        
+
         const inCart = cartItems[p._id.toString()] || 0;
         const atMaxStock = inCart >= p.stock;
         const isOutOfStock = p.stock <= 0;
         const isDisabled = isOutOfStock || atMaxStock;
-        
+
         let btnText = "Add to Cart";
         if (isOutOfStock) btnText = "Out of Stock";
         else if (atMaxStock) btnText = `Max (${inCart})`;
@@ -135,7 +135,6 @@ console.log("product.js loaded");
 
         container.appendChild(card);
       });
-
     } catch (err) {
       console.error("Load products error:", err);
       container.innerHTML = `<p style="color:var(--danger);">Failed to load products. Please refresh.</p>`;
@@ -153,17 +152,20 @@ console.log("product.js loaded");
 
       const p = await res.json();
 
-      const img       = document.querySelector(".product-image img");
-      const title     = document.querySelector(".product-title");
-      const price     = document.querySelector(".product-price");
-      const desc      = document.querySelector(".product-desc");
-      const addBtn    = document.querySelector(".add-cart-btn");
+      const img = document.querySelector(".product-image img");
+      const title = document.querySelector(".product-title");
+      const price = document.querySelector(".product-price");
+      const desc = document.querySelector(".product-desc");
+      const addBtn = document.querySelector(".add-cart-btn");
       const stockText = document.querySelector(".product-stock");
+      const category = document.querySelector(".product-category");
 
-      if (img)   img.src = getImageSrc(p.image);
+      if (img) img.src = getImageSrc(p.image);
       if (title) title.textContent = p.name;
       if (price) price.textContent = `₹${p.price}`;
-      if (desc)  desc.textContent  = p.description || "";
+      if (desc) desc.textContent = p.description || "";
+      if (category)
+        category.textContent = p.category ? p.category.toUpperCase() : "";
 
       // FIX: Use CSS classes instead of inline style.color
       if (stockText) {
@@ -183,19 +185,19 @@ console.log("product.js loaded");
       // Control button state
       if (p.stock <= 0) {
         if (addBtn) {
-          addBtn.disabled   = true;
-          addBtn.innerText  = "Out of Stock";
+          addBtn.disabled = true;
+          addBtn.innerText = "Out of Stock";
           addBtn.style.opacity = "0.55";
-          addBtn.style.cursor  = "not-allowed";
+          addBtn.style.cursor = "not-allowed";
         }
       } else {
         if (addBtn) addBtn.onclick = () => safeAddToCart(p._id);
       }
-
     } catch (err) {
       console.error("Product detail error:", err);
       const page = document.querySelector(".product-page");
-      if (page) page.innerHTML = `<p style="color:var(--danger);padding:60px;">Failed to load product.</p>`;
+      if (page)
+        page.innerHTML = `<p style="color:var(--danger);padding:60px;">Failed to load product.</p>`;
     }
   }
 
@@ -205,7 +207,7 @@ console.log("product.js loaded");
 
     if (container) {
       let category = null;
-      if (document.body.classList.contains("men-page"))   category = "men";
+      if (document.body.classList.contains("men-page")) category = "men";
       if (document.body.classList.contains("women-page")) category = "women";
       window.loadProducts(category);
     }
@@ -214,5 +216,4 @@ console.log("product.js loaded");
       loadProductDetails();
     }
   });
-
 })();

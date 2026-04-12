@@ -1,111 +1,116 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Product | UNISOLE</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Product | UNISOLE</title>
 
-  <!-- BASE STYLES -->
-   <link rel="stylesheet" href="css/stock-patch.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/navbar.css">
-  <link rel="stylesheet" href="css/product.css">
+    <!-- BASE STYLES -->
+    <link rel="stylesheet" href="css/stock-patch.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/product.css" />
 
-  <!-- FONTS & ICONS -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+    <!-- FONTS & ICONS -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar">
+      <div class="nav-container">
+        <!-- BRAND -->
+        <a href="index.html" class="brand">UNISOLE</a>
 
-<!-- ================= NAVBAR ================= -->
-<header class="navbar">
-  <div class="nav-container">
+        <!-- HAMBURGER-->
+        <div class="hamburger"><span></span><span></span><span></span></div>
 
-    <!-- BRAND -->
-    <a href="index.html" class="brand">UNISOLE</a>
+        <!-- LINKS -->
+        <nav class="nav-links">
+          <a href="mens.html">Men</a>
+          <a href="womens.html">Women</a>
+          <a href="orders.html">Orders</a>
+        </nav>
 
-    <!-- HAMBURGER-->
-     <div class="hamburger">
-  <span></span><span></span><span></span>
-</div>
+        <!-- ACTIONS -->
+        <div class="nav-actions">
+          <!-- CART -->
+          <a href="cart.html" class="cart-btn" aria-label="Cart">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span id="cart-count" class="cart-count">0</span>
+          </a>
 
-    <!-- LINKS -->
-    <nav class="nav-links">
-      <a href="mens.html">Men</a>
-      <a href="womens.html">Women</a>
-      <a href="orders.html">Orders</a>
-    </nav>
+          <!-- LOGIN -->
+          <a href="login.html" class="login-btn">Login</a>
 
-    <!-- ACTIONS -->
-    <div class="nav-actions">
+          <!-- PROFILE ICON -->
+          <a
+            href="profile.html"
+            id="profile-btn"
+            class="profile-icon"
+            style="display: none"
+            aria-label="Profile"
+          >
+            <i class="fa-solid fa-user"></i>
+          </a>
+        </div>
+      </div>
+    </header>
 
-      <!-- CART -->
-      <a href="cart.html" class="cart-btn" aria-label="Cart">
-        <i class="fa-solid fa-bag-shopping"></i>
-        <span id="cart-count" class="cart-count">0</span>
-      </a>
+    <!-- ================= PRODUCT PAGE ================= -->
+    <main class="product-page">
+      <!-- IMAGE -->
+      <div class="product-image">
+        <img src="" alt="Product image" />
+      </div>
 
-      <!-- LOGIN -->
-      <a href="login.html" class="login-btn">Login</a>
+      <!-- DETAILS -->
+      <div class="product-details">
+        <div class="product-category"></div>
 
-      <!-- PROFILE ICON -->
-      <a href="profile.html" id="profile-btn" class="profile-icon" style="display:none;" aria-label="Profile">
-        <i class="fa-solid fa-user"></i>
-      </a>
+        <h1 class="product-title"></h1>
 
-    </div>
-  </div>
-</header>
+        <div class="product-price"></div>
 
-<!-- ================= PRODUCT PAGE ================= -->
-<main class="product-page">
+        <p class="product-stock"></p>
 
-  <!-- IMAGE -->
-  <div class="product-image">
-    <img src="" alt="Product image">
-  </div>
+        <p class="product-desc"></p>
 
-  <!-- DETAILS -->
-  <div class="product-details">
+        <div class="action-buttons">
+          <button class="add-cart-btn">Add to Cart</button>
+        </div>
 
-    <h1 class="product-title"></h1>
+        <div class="extra-info">
+          <p><i class="fa-solid fa-truck"></i> Free Delivery</p>
+          <p><i class="fa-solid fa-rotate-left"></i> 7-Day Easy Returns</p>
+          <p>
+            <i class="fa-solid fa-shield-halved"></i> 100% Original Products
+          </p>
+        </div>
+      </div>
+    </main>
 
-    <div class="product-price"></div>
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <p>© 2026 UNISOLE — Designed for Motion</p>
+      <p>
+        Contact us -
+        <a href="mailto:unisole.store@gmail.com">unisole.store@gmail.com</a>
+      </p>
+    </footer>
 
-    <!-- 🔥 NEW STOCK  -->
-    <p class="product-stock"></p>
+    <!-- ================= SCRIPTS ================= -->
+    <script src="js/authNavbar.js"></script>
+    <script src="js/headerAuth.js"></script>
 
-    <p class="product-desc"></p>
-
-    <div class="action-buttons">
-      <button class="add-cart-btn">Add to Cart</button>
-    </div>
-
-    <div class="extra-info">
-      <p><i class="fa-solid fa-truck"></i> Free Delivery</p>
-      <p><i class="fa-solid fa-rotate-left"></i> 7-Day Easy Returns</p>
-      <p><i class="fa-solid fa-shield-halved"></i> 100% Original Products</p>
-    </div>
-
-  </div>
-</main>
-
-<!-- ================= FOOTER ================= -->
-<footer class="footer">
-  <p>© 2026 UNISOLE — Designed for Motion</p>
-  <p>
-  Contact us - <a href="mailto:unisole.store@gmail.com">unisole.store@gmail.com</a> 
-</p>
-</footer>
-
-
-<!-- ================= SCRIPTS ================= -->
-<script src="js/authNavbar.js"></script>
-<script src="js/headerAuth.js"></script>
-
-<script src="js/cartActions.js"></script>
-<script src="js/product.js"></script>
-<script src="js/enhancements.js" defer></script>
-
-</body>
+    <script src="js/cartActions.js"></script>
+    <script src="js/product.js"></script>
+    <script src="js/enhancements.js" defer></script>
+  </body>
 </html>

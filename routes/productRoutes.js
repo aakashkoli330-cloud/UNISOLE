@@ -95,10 +95,19 @@ router.post(
     }
     upload.single("image")(req, res, (err) => {
       if (err) {
-        console.error("Upload error:", err);
+        console.error("Upload error:", err.message);
+        let message = "Upload failed";
+        if (err.message.includes("File too large")) {
+          message = "Image file is too large (max 5MB)";
+        } else if (err.message.includes("Invalid file type")) {
+          message = "Only JPG, PNG, WEBP images are allowed";
+        }
+        return res.status(400).json({ message });
+      }
+      if (!req.file && !req.file?.path && !req.file?.secure_url) {
         return res
           .status(400)
-          .json({ message: err.message || "Upload failed" });
+          .json({ message: "Image upload failed - no file received" });
       }
       next();
     });
@@ -116,10 +125,14 @@ router.put(
     }
     upload.single("image")(req, res, (err) => {
       if (err) {
-        console.error("Upload error:", err);
-        return res
-          .status(400)
-          .json({ message: err.message || "Upload failed" });
+        console.error("Upload error:", err.message);
+        let message = "Upload failed";
+        if (err.message.includes("File too large")) {
+          message = "Image file is too large (max 5MB)";
+        } else if (err.message.includes("Invalid file type")) {
+          message = "Only JPG, PNG, WEBP images are allowed";
+        }
+        return res.status(400).json({ message });
       }
       next();
     });
