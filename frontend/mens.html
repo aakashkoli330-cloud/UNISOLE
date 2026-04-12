@@ -32,42 +32,46 @@
     <!-- ================= NAVBAR ================= -->
     <header class="navbar">
       <div class="nav-container">
-        <a href="index.html" class="brand">UNISOLE</a>
+        <div class="nav-left">
+          <a href="index.html" class="brand">UNISOLE</a>
+        </div>
 
-        <nav class="nav-links">
+        <nav class="nav-links nav-center">
           <a href="mens.html" class="active">Men</a>
           <a href="womens.html">Women</a>
           <a href="orders.html">Orders</a>
         </nav>
 
-        <div class="search-wrapper">
-          <div class="search-container">
-            <input
-              type="text"
-              id="searchInput"
-              placeholder="Search shoes..."
-              autocomplete="off"
-            />
-            <div id="searchResults" class="search-results"></div>
+        <div class="nav-right">
+          <div class="search-wrapper">
+            <div class="search-container">
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Search shoes..."
+                autocomplete="off"
+              />
+              <div id="searchResults" class="search-results"></div>
+            </div>
           </div>
-        </div>
 
-        <div class="nav-actions">
-          <a href="cart.html" class="cart-btn">
-            <i class="fa-solid fa-bag-shopping"></i>
-            <span id="cart-count" class="cart-count">0</span>
-          </a>
+          <div class="nav-actions">
+            <a href="cart.html" class="cart-btn">
+              <i class="fa-solid fa-bag-shopping"></i>
+              <span id="cart-count" class="cart-count">0</span>
+            </a>
 
-          <a href="login.html" class="login-btn">Login</a>
+            <a href="login.html" class="login-btn">Login</a>
 
-          <a
-            href="profile.html"
-            class="profile-avatar"
-            id="profile-btn"
-            style="display: none"
-          >
-            <i class="fa-solid fa-user"></i>
-          </a>
+            <a
+              href="profile.html"
+              class="profile-avatar"
+              id="profile-btn"
+              style="display: none"
+            >
+              <i class="fa-solid fa-user"></i>
+            </a>
+          </div>
         </div>
 
         <div class="hamburger"><span></span><span></span><span></span></div>
