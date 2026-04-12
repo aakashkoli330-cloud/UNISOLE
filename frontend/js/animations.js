@@ -259,53 +259,10 @@
     });
   }
 
-  /* ── Custom Shoe Cursor (Desktop Only) ── */
+  /* ── Custom Cursor (Disabled - using default) ── */
   function initCustomCursor() {
-    if (window.innerWidth < 768) return;
-
-    const cursor = document.createElement("div");
-    cursor.className = "custom-cursor active";
-    cursor.innerHTML = `
-      <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-        <path d="M448 416c0-8.8-7.2-16-16-16H96c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h24l8 32H192c0 44.2 35.8 80 80 80s80-35.8 80-80h64c44.2 0 80-35.8 80-80v-64h32v64zM48 432c-22.1 0-40-17.9-40-40V48c0-22.1 17.9-40 40-40h160c22.1 0 40 17.9 40 40v32c0 22.1-17.9 40-40 40H128l-16 16H48z"/>
-      </svg>
-    `;
-    document.body.appendChild(cursor);
-
-    let mouseX = 0,
-      mouseY = 0;
-    let cursorX = 0,
-      cursorY = 0;
-    const smoothing = 0.15;
-
-    document.addEventListener("mousemove", (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
-
-    document.addEventListener("mouseenter", () => {
-      cursor.classList.add("active");
-    });
-
-    document.addEventListener("mouseleave", () => {
-      cursor.classList.remove("active");
-    });
-
-    const hoverElements = document.querySelectorAll(
-      "a, button, .btn, input, textarea, select, [role='button']",
-    );
-    hoverElements.forEach((el) => {
-      el.addEventListener("mouseenter", () => cursor.classList.add("hover"));
-      el.addEventListener("mouseleave", () => cursor.classList.remove("hover"));
-    });
-
-    function animateCursor() {
-      cursorX += (mouseX - cursorX) * smoothing;
-      cursorY += (mouseY - cursorY) * smoothing;
-      cursor.style.left = cursorX + "px";
-      cursor.style.top = cursorY + "px";
-      requestAnimationFrame(animateCursor);
-    }
+    // Using default browser cursor
+  }
 
     animateCursor();
 
