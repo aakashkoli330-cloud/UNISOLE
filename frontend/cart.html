@@ -72,39 +72,59 @@
 
     <!-- ================= CART ================= -->
     <main class="cart-page">
-      <h1 class="cart-title">Your Cart</h1>
+      <div class="cart-header">
+        <h1 class="cart-title gradient-text">Your Cart</h1>
+        <p class="cart-subtitle">Review your items before checkout</p>
+      </div>
 
       <div class="cart-layout">
-        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-items reveal-stagger" id="cart-items"></div>
 
-        <div class="cart-summary">
+        <div class="cart-summary reveal">
+          <div class="summary-icon">
+            <i class="fas fa-receipt"></i>
+          </div>
           <h2>Order Summary</h2>
 
           <div class="summary-row">
-            <span>Subtotal</span>
+            <span><i class="fas fa-box"></i> Subtotal</span>
             <span id="subtotal">₹0</span>
           </div>
 
           <div class="summary-row">
-            <span>Shipping</span>
-            <span>Free</span>
+            <span><i class="fas fa-truck"></i> Shipping</span>
+            <span class="free-badge">Free</span>
           </div>
+
+          <div class="summary-divider"></div>
 
           <div class="summary-row total">
             <span>Total</span>
             <span id="total">₹0</span>
           </div>
 
-          <!-- CONNECTED TO cart.js -->
-          <button class="checkout-btn" onclick="goToCheckout()">
+          <button
+            class="checkout-btn btn-animate btn-magnetic ripple"
+            onclick="goToCheckout()"
+          >
+            <i class="fas fa-lock"></i>
             Proceed to Checkout
           </button>
+
+          <p class="secure-text">
+            <i class="fas fa-shield-halved"></i> Secure checkout
+          </p>
         </div>
       </div>
 
-      <p id="empty-cart" style="display: none; text-align: center">
-        Your cart is empty
-      </p>
+      <div id="empty-cart" class="empty-state" style="display: none">
+        <div class="empty-icon">
+          <i class="fas fa-bag-shopping"></i>
+        </div>
+        <h2>Your cart is empty</h2>
+        <p>Looks like you haven't added anything yet</p>
+        <a href="mens.html" class="empty-btn btn-animate">Start Shopping</a>
+      </div>
     </main>
 
     <!-- ================= FOOTER ================= -->

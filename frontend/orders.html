@@ -70,17 +70,25 @@
     </header>
     <!-- ================= ORDERS PAGE ================= -->
     <main class="orders-page">
-      <h1 class="page-title">My Orders</h1>
+      <div class="orders-header">
+        <h1 class="page-title gradient-text">My Orders</h1>
+        <p class="orders-subtitle">Track your recent purchases</p>
+      </div>
 
       <!-- ORDERS LIST -->
-      <div class="orders-list" id="orders-list">
+      <div class="orders-list reveal-stagger" id="orders-list">
         <!-- Orders will be injected here by orders.js -->
       </div>
 
       <!-- EMPTY STATE -->
-      <p class="empty-text" id="empty-orders" style="display: none">
-        You haven’t placed any orders yet.
-      </p>
+      <div class="empty-state" id="empty-orders" style="display: none">
+        <div class="empty-icon">
+          <i class="fas fa-box-open"></i>
+        </div>
+        <h2>No orders yet</h2>
+        <p>Start shopping to see your orders here</p>
+        <a href="mens.html" class="empty-btn btn-animate">Shop Now</a>
+      </div>
     </main>
 
     <!-- ================= FOOTER ================= -->
