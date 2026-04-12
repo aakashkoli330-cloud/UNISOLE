@@ -151,7 +151,7 @@ console.log("product.js loaded");
 
       products.forEach((p) => {
         const card = document.createElement("div");
-        card.className = "product-card reveal";
+        card.className = "product-card reveal glass-card";
         card.setAttribute("data-tilt", "");
 
         const inCart = cartItems[p._id.toString()] || 0;
@@ -164,8 +164,8 @@ console.log("product.js loaded");
         else if (atMaxStock) btnText = `Max (${inCart})`;
 
         card.innerHTML = `
-          <div class="product-img img-zoom">
-            <img src="${getImageSrc(p.image)}" alt="${p.name}" loading="lazy">
+          <div class="product-img img-zoom blur-reveal">
+            <img src="${getImageSrc(p.image)}" alt="${p.name}" loading="lazy" class="lightbox-trigger">
           </div>
           <div class="product-info">
             <h3>${p.name}</h3>

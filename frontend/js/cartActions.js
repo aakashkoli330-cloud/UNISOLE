@@ -100,6 +100,9 @@
       } else {
         alert("Added to cart");
       }
+      if (window.showSuccessAnimation) {
+        window.showSuccessAnimation();
+      }
     } catch {
       if (window.showToast) {
         window.showToast.error("Failed to add to cart");

@@ -64,9 +64,9 @@ window.loadCart = async function () {
       const imageUrl = getImageSrc(product.image);
 
       cartItemsEl.innerHTML += `
-        <div class="cart-item">
+        <div class="cart-item glass-card">
 
-          <div class="cart-img">
+          <div class="cart-img lightbox-trigger">
             <img src="${imageUrl}" alt="${product.name}">
           </div>
 
