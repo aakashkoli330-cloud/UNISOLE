@@ -1,127 +1,212 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Checkout | UNISOLE</title>
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/navbar.css">
-  <link rel="stylesheet" href="css/cart.css">
-  <link rel="stylesheet" href="css/checkout.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Checkout | UNISOLE</title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/cart.css" />
+    <link rel="stylesheet" href="css/checkout.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="brand">UNISOLE</a>
 
-  <header class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="brand">UNISOLE</a>
-      <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="cart.html">Cart</a>
-      </nav>
-    </div>
-  </header>
+        <nav class="nav-links">
+          <a href="mens.html">Men</a>
+          <a href="womens.html">Women</a>
+          <a href="orders.html">Orders</a>
+        </nav>
 
-  <main class="checkout-page">
-    <h1 class="checkout-title">Checkout</h1>
+        <div class="nav-actions">
+          <a href="cart.html" class="cart-btn" aria-label="Cart">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span id="cart-count" class="cart-count">0</span>
+          </a>
+          <a href="login.html" class="login-btn" id="login-btn">Login</a>
+          <a
+            href="profile.html"
+            id="profile-btn"
+            class="profile-icon"
+            style="display: none"
+            aria-label="Profile"
+          >
+            <i class="fa-solid fa-user"></i>
+          </a>
+        </div>
 
-    <div class="checkout-layout">
-      <section class="checkout-form">
-        <h2><i class="fas fa-truck"></i> Shipping Details</h2>
-        
-        <div class="field-wrapper">
-          <label for="fullName">Full Name</label>
-          <input id="fullName" type="text" placeholder="Enter your full name" required>
-          <span class="field-error" id="fullNameError"></span>
-        </div>
-        
-        <div class="field-wrapper">
-          <label for="phone">Phone Number</label>
-          <input id="phone" type="tel" placeholder="10-digit mobile number" maxlength="10" required>
-          <span class="field-error" id="phoneError"></span>
-        </div>
-        
-        <div class="field-wrapper">
-          <label for="state">State</label>
-          <select id="state" required>
-            <option value="">Select State</option>
-          </select>
-          <span class="field-error" id="stateError"></span>
-        </div>
-        
-        <div class="field-wrapper">
-          <label for="district">District</label>
-          <select id="district" required disabled>
-            <option value="">Select District</option>
-          </select>
-          <span class="field-error" id="districtError"></span>
-        </div>
-        
-        <div class="field-wrapper">
-          <label for="pincode">Pincode</label>
-          <div class="pincode-wrapper">
-            <input id="pincode" type="text" placeholder="6-digit pincode" maxlength="6" required>
-            <span class="pincode-hint" id="pincodeHint"></span>
+        <div class="hamburger"><span></span><span></span><span></span></div>
+      </div>
+    </header>
+
+    <main class="checkout-page">
+      <div class="checkout-header">
+        <a href="cart.html" class="back-link"
+          ><i class="fas fa-arrow-left"></i> Back to Cart</a
+        >
+        <h1 class="checkout-title">Checkout</h1>
+      </div>
+
+      <div class="checkout-layout">
+        <section class="checkout-form">
+          <h2><i class="fas fa-truck"></i> Shipping Details</h2>
+
+          <div class="field-wrapper">
+            <label for="fullName">Full Name</label>
+            <input
+              id="fullName"
+              type="text"
+              placeholder="Enter your full name"
+              required
+            />
+            <span class="field-error" id="fullNameError"></span>
           </div>
-          <span class="field-error" id="pincodeError"></span>
-        </div>
-        
-        <div class="field-wrapper">
-          <label for="address">Complete Address</label>
-          <textarea id="address" placeholder="House no., Street, Area, Landmark (optional)" rows="3" required></textarea>
-          <span class="field-error" id="addressError"></span>
-        </div>
 
-        <h2 class="section-gap"><i class="fas fa-credit-card"></i> Payment Method</h2>
-        <div class="payment-method">
-          <label class="payment-option active">
-            <input type="radio" name="payment" value="razorpay" checked>
-            <i class="fas fa-credit-card"></i>
-            <span>Pay Online (Razorpay)</span>
-          </label>
-          <label class="payment-option">
-            <input type="radio" name="payment" value="cod">
-            <i class="fas fa-money-bill-wave"></i>
-            <span>Cash on Delivery</span>
-          </label>
-        </div>
+          <div class="field-wrapper">
+            <label for="phone">Phone Number</label>
+            <input
+              id="phone"
+              type="tel"
+              placeholder="10-digit mobile number"
+              maxlength="10"
+              required
+            />
+            <span class="field-error" id="phoneError"></span>
+          </div>
 
-        <button id="placeOrderBtn" class="place-order-btn">
-          <i class="fas fa-lock"></i> Proceed to Pay
-        </button>
+          <div class="field-wrapper">
+            <label for="state">State</label>
+            <select id="state" required>
+              <option value="">Select State</option>
+            </select>
+            <span class="field-error" id="stateError"></span>
+          </div>
 
-        <p class="test-card-info">
-          <i class="fas fa-info-circle"></i>
-          Test Mode: Use card 4111 1111 1111 1111, any future expiry, any CVV
-        </p>
-      </section>
+          <div class="field-wrapper">
+            <label for="district">District</label>
+            <select id="district" required disabled>
+              <option value="">Select District</option>
+            </select>
+            <span class="field-error" id="districtError"></span>
+          </div>
 
-      <aside class="order-summary">
-        <h2><i class="fas fa-shopping-bag"></i> Order Summary</h2>
-        <div id="cartItems" class="cart-items-summary"></div>
-        <div class="summary-row">
-          <span>Subtotal</span>
-          <span id="subtotal">₹0</span>
-        </div>
-        <div class="summary-row">
-          <span>Shipping</span>
-          <span>Free</span>
-        </div>
-        <div class="summary-row total">
-          <span>Total</span>
-          <span id="total">₹0</span>
-        </div>
-      </aside>
-    </div>
-  </main>
+          <div class="field-wrapper">
+            <label for="pincode">Pincode</label>
+            <div class="pincode-wrapper">
+              <input
+                id="pincode"
+                type="text"
+                placeholder="6-digit pincode"
+                maxlength="6"
+                required
+              />
+              <span class="pincode-hint" id="pincodeHint"></span>
+            </div>
+            <span class="field-error" id="pincodeError"></span>
+          </div>
 
-  <script>
-    const RAZORPAY_KEY_ID = "rzp_test_SbQBaTenDLPSMr";
-  </script>
-  <script src="js/india-address.js"></script>
-  <script src="js/cartActions.js"></script>
-  <script src="js/headerAuth.js"></script>
-  <script src="js/checkout.js"></script>
-</body>
+          <div class="field-wrapper">
+            <label for="address">Complete Address</label>
+            <textarea
+              id="address"
+              placeholder="House no., Street, Area, Landmark (optional)"
+              rows="3"
+              required
+            ></textarea>
+            <span class="field-error" id="addressError"></span>
+          </div>
+
+          <h2 class="section-gap">
+            <i class="fas fa-credit-card"></i> Payment Method
+          </h2>
+          <div class="payment-method">
+            <label class="payment-option active">
+              <input type="radio" name="payment" value="razorpay" checked />
+              <i class="fas fa-credit-card"></i>
+              <span>Pay Online (Razorpay)</span>
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="payment" value="cod" />
+              <i class="fas fa-money-bill-wave"></i>
+              <span>Cash on Delivery</span>
+            </label>
+          </div>
+
+          <button id="placeOrderBtn" class="place-order-btn">
+            <i class="fas fa-lock"></i> Proceed to Pay
+          </button>
+
+          <p class="test-card-info">
+            <i class="fas fa-info-circle"></i>
+            Test Mode: Use card 4111 1111 1111 1111, any future expiry, any CVV
+          </p>
+        </section>
+
+        <aside class="order-summary">
+          <h2><i class="fas fa-shopping-bag"></i> Order Summary</h2>
+          <div id="cartItems" class="cart-items-summary"></div>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="subtotal">₹0</span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span>Free</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span id="total">₹0</span>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <div class="footer-brand">UNISOLE</div>
+      <p class="footer-tagline">Designed for Motion</p>
+
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="mens.html">Men</a>
+        <a href="womens.html">Women</a>
+        <a href="orders.html">Orders</a>
+        <a href="cart.html">Cart</a>
+      </div>
+
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <p>© 2026 UNISOLE — Designed for Motion</p>
+      <p>
+        Contact us -
+        <a href="mailto:unisole.store@gmail.com">unisole.store@gmail.com</a>
+      </p>
+    </footer>
+
+    <script>
+      const RAZORPAY_KEY_ID = "rzp_test_SbQBaTenDLPSMr";
+    </script>
+    <script src="js/toast.js"></script>
+    <script src="js/india-address.js"></script>
+    <script src="js/cartActions.js"></script>
+    <script src="js/headerAuth.js"></script>
+    <script src="js/checkout.js"></script>
+  </body>
 </html>

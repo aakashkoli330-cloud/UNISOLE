@@ -9,7 +9,11 @@
   }
 
   function requireLogin() {
-    alert("Please login first");
+    if (window.showToast) {
+      window.showToast.warning("Please login to continue");
+    } else {
+      alert("Please login first");
+    }
     window.location.href = "login.html";
   }
 
@@ -19,7 +23,7 @@
     const byClass = document.querySelectorAll(".cart-count");
 
     if (byId) elements.push(byId);
-    byClass.forEach(el => {
+    byClass.forEach((el) => {
       if (el !== byId) elements.push(el);
     });
 
@@ -33,7 +37,7 @@
 
     const token = getToken();
     if (!token) {
-      badges.forEach(b => {
+      badges.forEach((b) => {
         b.textContent = "0";
         b.style.display = "none";
       });
@@ -42,7 +46,7 @@
 
     try {
       const res = await fetch(API_URL, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (!res.ok) throw new Error();
@@ -52,14 +56,13 @@
 
       const totalQty = items.reduce(
         (sum, item) => sum + (item.quantity || 0),
-        0
+        0,
       );
 
-      badges.forEach(b => {
+      badges.forEach((b) => {
         b.textContent = totalQty;
         b.style.display = totalQty > 0 ? "flex" : "none";
       });
-
     } catch (err) {
       console.error("Cart count error:", err);
     }
@@ -75,21 +78,39 @@
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ productId })
+        body: JSON.stringify({ productId }),
       });
 
       const data = await res.json();
       
       if (!res.ok) {
-        alert(data.message || "Failed to add to cart");
+        if (window.showToast) {
+          window.showToast.error(data.message || "Failed to add to cart");
+        } else {
+          alert(data.message || "Failed to add to cart");
+        }
         return;
       }
 
       await window.updateCartCount();
-      alert("Added to cart");
+      if (window.showToast) {
+        window.showToast.success("Product added to cart!");
+      } else {
+        alert("Added to cart");
+      }
 
+    } catch {
+      if (window.showToast) {
+        window.showToast.error("Failed to add to cart");
+      } else {
+        alert("Failed to add to cart");
+      }
+    }
+
+      await window.updateCartCount();
+      alert("Added to cart");
     } catch {
       alert("Failed to add to cart");
     }
@@ -104,9 +125,9 @@
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ productId, change })
+      body: JSON.stringify({ productId, change }),
     });
 
     if (typeof window.loadCart === "function") {
@@ -130,6 +151,10 @@
       window.loadCart();
     }
     window.updateCartCount();
+    
+    if (window.showToast) {
+      window.showToast.info("Item removed from cart");
+    }
   };
 
   /* ================= INIT ================= */

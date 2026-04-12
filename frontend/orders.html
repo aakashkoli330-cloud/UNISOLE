@@ -1,100 +1,124 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>My Orders | UNISOLE</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Orders | UNISOLE</title>
 
-  <!-- STYLES -->
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/order.css">
-  <link rel="stylesheet" href="css/navbar.css">
-  <link rel="stylesheet" href="css/cart.css">
-  <link rel="stylesheet" href="css/auth.css">
-  <link rel="stylesheet" href="css/checkout.css">
-  <link rel="stylesheet" href="css/profile.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+    <!-- STYLES -->
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/order.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/toast.css" />
+    <link rel="stylesheet" href="css/cart.css" />
+    <link rel="stylesheet" href="css/auth.css" />
+    <link rel="stylesheet" href="css/checkout.css" />
+    <link rel="stylesheet" href="css/profile.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
 
-<body>
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar">
+      <div class="nav-container">
+        <!-- BRAND -->
+        <a href="index.html" class="brand">UNISOLE</a>
 
-<!-- ================= NAVBAR ================= -->
-<!-- ================= NAVBAR ================= -->
-<header class="navbar">
-  <div class="nav-container">
+        <!-- HAMBURGER-->
+        <div class="hamburger"><span></span><span></span><span></span></div>
 
-    <!-- BRAND -->
-    <a href="index.html" class="brand">UNISOLE</a>
+        <!-- LINKS -->
+        <nav class="nav-links">
+          <a href="mens.html">Men</a>
+          <a href="womens.html">Women</a>
+          <a href="orders.html">Orders</a>
+        </nav>
 
-    <!-- HAMBURGER-->
-     <div class="hamburger">
-  <span></span><span></span><span></span>
-</div>
+        <!-- ACTIONS -->
+        <div class="nav-actions">
+          <!-- CART ICON -->
+          <a href="cart.html" class="cart-btn" aria-label="Cart">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span id="cart-count" class="cart-count">0</span>
+          </a>
 
+          <!-- LOGIN BUTTON -->
+          <a href="login.html" class="login-btn">Login</a>
 
-    <!-- LINKS -->
-    <nav class="nav-links">
-      <a href="mens.html">Men</a>
-      <a href="womens.html">Women</a>
-      <a href="orders.html">Orders</a>
-    </nav>
+          <!-- PROFILE AVATAR -->
+          <a
+            href="profile.html"
+            class="profile-avatar"
+            id="profile-btn"
+            style="display: none"
+            aria-label="Profile"
+          >
+            <i class="fa-solid fa-user"></i>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- ================= ORDERS PAGE ================= -->
+    <main class="orders-page">
+      <h1 class="page-title">My Orders</h1>
 
-    <!-- ACTIONS -->
-    <div class="nav-actions">
+      <!-- ORDERS LIST -->
+      <div class="orders-list" id="orders-list">
+        <!-- Orders will be injected here by orders.js -->
+      </div>
 
-      <!-- CART ICON -->
-      <a href="cart.html" class="cart-btn" aria-label="Cart">
-        <i class="fa-solid fa-bag-shopping"></i>
-        <span id="cart-count" class="cart-count">0</span>
-      </a>
+      <!-- EMPTY STATE -->
+      <p class="empty-text" id="empty-orders" style="display: none">
+        You haven’t placed any orders yet.
+      </p>
+    </main>
 
-      <!-- LOGIN BUTTON -->
-      <a href="login.html" class="login-btn">Login</a>
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <div class="footer-brand">UNISOLE</div>
+      <p class="footer-tagline">Designed for Motion</p>
 
-      <!-- PROFILE AVATAR -->
-      <a href="profile.html" class="profile-avatar" id="profile-btn" style="display:none;" aria-label="Profile">
-        <i class="fa-solid fa-user"></i>
-      </a>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="mens.html">Men</a>
+        <a href="womens.html">Women</a>
+        <a href="orders.html">Orders</a>
+        <a href="cart.html">Cart</a>
+      </div>
 
-    </div>
-  </div>
-</header>
-<!-- ================= ORDERS PAGE ================= -->
-<main class="orders-page">
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      </div>
 
-  <h1 class="page-title">My Orders</h1>
+      <div class="footer-divider"></div>
 
-  <!-- ORDERS LIST -->
-  <div class="orders-list" id="orders-list">
-    <!-- Orders will be injected here by orders.js -->
-  </div>
+      <p>© 2026 UNISOLE — Designed for Motion</p>
+      <p>
+        Contact us -
+        <a href="mailto:unisole.store@gmail.com">unisole.store@gmail.com</a>
+      </p>
+    </footer>
 
-  <!-- EMPTY STATE -->
-  <p class="empty-text" id="empty-orders" style="display:none;">
-    You haven’t placed any orders yet.
-  </p>
+    <!-- ================= SCRIPTS ================= -->
+    <script src="js/toast.js"></script>
+    <script src="js/cartActions.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/authNavbar.js"></script>
 
-</main>
-
-<!-- ================= FOOTER ================= -->
-<footer class="footer">
-  <p>© 2026 UNISOLE — Designed for Motion</p>
-  <p>
-  Contact us - <a href="mailto:unisole.store@gmail.com">unisole.store@gmail.com</a> 
-</p>
-</footer>
-
-
-<!-- ================= SCRIPTS ================= -->
- <script src="js/cartActions.js"></script>
-<script src="js/cart.js"></script>
-<script src="js/authNavbar.js"></script>
-
-<script src="js/orders.js"></script>
-<script src="js/authNavbar.js"></script>
-<script src="js/headerAuth.js"></script>
-<script src="js/enhancements.js" defer></script>
-
-</body>
+    <script src="js/orders.js"></script>
+    <script src="js/authNavbar.js"></script>
+    <script src="js/headerAuth.js"></script>
+    <script src="js/enhancements.js" defer></script>
+  </body>
 </html>

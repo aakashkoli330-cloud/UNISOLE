@@ -55,7 +55,56 @@ console.log("product.js loaded");
     const container = document.querySelector(".products-container");
     if (!container) return;
 
-    container.innerHTML = `<p style="color:var(--text-60);padding:40px 0;">Loading products...</p>`;
+    container.innerHTML = `
+      <div class="skeleton-card">
+        <div class="skeleton-image"></div>
+        <div class="skeleton-info">
+          <div class="skeleton skeleton-title"></div>
+          <div class="skeleton skeleton-category"></div>
+          <div class="skeleton skeleton-price"></div>
+          <div class="skeleton-buttons">
+            <div class="skeleton skeleton-btn"></div>
+            <div class="skeleton skeleton-btn"></div>
+          </div>
+        </div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skeleton-image"></div>
+        <div class="skeleton-info">
+          <div class="skeleton skeleton-title"></div>
+          <div class="skeleton skeleton-category"></div>
+          <div class="skeleton skeleton-price"></div>
+          <div class="skeleton-buttons">
+            <div class="skeleton skeleton-btn"></div>
+            <div class="skeleton skeleton-btn"></div>
+          </div>
+        </div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skeleton-image"></div>
+        <div class="skeleton-info">
+          <div class="skeleton skeleton-title"></div>
+          <div class="skeleton skeleton-category"></div>
+          <div class="skeleton skeleton-price"></div>
+          <div class="skeleton-buttons">
+            <div class="skeleton skeleton-btn"></div>
+            <div class="skeleton skeleton-btn"></div>
+          </div>
+        </div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skeleton-image"></div>
+        <div class="skeleton-info">
+          <div class="skeleton skeleton-title"></div>
+          <div class="skeleton skeleton-category"></div>
+          <div class="skeleton skeleton-price"></div>
+          <div class="skeleton-buttons">
+            <div class="skeleton skeleton-btn"></div>
+            <div class="skeleton skeleton-btn"></div>
+          </div>
+        </div>
+      </div>
+    `;
 
     try {
       let url = PRODUCT_API;
@@ -68,7 +117,13 @@ console.log("product.js loaded");
       container.innerHTML = "";
 
       if (!Array.isArray(products) || products.length === 0) {
-        container.innerHTML = `<p style="color:var(--text-60);padding:40px 0;">No products found.</p>`;
+        container.innerHTML = `
+          <div class="skeleton-empty" style="grid-column: 1 / -1;">
+            <div class="skeleton-empty-icon"><i class="fas fa-shoe-prints"></i></div>
+            <div class="skeleton-empty-text">No products found</div>
+            <div class="skeleton-empty-sub">Check back later for new arrivals</div>
+          </div>
+        `;
         return;
       }
 

@@ -358,14 +358,16 @@
 }
 
 @media (max-width: 480px) {
-  .nav-actions { gap: var(--sp-4); }
+  .nav-actions {
+    gap: var(--sp-4);
+  }
 }
 
 /* ── Small Logout Button ── */
 .logout-btn-small {
   padding: 6px 14px;
   border-radius: var(--r-full);
-  border: 1.5px solid rgba(245,208,0,0.4);
+  border: 1.5px solid rgba(245, 208, 0, 0.4);
   background: transparent;
   color: var(--yellow);
   font-family: var(--f-head);
@@ -382,7 +384,6 @@
   background: var(--yellow);
   border-color: var(--yellow);
   color: #000;
-}
 }
 
 /* ── Search Bar ── */

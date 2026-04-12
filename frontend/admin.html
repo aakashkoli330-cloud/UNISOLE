@@ -1,111 +1,119 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Admin – UNISOLE</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin – UNISOLE</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/auth.css">
-  <link rel="stylesheet" href="css/navbar.css">
-  <link rel="stylesheet" href="css/admin.css">
-   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/auth.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
 
-<body>
+  <body class="dark">
+    <!-- NAVBAR -->
+    <nav class="admin-navbar">
+      <div class="logo">UNISOLE <span>Admin</span></div>
 
-  <!-- NAVBAR -->
-  <nav class="admin-navbar">
-    <div class="logo">UNISOLE <span>Admin</span></div>
+      <div class="nav-actions">
+        <button id="themeToggle">🌙</button>
+        <button id="logoutBtn">Logout</button>
+      </div>
+    </nav>
 
-    <div class="nav-actions">
-      <button id="themeToggle">🌙</button>
-      <button id="logoutBtn">Logout</button>
-    </div>
-  </nav>
+    <!-- MAIN -->
+    <div class="admin-main">
+      <h1>Admin Panel</h1>
 
-  <!-- MAIN -->
-  <div class="admin-main">
-
-    <h1>Admin Panel</h1>
-
-    <!-- TABS -->
-    <div class="admin-tabs">
-      <button class="tab-btn active" data-tab="products-section">Products</button>
-      <button class="tab-btn" data-tab="orders-section">Orders</button>
-    </div>
-
-    <!-- PRODUCTS -->
-    <section id="products-section" class="tab-content active">
-
-      <!-- FORM -->
-      <div class="admin-products">
-        <h2>Add / Edit Product</h2>
-
-        <form id="addForm" class="admin-form" enctype="multipart/form-data">
-
-          <div class="admin-form-row">
-            <input id="name" placeholder="Product Name" required>
-            <input id="price" type="number" placeholder="Price ₹" required>
-          </div>
-
-          <div class="admin-form-row">
-            <input id="image" type="file" accept="image/*">
-            <select id="category" required>
-              <option value="">Select Category</option>
-              <option value="men">Men</option>
-              <option value="women">Women</option>
-            </select>
-          </div>
-
-          <!--  NEW STOCK FIELD -->
-          <div class="admin-form-row">
-            <input id="stock" type="number" placeholder="Stock Quantity" required>
-          </div>
-
-          <textarea id="description" placeholder="Product Description"></textarea>
-
-          <button id="addBtn" type="submit">Add Product</button>
-
-        </form>
+      <!-- TABS -->
+      <div class="admin-tabs">
+        <button class="tab-btn active" data-tab="products-section">
+          Products
+        </button>
+        <button class="tab-btn" data-tab="orders-section">Orders</button>
       </div>
 
-      <!-- PRODUCT LIST -->
-      <div class="admin-products">
-        <h2>All Products</h2>
-        <div id="products"></div>
-      </div>
+      <!-- PRODUCTS -->
+      <section id="products-section" class="tab-content active">
+        <!-- FORM -->
+        <div class="admin-products">
+          <h2>Add / Edit Product</h2>
 
-    </section>
+          <form id="addForm" class="admin-form" enctype="multipart/form-data">
+            <div class="admin-form-row">
+              <input id="name" placeholder="Product Name" required />
+              <input id="price" type="number" placeholder="Price ₹" required />
+            </div>
 
-    <!-- ORDERS -->
-    <section id="orders-section" class="tab-content">
+            <div class="admin-form-row">
+              <input id="image" type="file" accept="image/*" />
+              <select id="category" required>
+                <option value="">Select Category</option>
+                <option value="men">Men</option>
+                <option value="women">Women</option>
+              </select>
+            </div>
 
-      <div class="admin-products">
-        <div class="orders-header">
-          <h2>All Orders</h2>
-          <div class="filter-bar">
-            <select id="orderFilter">
-              <option value="all">All Orders</option>
-              <option value="Placed">Placed</option>
-              <option value="Processing">Processing</option>
-              <option value="Shipped">Shipped</option>
-              <option value="Delivered">Delivered</option>
-              <option value="Cancelled">Cancelled</option>
-            </select>
-            <span id="orderCount" class="order-count"></span>
-          </div>
+            <!--  NEW STOCK FIELD -->
+            <div class="admin-form-row">
+              <input
+                id="stock"
+                type="number"
+                placeholder="Stock Quantity"
+                required
+              />
+            </div>
+
+            <textarea
+              id="description"
+              placeholder="Product Description"
+            ></textarea>
+
+            <button id="addBtn" type="submit">Add Product</button>
+          </form>
         </div>
-        <div id="admin-orders"></div>
-      </div>
 
-    </section>
+        <!-- PRODUCT LIST -->
+        <div class="admin-products">
+          <h2>All Products</h2>
+          <div id="products"></div>
+        </div>
+      </section>
 
-  </div>
+      <!-- ORDERS -->
+      <section id="orders-section" class="tab-content">
+        <div class="admin-products">
+          <div class="orders-header">
+            <h2>All Orders</h2>
+            <div class="filter-bar">
+              <select id="orderFilter">
+                <option value="all">All Orders</option>
+                <option value="Placed">Placed</option>
+                <option value="Processing">Processing</option>
+                <option value="Shipped">Shipped</option>
+                <option value="Delivered">Delivered</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+              <span id="orderCount" class="order-count"></span>
+            </div>
+          </div>
+          <div id="admin-orders"></div>
+        </div>
+      </section>
+    </div>
 
-  <script src="js/admin.js"></script>
-<script src="js/enhancements.js" defer></script>
-</body>
+    <script src="js/toast.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/enhancements.js" defer></script>
+  </body>
 </html>
