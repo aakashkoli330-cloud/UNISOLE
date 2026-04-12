@@ -16,6 +16,7 @@ function getImageSrc(image) {
 /* Load cart */
 window.loadCart = async function () {
   const cartItemsEl = document.getElementById("cart-items");
+  const cartLayoutEl = document.getElementById("cart-layout");
   const subtotalEl = document.getElementById("subtotal");
   const totalEl = document.getElementById("total");
   const emptyCartEl = document.getElementById("empty-cart");
@@ -31,7 +32,7 @@ window.loadCart = async function () {
 
   try {
     const res = await fetch(CART_API, {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
     });
 
     if (!res.ok) throw new Error("Cart fetch failed");
@@ -42,6 +43,7 @@ window.loadCart = async function () {
     cartItemsEl.innerHTML = "";
 
     if (!items.length) {
+      if (cartLayoutEl) cartLayoutEl.classList.add("hidden");
       if (emptyCartEl) emptyCartEl.style.display = "block";
       subtotalEl.textContent = "₹0";
       totalEl.textContent = "₹0";
@@ -50,6 +52,7 @@ window.loadCart = async function () {
       return;
     }
 
+    if (cartLayoutEl) cartLayoutEl.classList.remove("hidden");
     if (emptyCartEl) emptyCartEl.style.display = "none";
 
     let subtotal = 0;
@@ -90,7 +93,6 @@ window.loadCart = async function () {
     totalEl.textContent = `₹${subtotal}`;
 
     if (window.updateCartCount) updateCartCount();
-
   } catch (err) {
     console.error("Load cart error:", err);
     cartItemsEl.innerHTML = "<p>Failed to load cart</p>";
