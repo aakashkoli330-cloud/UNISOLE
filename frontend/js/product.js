@@ -10,7 +10,7 @@ console.log("product.js loaded");
 
 (() => {
   const PRODUCT_API = "/api/products";
-  const PLACEHOLDER_IMG = "/images/placeholder.png";
+  const PLACEHOLDER_IMG = "/images/placeholder.svg";
 
   /* ── Safe add to cart ── */
   function safeAddToCart(productId) {
