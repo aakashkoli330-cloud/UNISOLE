@@ -208,23 +208,29 @@
 }
 
 /* Profile icon */
-.profile-avatar,
-.profile-icon {
+.navbar .profile-avatar,
+.navbar .profile-icon {
   all: unset;
   cursor: pointer;
   color: var(--text-hi);
-  font-size: 18px;
+  font-size: 16px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   transition:
     color var(--t-sm),
+    background var(--t-sm),
     transform var(--t-sm) var(--ease-spring);
 }
 
-.profile-avatar:hover,
-.profile-icon:hover {
+.navbar .profile-avatar:hover,
+.navbar .profile-icon:hover {
   color: var(--yellow);
-  transform: scale(1.12);
+  background: rgba(245, 208, 0, 0.1);
+  transform: scale(1.05);
 }
 
 /* Logout button (used in profile navbar) */
@@ -383,9 +389,11 @@
     font-size: 20px;
   }
 
-  .profile-icon,
-  .profile-avatar {
-    font-size: 18px;
+  .navbar .profile-icon,
+  .navbar .profile-avatar {
+    font-size: 14px;
+    width: 28px;
+    height: 28px;
   }
 
   .hamburger {

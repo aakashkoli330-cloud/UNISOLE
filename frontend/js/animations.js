@@ -65,10 +65,13 @@
   /* ── Button Ripple Effect ── */
   function initRippleEffect() {
     const rippleButtons = document.querySelectorAll(
-      ".ripple, .btn-animate, button, .hero-btn, .btn-primary, .btn-secondary",
+      ".ripple, .btn-animate, .hero-btn, .btn-primary, .btn-secondary, .checkout-btn, .empty-btn, .auth-box button[type='submit']",
     );
 
     rippleButtons.forEach((btn) => {
+      if (btn.closest(".qty-controls") || btn.classList.contains("qty-btn"))
+        return;
+
       btn.addEventListener("click", function (e) {
         const rect = this.getBoundingClientRect();
         const x = e.clientX - rect.left;

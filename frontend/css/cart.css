@@ -90,6 +90,8 @@
   background: linear-gradient(180deg, var(--blue), var(--yellow));
   opacity: 0;
   transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .cart-item:hover::before {
@@ -197,6 +199,8 @@
   border: 1px solid var(--border);
   border-radius: var(--r-sm);
   padding: 4px;
+  position: relative;
+  z-index: 1;
 }
 
 .qty-controls button {
@@ -216,11 +220,18 @@
     background var(--t-sm),
     transform var(--t-sm) var(--ease-spring);
   font-family: var(--f-head);
+  position: relative;
+  z-index: 2;
 }
 
 .qty-controls button:hover {
   background: var(--blue);
-  transform: scale(1.12);
+  color: var(--white);
+  transform: scale(1.1);
+}
+
+.qty-controls button:active {
+  transform: scale(0.95);
 }
 
 .qty-controls span {
