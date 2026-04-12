@@ -134,6 +134,27 @@
 }
 
 .gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #f5d000 50%, #1a6fba 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradientFlow 4s ease infinite;
+  color: transparent !important;
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-text {
   background: linear-gradient(135deg, #ffffff 0%, #f5d000 40%, #1a6fba 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
