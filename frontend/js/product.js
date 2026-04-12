@@ -164,7 +164,7 @@ console.log("product.js loaded");
         else if (atMaxStock) btnText = `Max (${inCart})`;
 
         card.innerHTML = `
-          <div class="product-img img-zoom blur-reveal">
+          <div class="product-img img-zoom">
             <img src="${getImageSrc(p.image)}" alt="${p.name}" loading="lazy" class="lightbox-trigger">
           </div>
           <div class="product-info">
