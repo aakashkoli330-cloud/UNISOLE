@@ -264,15 +264,6 @@
     // Using default browser cursor
   }
 
-    animateCursor();
-
-    window.addEventListener("resize", () => {
-      if (window.innerWidth < 768) {
-        cursor.style.display = "none";
-      }
-    });
-  }
-
   /* ── Initialize All Animations ── */
   function init() {
     initScrollReveal();
