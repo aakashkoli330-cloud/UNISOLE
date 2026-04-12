@@ -114,19 +114,35 @@
     const token = getToken();
     if (!token) return requireLogin();
 
-    await fetch(`${API_URL}/update`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ productId, change }),
-    });
+    try {
+      const res = await fetch(`${API_URL}/update`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ productId, change }),
+      });
 
-    if (typeof window.loadCart === "function") {
-      window.loadCart();
+      const data = await res.json();
+
+      if (!res.ok) {
+        if (window.showToast) {
+          window.showToast.error(data.message || "Failed to update quantity");
+        }
+        return;
+      }
+
+      if (typeof window.loadCart === "function") {
+        window.loadCart();
+      }
+      window.updateCartCount();
+    } catch (err) {
+      console.error("Update qty error:", err);
+      if (window.showToast) {
+        window.showToast.error("Failed to update quantity");
+      }
     }
-    window.updateCartCount();
   };
 
   /* ================= REMOVE ITEM ================= */

@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/product.css" />
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/toast.css" />
+    <link rel="stylesheet" href="css/animations.css" />
     <link rel="stylesheet" href="css/cart.css" />
     <link rel="stylesheet" href="css/auth.css" />
     <link rel="stylesheet" href="css/checkout.css" />
@@ -24,10 +26,19 @@
   </head>
 
   <body class="auth-page">
-    <div class="auth-container">
-      <div class="brand">UNISOLE</div>
+    <div class="auth-bg-shapes">
+      <div class="auth-shape shape1"></div>
+      <div class="auth-shape shape2"></div>
+      <div class="auth-shape shape3"></div>
+    </div>
 
-      <div class="auth-box">
+    <div class="auth-container">
+      <div class="brand gradient-text">UNISOLE</div>
+
+      <div class="auth-box reveal">
+        <div class="auth-icon">
+          <i class="fas fa-user-plus"></i>
+        </div>
         <h2>Create Account</h2>
         <p class="subtitle">Join the UNISOLE community</p>
 
@@ -61,7 +72,9 @@
             placeholder="Confirm your password"
             required
           />
-          <button type="submit">Register</button>
+          <button type="submit" class="btn-animate btn-magnetic ripple">
+            Register
+          </button>
         </form>
 
         <p style="text-align: center; margin: 10px 0">or</p>
@@ -71,13 +84,14 @@
 
         <div class="auth-switch">
           Already have an account?
-          <a href="login.html">Login</a>
+          <a href="login.html" class="underline-animate">Login</a>
         </div>
       </div>
     </div>
 
     <!-- JS -->
     <script src="js/toast.js"></script>
+    <script src="js/animations.js" defer></script>
     <script src="js/register.js"></script>
     <script src="js/enhancements.js" defer></script>
   </body>

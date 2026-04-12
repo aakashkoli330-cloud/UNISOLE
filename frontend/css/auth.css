@@ -1,6 +1,6 @@
 /* ==========================================================
    UNISOLE — AUTH.CSS
-   Login & Register Pages · .auth-page · .auth-box
+   Login & Register Pages · Enhanced with animations
    ========================================================== */
 
 /* ── Page wrapper ── */
@@ -24,6 +24,49 @@
   }
 }
 
+/* Animated background shapes */
+.auth-bg-shapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.auth-shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.05;
+}
+
+.auth-shape.shape1 {
+  width: 400px;
+  height: 400px;
+  background: var(--blue);
+  top: -100px;
+  left: -100px;
+  animation: morphFloat 15s ease-in-out infinite;
+}
+
+.auth-shape.shape2 {
+  width: 300px;
+  height: 300px;
+  background: var(--yellow);
+  bottom: -50px;
+  right: -50px;
+  animation: morphFloat 12s ease-in-out infinite reverse;
+}
+
+.auth-shape.shape3 {
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(135deg, var(--blue), var(--yellow));
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: morphFloat 10s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
 /* Ambient glows */
 .auth-page::before {
   content: "";
@@ -33,12 +76,13 @@
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(26, 111, 186, 0.18) 0%,
+    rgba(26, 111, 186, 0.12) 0%,
     transparent 68%
   );
   top: -200px;
   left: -180px;
   pointer-events: none;
+  animation: pulse 8s ease-in-out infinite;
 }
 
 .auth-page::after {
@@ -49,12 +93,13 @@
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(245, 208, 0, 0.1) 0%,
+    rgba(245, 208, 0, 0.08) 0%,
     transparent 65%
   );
   bottom: -150px;
   right: -100px;
   pointer-events: none;
+  animation: pulse 10s ease-in-out infinite;
 }
 
 /* ── Container ── */
@@ -79,6 +124,32 @@
     0 0 0 1px rgba(255, 255, 255, 0.04) inset;
   backdrop-filter: blur(10px);
   overflow: visible;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-box:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(26, 111, 186, 0.2) inset;
+}
+
+/* Auth icon */
+.auth-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, var(--blue), var(--yellow));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--sp-5);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.auth-icon i {
+  font-size: 28px;
+  color: var(--white);
 }
 
 /* Brand in auth pages */
@@ -87,7 +158,6 @@
   font-family: var(--f-display);
   font-size: 36px;
   letter-spacing: 6px;
-  color: var(--white);
   margin-bottom: 24px;
   cursor: default;
   transition: none;
