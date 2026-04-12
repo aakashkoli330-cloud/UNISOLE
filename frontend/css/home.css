@@ -128,9 +128,12 @@
   font-size: clamp(3.8rem, 10vw, 8rem);
   line-height: 0.95;
   letter-spacing: 3px;
-  color: var(--white);
   margin-bottom: var(--sp-5);
   animation: fadeUp 0.75s var(--ease-out) 0.1s both;
+}
+
+.hero-content h1:not(.gradient-text) {
+  color: var(--white);
 }
 
 /* Outlined accent word */
