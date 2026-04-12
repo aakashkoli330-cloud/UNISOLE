@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/skeleton.css" />
     <link rel="stylesheet" href="css/bottom-nav.css" />
     <link rel="stylesheet" href="css/touch.css" />
+    <link rel="stylesheet" href="css/animations.css" />
     <link rel="stylesheet" href="css/cart.css" />
     <link rel="stylesheet" href="css/auth.css" />
     <link rel="stylesheet" href="css/checkout.css" />
@@ -75,16 +76,32 @@
 
     <!-- ================= GRADIENT HERO ================= -->
     <section class="gradient-hero">
+      <!-- Floating decorative shoes -->
+      <div class="hero-float-elements">
+        <div class="float-shoe float float-delay-1">
+          <i class="fas fa-shoe-prints"></i>
+        </div>
+        <div class="float-shoe float float-delay-2">
+          <i class="fas fa-shoe-prints"></i>
+        </div>
+        <div class="float-shoe float float-delay-3">
+          <i class="fas fa-sneaker"></i>
+        </div>
+      </div>
+
       <div class="hero-content">
-        <h1>Walk Beyond Limits</h1>
+        <div class="hero-eyebrow">New Season 2026</div>
+        <h1 class="gradient-text">Walk Beyond Limits</h1>
         <p>
           Premium sneakers engineered for comfort, performance and bold everyday
           style.
         </p>
 
         <div class="hero-actions">
-          <a href="mens.html" class="hero-btn">Shop Men</a>
-          <a href="womens.html" class="hero-btn" style="margin-left: 14px"
+          <a href="mens.html" class="hero-btn btn-animate btn-magnetic ripple"
+            >Shop Men</a
+          >
+          <a href="womens.html" class="hero-btn btn-animate btn-magnetic ripple"
             >Shop Women</a
           >
         </div>
@@ -93,13 +110,13 @@
 
     <!-- ================= PRODUCTS ================= -->
     <section class="products-section">
-      <h2 class="section-title">Featured Drops</h2>
+      <h2 class="section-title reveal">Featured Drops</h2>
 
-      <div class="products-grid products-container"></div>
+      <div class="products-grid products-container reveal-stagger"></div>
     </section>
 
     <!-- ================= FOOTER ================= -->
-    <footer class="footer">
+    <footer class="footer reveal">
       <div class="footer-brand">UNISOLE</div>
       <p class="footer-tagline">Designed for Motion</p>
 
@@ -166,5 +183,6 @@
     <script src="js/headerAuth.js"></script>
     <script src="js/enhancements.js" defer></script>
     <script src="js/search.js"></script>
+    <script src="js/animations.js" defer></script>
   </body>
 </html>

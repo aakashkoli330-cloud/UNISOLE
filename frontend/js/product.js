@@ -151,7 +151,8 @@ console.log("product.js loaded");
 
       products.forEach((p) => {
         const card = document.createElement("div");
-        card.className = "product-card";
+        card.className = "product-card reveal";
+        card.setAttribute("data-tilt", "");
 
         const inCart = cartItems[p._id.toString()] || 0;
         const atMaxStock = inCart >= p.stock;
@@ -163,7 +164,7 @@ console.log("product.js loaded");
         else if (atMaxStock) btnText = `Max (${inCart})`;
 
         card.innerHTML = `
-          <div class="product-img">
+          <div class="product-img img-zoom">
             <img src="${getImageSrc(p.image)}" alt="${p.name}" loading="lazy">
           </div>
           <div class="product-info">
@@ -172,8 +173,8 @@ console.log("product.js loaded");
             <div class="price">₹${p.price}</div>
             ${getStockHTML(p.stock)}
             <div class="product-actions">
-              <button class="btn-view">View</button>
-              <button class="btn-cart" ${isDisabled ? "disabled" : ""}>
+              <button class="btn-view ripple">View</button>
+              <button class="btn-cart ripple" ${isDisabled ? "disabled" : ""}>
                 ${btnText}
               </button>
             </div>
