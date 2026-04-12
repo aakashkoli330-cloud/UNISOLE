@@ -8,42 +8,74 @@
   min-height: 100vh;
   background: var(--bg);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   position: relative;
-  overflow: hidden;
-  padding: var(--sp-6);
+  overflow-x: hidden;
+  padding: 80px var(--sp-6) var(--sp-10);
+}
+
+@media (max-width: 600px) {
+  .auth-page {
+    padding-top: 60px;
+  }
 }
 
 /* Ambient glows */
 .auth-page::before {
-  content: '';
+  content: "";
   position: absolute;
-  width: 700px; height: 700px;
+  width: 700px;
+  height: 700px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(26,111,186,0.18) 0%, transparent 68%);
-  top: -200px; left: -180px;
+  background: radial-gradient(
+    circle,
+    rgba(26, 111, 186, 0.18) 0%,
+    transparent 68%
+  );
+  top: -200px;
+  left: -180px;
   pointer-events: none;
 }
 
 .auth-page::after {
-  content: '';
+  content: "";
   position: absolute;
-  width: 500px; height: 500px;
+  width: 500px;
+  height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(245,208,0,0.1) 0%, transparent 65%);
-  bottom: -150px; right: -100px;
+  background: radial-gradient(
+    circle,
+    rgba(245, 208, 0, 0.1) 0%,
+    transparent 65%
+  );
+  bottom: -150px;
+  right: -100px;
   pointer-events: none;
 }
 
 /* ── Container ── */
 .auth-container {
   width: 100%;
-  max-width: 440px;
+  max-width: 420px;
   text-align: center;
   position: relative;
   z-index: 1;
   animation: fadeUp 0.65s var(--ease-out) both;
+  margin: 0 auto;
+}
+
+/* Ensure auth box doesn't overflow */
+.auth-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-hi);
+  border-radius: var(--r-xl);
+  padding: 32px 28px;
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  backdrop-filter: blur(10px);
+  overflow: visible;
 }
 
 /* Brand in auth pages */
@@ -58,7 +90,9 @@
   transition: none;
 }
 
-.auth-container .brand::after { display: none; }
+.auth-container .brand::after {
+  display: none;
+}
 
 /* ── Auth box ── */
 .auth-box {
@@ -67,8 +101,8 @@
   border-radius: var(--r-xl);
   padding: 42px 38px;
   box-shadow:
-    0 32px 80px rgba(0,0,0,0.55),
-    0 0 0 1px rgba(255,255,255,0.04) inset;
+    0 32px 80px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
   backdrop-filter: blur(10px);
 }
 
@@ -87,7 +121,11 @@
 }
 
 /* ── Inputs ── */
-.auth-box form { display: flex; flex-direction: column; gap: 0; }
+.auth-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
 
 .auth-box input {
   background: var(--bg-3);
@@ -134,11 +172,18 @@
 
 .auth-box button[type="submit"]::before,
 .auth-box button:not(.google-btn)::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: 0; left: -100%;
-  width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
   transition: left var(--t-md);
 }
 
@@ -148,7 +193,9 @@
   box-shadow: var(--shadow-yel);
 }
 
-.auth-box button[type="submit"]:hover::before { left: 100%; }
+.auth-box button[type="submit"]:hover::before {
+  left: 100%;
+}
 
 /* "or" divider */
 .auth-box p[style*="text-align:center"] {
@@ -162,7 +209,7 @@
 
 .auth-box p[style*="text-align:center"]::before,
 .auth-box p[style*="text-align:center"]::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   width: 38%;
@@ -170,8 +217,12 @@
   background: var(--border-hi);
 }
 
-.auth-box p[style*="text-align:center"]::before { left: 0; }
-.auth-box p[style*="text-align:center"]::after  { right: 0; }
+.auth-box p[style*="text-align:center"]::before {
+  left: 0;
+}
+.auth-box p[style*="text-align:center"]::after {
+  right: 0;
+}
 
 /* Google sign-in button container */
 #googleSignInButton {
@@ -202,10 +253,36 @@
   transition: color var(--t-sm);
 }
 
-.auth-switch a:hover { color: var(--yellow); }
+.auth-switch a:hover {
+  color: var(--yellow);
+}
 
 /* ── Mobile ── */
 @media (max-width: 480px) {
-  .auth-box { padding: 32px 22px; }
-  .auth-container .brand { font-size: 38px; }
+  .auth-box { 
+    padding: 24px 18px; 
+  }
+  .auth-container .brand { 
+    font-size: 36px; 
+    letter-spacing: 5px;
+  }
+  .auth-box h2 {
+    font-size: 24px;
+  }
+  .auth-container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .auth-box {
+    padding: 20px 14px;
+  }
+  .auth-box input {
+    padding: 12px 14px;
+  }
+}
+  .auth-container .brand {
+    font-size: 38px;
+  }
 }
