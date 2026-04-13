@@ -2,7 +2,6 @@
 
 🚀 A full-stack e-commerce web application for buying shoes online.
 Built using modern web technologies with authentication, cart system, and responsive UI.
-
 ---
 
 🌐 Live Demo
