@@ -444,7 +444,6 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  aspect-ratio: 1;
   transition:
     transform var(--t-md) var(--ease-out),
     box-shadow var(--t-md),
@@ -508,13 +507,14 @@
 /* Product image */
 .product-img {
   width: 100%;
-  flex: 0 0 50%;
+  aspect-ratio: 1;
   background: #0a0d15;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   position: relative;
+  flex-shrink: 0;
 }
 
 .product-img img {
