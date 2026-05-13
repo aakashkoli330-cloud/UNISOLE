@@ -444,6 +444,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  aspect-ratio: 1;
   transition:
     transform var(--t-md) var(--ease-out),
     box-shadow var(--t-md),
@@ -507,14 +508,13 @@
 /* Product image */
 .product-img {
   width: 100%;
-  aspect-ratio: 1;
+  flex: 0 0 65%;
   background: #0a0d15;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   position: relative;
-  flex-shrink: 0;
 }
 
 .product-img img {
@@ -556,44 +556,45 @@
 
 /* Product info */
 .product-info {
-  padding: var(--sp-5) var(--sp-5) 0;
-  flex-grow: 1;
+  padding: 10px 12px 0;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 3px;
   position: relative;
   z-index: 1;
+  min-height: 0;
 }
 
 .product-info h3 {
   font-family: var(--f-head);
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--white);
   line-height: 1.3;
 }
 
 .product-info .category {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--text-lo);
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   font-weight: 600;
 }
 
 .product-info .price {
   font-family: var(--f-head);
-  font-size: 19px;
+  font-size: 15px;
   font-weight: 800;
   color: var(--yellow);
-  margin: var(--sp-1) 0;
+  margin: 2px 0;
 }
 
 /* Product actions */
 .product-actions {
   display: flex;
-  gap: var(--sp-2);
-  padding: var(--sp-4) var(--sp-5) var(--sp-5);
+  gap: 6px;
+  padding: 8px 12px 12px;
   position: relative;
   z-index: 1;
 }
@@ -601,12 +602,12 @@
 .btn-view,
 .btn-cart {
   flex: 1;
-  padding: 10px var(--sp-3);
+  padding: 8px 10px;
   border-radius: var(--r-sm);
   font-family: var(--f-head);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
   border: none;
   cursor: pointer;
@@ -714,15 +715,15 @@
     gap: var(--sp-3);
   }
   .product-info {
-    padding: var(--sp-4) var(--sp-4) 0;
+    padding: 8px 10px 0;
   }
   .product-actions {
-    padding: var(--sp-3) var(--sp-4) var(--sp-4);
+    padding: 6px 10px 10px;
     flex-direction: column;
   }
   .btn-view,
   .btn-cart {
-    font-size: 11px;
-    padding: 10px var(--sp-2);
+    font-size: 10px;
+    padding: 7px 8px;
   }
 }
