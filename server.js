@@ -30,6 +30,7 @@ console.log("RAZORPAY_KEY_ID:", process.env.RAZORPAY_KEY_ID ? "OK" : "MISSING");
 const allowedOrigins = [
   "http://localhost:5000",
   "http://localhost:3000",
+  "http://localhost:5173",
   "https://unisole.onrender.com",
 ];
 
@@ -53,9 +54,21 @@ app.use(express.urlencoded({ extended: true }));
 // Serve product images
 app.use("/images", express.static(path.join(__dirname, "images")));
 
-// Serve frontend
-const frontendPath = path.join(__dirname, "frontend");
-app.use(express.static(frontendPath));
+// Serve the React app (react-frontend/dist) when built,
+// otherwise fall back to the legacy vanilla frontend.
+const fs = require("fs");
+const reactDistPath = path.join(__dirname, "react-frontend", "dist");
+const legacyFrontendPath = path.join(__dirname, "frontend");
+
+function hasReactBuild() {
+  return fs.existsSync(path.join(reactDistPath, "index.html"));
+}
+
+if (hasReactBuild()) {
+  app.use(express.static(reactDistPath));
+} else {
+  app.use(express.static(legacyFrontendPath));
+}
 
 // =================== ROUTES ===================
 const authRoutes = require("./routes/authRoutes");
@@ -71,15 +84,17 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 
 // =================== SPA FALLBACK ===================
-// FIX: This was missing — without it, refreshing any page (e.g. /cart.html)
-// returns a 404 on Render because there's no file at that URL path.
-// This sends all non-API requests to the frontend.
+// Sends all non-API requests to the frontend so direct URL
+// refreshes (e.g. /products/abc123) work on Render.
 app.get(/^(?!\/api\/).*/, (req, res) => {
   // Don't intercept API calls
   if (req.path.startsWith("/api/")) {
     return res.status(404).json({ message: "API route not found" });
   }
-  res.sendFile(path.join(frontendPath, "index.html"));
+  const indexFile = hasReactBuild()
+    ? path.join(reactDistPath, "index.html")
+    : path.join(legacyFrontendPath, "index.html");
+  res.sendFile(indexFile);
 });
 
 // =================== MONGODB ===================
