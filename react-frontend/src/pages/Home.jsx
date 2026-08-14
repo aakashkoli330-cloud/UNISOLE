@@ -34,146 +34,78 @@ export default function Home() {
 
   return (
     <div>
-      <section className="relative overflow-hidden bg-gradient-to-br from-brand-50 via-white to-accent-50">
-        <div className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-brand-200/50 blur-3xl" />
-        <div className="pointer-events-none absolute -right-20 top-8 h-96 w-96 rounded-full bg-accent-100/70 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-brand-100/60 blur-3xl" />
-        <div
-          className="pointer-events-none absolute inset-0 opacity-40"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle, rgba(37,99,235,0.12) 1px, transparent 1px)",
-            backgroundSize: "26px 26px",
-          }}
-        />
+      <section className="relative h-[30rem] overflow-hidden bg-brand-900 sm:h-[34rem] lg:h-[36rem]">
+        {heroProduct?.image ? (
+          <img
+            src={getImageSrc(heroProduct.image)}
+            alt={heroProduct.name}
+            className="absolute inset-0 h-full w-full object-cover object-center"
+            loading="eager"
+            fetchPriority="high"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-700 via-brand-600 to-brand-400" />
+        )}
 
-        <div className="container-app relative grid items-center gap-14 py-16 sm:py-24 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="animate-fade-in text-center lg:text-left">
-            <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-4 py-1.5 text-xs font-semibold text-brand-700 shadow-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-400" />
-              </span>
-              New Season 2026 — Drop 02
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-950/85 via-gray-950/40 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-gray-950/60 to-transparent" />
+
+        <div className="container-app relative flex h-full items-end pb-14 sm:pb-16">
+          <div className="max-w-2xl">
+            <span className="animate-fade-in inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest text-white ring-1 ring-white/25 backdrop-blur">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-400" />
+              New Season 2026
             </span>
-            <h1 className="mt-6 text-4xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl lg:text-7xl">
-              Walk Beyond{" "}
-              <span className="bg-gradient-to-r from-brand-600 via-brand-500 to-brand-400 bg-clip-text text-transparent">
-                Limits
-              </span>
+            <h1
+              className="mt-5 animate-fade-in text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl"
+              style={{ animationDelay: "100ms" }}
+            >
+              Walk Beyond <span className="text-accent-400">Limits</span>
             </h1>
-            <p className="mx-auto mt-5 max-w-xl text-base text-gray-600 sm:text-lg lg:mx-0">
+            <p
+              className="mt-4 max-w-md animate-fade-in text-sm text-white/85 sm:text-base"
+              style={{ animationDelay: "200ms" }}
+            >
               Premium sneakers engineered for comfort, performance and bold
-              everyday style. Step into the drop.
+              everyday style.
             </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
+            <div
+              className="mt-7 flex animate-fade-in flex-wrap items-center gap-3"
+              style={{ animationDelay: "300ms" }}
+            >
               <Link
                 to="/shop?category=men"
-                className="btn-primary px-7 py-3.5 text-base shadow-lg shadow-brand-600/20"
+                className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-gray-900 shadow-lg transition-transform hover:scale-[1.03]"
               >
                 Shop Men
-                <i className="fa-solid fa-arrow-right text-sm" aria-hidden="true" />
+                <i className="fa-solid fa-arrow-right text-xs" aria-hidden="true" />
               </Link>
-              <Link to="/shop" className="btn-secondary px-7 py-3.5 text-base">
-                <i className="fa-solid fa-bolt mr-1 text-accent-500" aria-hidden="true" />
+              <Link
+                to="/shop"
+                className="inline-flex items-center gap-2 rounded-lg border border-white/40 bg-white/10 px-6 py-3 text-sm font-bold text-white backdrop-blur transition-colors hover:bg-white/20"
+              >
                 Shop All
               </Link>
             </div>
-
-            <dl className="mt-10 flex items-center justify-center gap-7 lg:justify-start">
-              <div>
-                <dt className="text-2xl font-black text-gray-900">30K+</dt>
-                <dd className="mt-0.5 text-xs font-medium text-gray-500">
-                  Happy customers
-                </dd>
-              </div>
-              <div className="h-10 w-px bg-gray-200" />
-              <div>
-                <dt className="text-2xl font-black text-gray-900">
-                  4.8
-                  <i
-                    className="fa-solid fa-star ml-1 text-sm text-accent-400"
-                    aria-hidden="true"
-                  />
-                </dt>
-                <dd className="mt-0.5 text-xs font-medium text-gray-500">
-                  Average rating
-                </dd>
-              </div>
-              <div className="h-10 w-px bg-gray-200" />
-              <div>
-                <dt className="text-2xl font-black text-gray-900">100%</dt>
-                <dd className="mt-0.5 text-xs font-medium text-gray-500">Authentic</dd>
-              </div>
-            </dl>
-          </div>
-
-          <div className="relative mx-auto w-full max-w-md">
-            <div className="absolute inset-4 -rotate-6 rounded-[2rem] bg-gradient-to-br from-brand-500 to-brand-800 opacity-90" />
-            <div className="relative rotate-2 rounded-[2rem] border border-white/60 bg-white/80 p-4 shadow-card-hover backdrop-blur">
-              <div className="overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-brand-50 to-accent-50">
-                {heroProduct?.image ? (
-                  <img
-                    src={getImageSrc(heroProduct.image)}
-                    alt={heroProduct.name}
-                    className="h-72 w-full object-cover sm:h-80"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div className="flex h-72 w-full items-center justify-center sm:h-80">
-                    <svg
-                      viewBox="0 0 120 60"
-                      className="h-24 w-44 text-brand-600/70"
-                      fill="none"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M8 34C28 30 46 22 58 10"
-                        stroke="currentColor"
-                        strokeWidth="6"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </div>
-                )}
-              </div>
-              <div className="flex items-center justify-between px-2 pb-1 pt-4">
-                <div>
-                  <p className="text-sm font-bold text-gray-900">
-                    {heroProduct ? heroProduct.name : "Premium Drop"}
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    {heroProduct ? heroProduct.category : "UNISOLE Collection"}
-                  </p>
-                </div>
-                <span className="rounded-full bg-brand-600 px-3 py-1 text-xs font-bold text-white">
-                  {heroProduct ? formatPrice(heroProduct.price) : "New"}
-                </span>
-              </div>
-            </div>
-
-            <div
-              className="absolute -left-3 top-8 animate-fade-in rounded-2xl bg-white px-4 py-3 shadow-card-hover sm:-left-6"
-              style={{ animationDelay: "150ms" }}
-            >
-              <p className="flex items-center gap-2 text-xs font-bold text-gray-900">
-                <i className="fa-solid fa-truck-fast text-brand-600" aria-hidden="true" />
-                Free Shipping
-              </p>
-              <p className="mt-0.5 text-[11px] text-gray-500">On orders above ₹999</p>
-            </div>
-            <div
-              className="absolute -right-2 bottom-16 animate-fade-in rounded-2xl bg-white px-4 py-3 shadow-card-hover sm:-right-5"
-              style={{ animationDelay: "300ms" }}
-            >
-              <p className="flex items-center gap-2 text-xs font-bold text-gray-900">
-                <i className="fa-solid fa-bolt text-accent-500" aria-hidden="true" />
-                New Season
-              </p>
-              <p className="mt-0.5 text-[11px] text-gray-500">2026 collection live</p>
-            </div>
           </div>
         </div>
+
+        {heroProduct && (
+          <div className="absolute right-6 top-6 hidden rounded-2xl bg-white/95 px-4 py-3 shadow-card-hover backdrop-blur sm:block lg:right-10 lg:top-8">
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-gray-500">
+              {heroProduct.category}
+            </p>
+            <p className="mt-0.5 text-lg font-black text-gray-900">
+              {formatPrice(heroProduct.price)}
+            </p>
+            <Link
+              to={`/products/${heroProduct._id}`}
+              className="mt-1 inline-block text-xs font-bold text-brand-600 hover:underline"
+            >
+              View product
+            </Link>
+          </div>
+        )}
       </section>
 
       <section className="container-app py-12 sm:py-16">
