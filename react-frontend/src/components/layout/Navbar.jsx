@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
 import { productsApi } from "../../api/products";
+import Logo from "../ui/Logo";
 import { getImageSrc } from "../../utils/getImageSrc";
 import { formatPrice } from "../../utils/format";
 
@@ -78,13 +79,8 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-gray-100 bg-white/90 backdrop-blur">
       <div className="container-app flex h-16 items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-2">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-sm font-black text-white">
-            U
-          </span>
-          <span className="text-xl font-black tracking-tight text-gray-900">
-            UNI<span className="text-brand-600">SOLE</span>
-          </span>
+        <Link to="/" className="flex items-center">
+          <Logo />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

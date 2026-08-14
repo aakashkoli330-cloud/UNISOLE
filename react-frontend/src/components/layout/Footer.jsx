@@ -1,17 +1,13 @@
 import { Link } from "react-router-dom";
+import Logo from "../ui/Logo";
 
 export default function Footer() {
   return (
     <footer className="mt-auto border-t border-gray-100 bg-white">
       <div className="container-app py-12">
         <div className="flex flex-col items-center gap-6 text-center">
-          <Link to="/" className="flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-sm font-black text-white">
-              U
-            </span>
-            <span className="text-lg font-black tracking-tight text-gray-900">
-              UNI<span className="text-brand-600">SOLE</span>
-            </span>
+          <Link to="/" className="flex items-center">
+            <Logo size="sm" />
           </Link>
           <p className="text-sm text-gray-500">Designed for Motion</p>
 

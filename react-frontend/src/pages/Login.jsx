@@ -7,6 +7,7 @@ import { validateEmail, validatePassword } from "../utils/validation";
 import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import GoogleLoginButton from "../components/ui/GoogleLoginButton";
+import Logo from "../components/ui/Logo";
 
 export default function Login() {
   const { token, login } = useAuth();
@@ -48,9 +49,7 @@ export default function Login() {
       <div className="w-full max-w-md">
         <div className="card p-8">
           <div className="text-center">
-            <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-600 text-lg font-black text-white">
-              U
-            </span>
+            <Logo showText={false} size="lg" />
             <h1 className="mt-4 text-2xl font-black text-gray-900">Welcome back</h1>
             <p className="mt-1 text-sm text-gray-500">Login to your UNISOLE account</p>
           </div>
