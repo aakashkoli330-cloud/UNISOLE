@@ -16,15 +16,6 @@ dotenv.config();
 
 const app = express();
 
-// Debug env check
-console.log("MONGO_URI:", process.env.MONGO_URI ? "OK" : "MISSING");
-console.log("JWT_SECRET:", process.env.JWT_SECRET ? "OK" : "MISSING");
-console.log(
-  "CLOUDINARY_CLOUD_NAME:",
-  process.env.CLOUDINARY_CLOUD_NAME ? "OK" : "MISSING",
-);
-console.log("RAZORPAY_KEY_ID:", process.env.RAZORPAY_KEY_ID ? "OK" : "MISSING");
-
 // =================== CORS ===================
 // FIX: Restrict CORS to your actual frontend domain in production
 const allowedOrigins = [
