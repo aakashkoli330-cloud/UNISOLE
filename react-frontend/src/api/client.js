@@ -22,6 +22,10 @@ client.interceptors.response.use(
       if (token && !error.config?.url?.includes("/auth/")) {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
+        const path = window.location.pathname;
+        if (!path.startsWith("/login") && !path.startsWith("/register")) {
+          window.location.href = "/login";
+        }
       }
     }
     return Promise.reject(error);
