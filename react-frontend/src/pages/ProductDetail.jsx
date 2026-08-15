@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { productsApi } from "../api/products";
 import { useCart } from "../context/CartContext";
 import { getImageSrc } from "../utils/getImageSrc";
@@ -19,7 +19,6 @@ function sizeStock(product, size) {
 
 export default function ProductDetail() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const { addToCart } = useCart();
 
   const [product, setProduct] = useState(null);
@@ -55,7 +54,7 @@ export default function ProductDetail() {
     }
   }, [product]);
 
-  const handleAdd = async (buyNow = false) => {
+  const handleAdd = async () => {
     if (!selectedSize) {
       return;
     }
@@ -64,7 +63,6 @@ export default function ProductDetail() {
       for (let i = 0; i < qty; i++) {
         await addToCart(product._id, selectedSize);
       }
-      if (buyNow) navigate("/checkout");
     } finally {
       setAdding(false);
     }
@@ -237,7 +235,7 @@ export default function ProductDetail() {
             )}
           </div>
 
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-6 flex flex-col gap-3">
             <Button
               variant="primary"
               size="lg"
@@ -248,16 +246,6 @@ export default function ProductDetail() {
             >
               <i className="fa-solid fa-cart-plus" aria-hidden="true" />
               {outOfStock ? "Sold Out" : !selectedSize ? "Select Size" : "Add to Cart"}
-            </Button>
-            <Button
-              variant="accent"
-              size="lg"
-              fullWidth
-              disabled={outOfStock || !selectedSize}
-              onClick={() => handleAdd(true)}
-            >
-              <i className="fa-solid fa-bolt" aria-hidden="true" />
-              Buy Now
             </Button>
           </div>
         </div>
