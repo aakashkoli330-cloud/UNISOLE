@@ -8,5 +8,6 @@ export const ordersApi = {
   getMyOrders: () => client.get("/orders/my"),
   getById: (id) => client.get(`/orders/${id}`),
   adminGetAll: () => client.get("/orders/admin/all"),
+  adminGetById: (id) => client.get(`/orders/admin/order/${id}`),
   adminUpdateStatus: (id, status) => client.put(`/orders/admin/${id}`, { status }),
 };

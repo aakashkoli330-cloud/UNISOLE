@@ -92,7 +92,7 @@ export default function AdminOrders() {
 
               <div className="flex items-center gap-3">
                 <Link
-                  to={`/orders/${order._id}`}
+                  to={`/admin/orders/${order._id}`}
                   className="text-xs font-semibold text-brand-600 hover:underline"
                 >
                   View

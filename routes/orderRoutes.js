@@ -33,6 +33,24 @@ router.get("/admin", auth, admin, getAllOrders);
 // Update order status
 router.put("/admin/:id", auth, admin, updateOrderStatus);
 
+// Get single order details (admin)
+router.get("/admin/order/:id", auth, admin, async (req, res) => {
+  try {
+    const Order = require("../models/Order");
+    const order = await Order.findById(req.params.id).populate(
+      "user",
+      "name email phone",
+    );
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+    res.json(order);
+  } catch (err) {
+    console.error("GET ADMIN ORDER ERROR:", err);
+    res.status(500).json({ message: "Invalid order ID" });
+  }
+});
+
 /* ================= USER ROUTES ================= */
 
 // Create Razorpay order
