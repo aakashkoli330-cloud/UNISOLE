@@ -278,24 +278,39 @@ export default function AdminProducts() {
             <div>
               <label className="label">Stock per Size (UK)</label>
               <div className="grid grid-cols-5 gap-2">
-                {SIZE_OPTIONS.map((s) => (
-                  <div key={s} className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      placeholder="0"
-                      value={form.sizes[String(s)]}
-                      onChange={(e) => setSize(s, e.target.value)}
-                      className="w-full rounded-lg border border-gray-300 px-2 py-2 text-center text-sm font-semibold text-gray-900 outline-none transition-colors focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
-                    />
-                    <span className="mt-1 block text-[11px] font-semibold text-gray-400">
-                      UK {s}
-                    </span>
-                  </div>
-                ))}
+                {SIZE_OPTIONS.map((s) => {
+                  const val = form.sizes[String(s)];
+                  const hasStock = Number(val) > 0;
+                  return (
+                    <div
+                      key={s}
+                      className={`flex flex-col overflow-hidden rounded-lg border ${
+                        hasStock
+                          ? "border-green-400 bg-green-50"
+                          : "border-gray-300 bg-white"
+                      }`}
+                    >
+                      <span
+                        className={`py-1 text-center text-xs font-bold ${
+                          hasStock ? "bg-green-500 text-white" : "bg-gray-100 text-gray-500"
+                        }`}
+                      >
+                        UK {s}
+                      </span>
+                      <input
+                        type="number"
+                        min="0"
+                        placeholder="0"
+                        value={val}
+                        onChange={(e) => setSize(s, e.target.value)}
+                        className="w-full bg-transparent px-2 py-2 text-center text-lg font-bold text-gray-900 outline-none transition-colors focus:bg-white"
+                      />
+                    </div>
+                  );
+                })}
               </div>
               <p className="mt-1.5 text-xs text-gray-500">
-                Total stock: {totalStock}
+                Total stock: <span className="font-bold text-gray-900">{totalStock}</span>
               </p>
             </div>
           </div>
