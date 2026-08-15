@@ -9,6 +9,14 @@ import Button from "../components/ui/Button";
 import Skeleton from "../components/ui/Skeleton";
 import EmptyState from "../components/ui/EmptyState";
 
+function sizeStock(product, size) {
+  if (!product.sizes || product.sizes.length === 0) {
+    return product.stock || 0;
+  }
+  const match = product.sizes.find((s) => String(s.size) === String(size));
+  return match ? match.stock || 0 : 0;
+}
+
 export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -19,6 +27,7 @@ export default function ProductDetail() {
   const [error, setError] = useState("");
   const [qty, setQty] = useState(1);
   const [adding, setAdding] = useState(false);
+  const [selectedSize, setSelectedSize] = useState("");
 
   useEffect(() => {
     let mounted = true;
@@ -34,11 +43,26 @@ export default function ProductDetail() {
     };
   }, [id]);
 
+  useEffect(() => {
+    if (!product) return;
+    setQty(1);
+    const hasSizes = product.sizes && product.sizes.length > 0;
+    if (hasSizes) {
+      const first = product.sizes.find((s) => (s.stock || 0) > 0);
+      setSelectedSize(first ? String(first.size) : "");
+    } else {
+      setSelectedSize("");
+    }
+  }, [product]);
+
   const handleAdd = async (buyNow = false) => {
+    if (!selectedSize) {
+      return;
+    }
     setAdding(true);
     try {
       for (let i = 0; i < qty; i++) {
-        await addToCart(product._id);
+        await addToCart(product._id, selectedSize);
       }
       if (buyNow) navigate("/checkout");
     } finally {
@@ -79,7 +103,12 @@ export default function ProductDetail() {
     );
   }
 
-  const outOfStock = product.stock <= 0;
+  const hasSizes = product.sizes && product.sizes.length > 0;
+  const availableStock = hasSizes
+    ? product.sizes.reduce((sum, s) => sum + (s.stock || 0), 0)
+    : product.stock || 0;
+  const outOfStock = availableStock <= 0;
+  const maxQty = selectedSize ? sizeStock(product, selectedSize) : availableStock;
 
   return (
     <div className="container-app py-10">
@@ -114,8 +143,8 @@ export default function ProductDetail() {
             </Badge>
             {outOfStock ? (
               <Badge color="red">Out of Stock</Badge>
-            ) : product.stock <= 5 ? (
-              <Badge color="yellow">Only {product.stock} left</Badge>
+            ) : availableStock <= 5 ? (
+              <Badge color="yellow">Only {availableStock} left</Badge>
             ) : (
               <Badge color="green">In Stock</Badge>
             )}
@@ -139,8 +168,46 @@ export default function ProductDetail() {
           )}
 
           <div className="mt-8 border-t border-gray-100 pt-6">
+            <span className="label">Size (UK)</span>
+            {hasSizes ? (
+              <div className="mt-3 flex flex-wrap gap-2">
+                {product.sizes.map((s) => {
+                  const stock = s.stock || 0;
+                  const selected = String(s.size) === String(selectedSize);
+                  return (
+                    <button
+                      key={s.size}
+                      type="button"
+                      disabled={stock <= 0 || outOfStock}
+                      onClick={() => setSelectedSize(String(s.size))}
+                      className={
+                        "min-w-12 rounded-lg border px-3 py-2 text-sm font-semibold transition " +
+                        (selected
+                          ? "border-brand-600 bg-brand-600 text-white"
+                          : stock <= 0
+                            ? "cursor-not-allowed border-gray-200 text-gray-300 line-through"
+                            : "border-gray-300 text-gray-700 hover:border-brand-600 hover:text-brand-600")
+                      }
+                    >
+                      {s.size}
+                    </button>
+                  );
+                })}
+              </div>
+            ) : (
+              <button
+                type="button"
+                disabled={outOfStock}
+                className="mt-3 inline-block rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700"
+              >
+                Free Size
+              </button>
+            )}
+          </div>
+
+          <div className="mt-6 border-t border-gray-100 pt-6">
             <span className="label">Quantity</span>
-            <div className="inline-flex items-center rounded-lg border border-gray-300 bg-white">
+            <div className="mt-3 inline-flex items-center rounded-lg border border-gray-300 bg-white">
               <button
                 type="button"
                 onClick={() => setQty((v) => Math.max(1, v - 1))}
@@ -155,14 +222,19 @@ export default function ProductDetail() {
               </span>
               <button
                 type="button"
-                onClick={() => setQty((v) => Math.min(product.stock, v + 1))}
-                disabled={qty >= product.stock || outOfStock}
+                onClick={() => setQty((v) => Math.min(maxQty, v + 1))}
+                disabled={qty >= maxQty || outOfStock}
                 className="px-3 py-2 text-sm text-gray-600 hover:text-brand-600 disabled:opacity-40"
                 aria-label="Increase quantity"
               >
                 <i className="fa-solid fa-plus" />
               </button>
             </div>
+            {selectedSize && (
+              <p className="mt-2 text-xs text-gray-500">
+                {sizeStock(product, selectedSize)} available in UK {selectedSize}
+              </p>
+            )}
           </div>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -171,17 +243,17 @@ export default function ProductDetail() {
               size="lg"
               fullWidth
               loading={adding}
-              disabled={outOfStock}
+              disabled={outOfStock || !selectedSize}
               onClick={() => handleAdd(false)}
             >
               <i className="fa-solid fa-cart-plus" aria-hidden="true" />
-              {outOfStock ? "Sold Out" : "Add to Cart"}
+              {outOfStock ? "Sold Out" : !selectedSize ? "Select Size" : "Add to Cart"}
             </Button>
             <Button
               variant="accent"
               size="lg"
               fullWidth
-              disabled={outOfStock}
+              disabled={outOfStock || !selectedSize}
               onClick={() => handleAdd(true)}
             >
               <i className="fa-solid fa-bolt" aria-hidden="true" />

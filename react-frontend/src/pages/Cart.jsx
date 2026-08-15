@@ -53,6 +53,12 @@ export default function Cart() {
           {items.map((item) => {
             const product = item.product;
             if (!product) return null;
+            const sizeEntry = item.size
+              ? product.sizes?.find((s) => String(s.size) === String(item.size))
+              : null;
+            const itemMax = sizeEntry
+              ? sizeEntry.stock || 0
+              : product.stock || 0;
             return (
               <div
                 key={item._id || product._id}
@@ -70,21 +76,21 @@ export default function Cart() {
                   <h3 className="mt-0.5 truncate text-sm font-bold text-gray-900">
                     {product.name}
                   </h3>
+                  {item.size && (
+                    <p className="mt-0.5 text-xs font-medium text-gray-500">
+                      Size: <span className="font-semibold text-gray-700">{item.size}</span>
+                    </p>
+                  )}
                   <p className="mt-1 text-lg font-bold text-gray-900">
                     {formatPrice(product.price)}
                   </p>
-                  {product.stock <= 3 && product.stock > 0 && (
-                    <p className="mt-0.5 text-xs font-medium text-accent-500">
-                      Only {product.stock} left in stock
-                    </p>
-                  )}
                 </div>
 
                 <div className="flex items-center justify-between gap-4 sm:flex-col sm:items-end">
                   <div className="inline-flex items-center rounded-lg border border-gray-300 bg-white">
                     <button
                       type="button"
-                      onClick={() => updateQty(product._id, -1)}
+                      onClick={() => updateQty(product._id, item.size || "", -1)}
                       disabled={item.quantity <= 1}
                       className="px-3 py-1.5 text-sm text-gray-600 hover:text-brand-600 disabled:opacity-40"
                       aria-label="Decrease quantity"
@@ -96,8 +102,8 @@ export default function Cart() {
                     </span>
                     <button
                       type="button"
-                      onClick={() => updateQty(product._id, 1)}
-                      disabled={item.quantity >= product.stock}
+                      onClick={() => updateQty(product._id, item.size || "", 1)}
+                      disabled={item.quantity >= itemMax}
                       className="px-3 py-1.5 text-sm text-gray-600 hover:text-brand-600 disabled:opacity-40"
                       aria-label="Increase quantity"
                     >
@@ -111,7 +117,7 @@ export default function Cart() {
                     </span>
                     <button
                       type="button"
-                      onClick={() => removeItem(product._id)}
+                      onClick={() => removeItem(product._id, item.size || "")}
                       className="text-gray-400 transition-colors hover:text-red-600"
                       aria-label="Remove item"
                     >

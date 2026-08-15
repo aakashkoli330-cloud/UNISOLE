@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom";
-import { useCart } from "../../context/CartContext";
+import { Link, useNavigate } from "react-router-dom";
 import { formatPrice } from "../../utils/format";
 import { getImageSrc } from "../../utils/getImageSrc";
 import Badge from "./Badge";
 
 export default function ProductCard({ product }) {
-  const { addToCart } = useCart();
+  const navigate = useNavigate();
 
   if (!product) return null;
 
@@ -63,7 +62,7 @@ export default function ProductCard({ product }) {
         <div className="mt-3">
           <button
             type="button"
-            onClick={() => addToCart(product._id)}
+            onClick={() => navigate(`/products/${product._id}`)}
             disabled={outOfStock}
             className={`btn w-full ${
               outOfStock
@@ -72,7 +71,7 @@ export default function ProductCard({ product }) {
             }`}
           >
             <i className="fa-solid fa-cart-plus" aria-hidden="true" />
-            {outOfStock ? "Sold Out" : "Add to Cart"}
+            {outOfStock ? "Sold Out" : "Select Size"}
           </button>
         </div>
       </div>

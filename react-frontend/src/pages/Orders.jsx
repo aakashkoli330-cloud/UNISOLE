@@ -99,6 +99,14 @@ export default function Orders() {
                   {order.items?.length} item{order.items?.length > 1 ? "s" : ""} · Placed on{" "}
                   {formatDate(order.createdAt)}
                 </p>
+                {order.items?.map((item, idx) => (
+                  <p key={idx} className="mt-0.5 truncate text-xs text-gray-500">
+                    {item.name}
+                    {item.size ? ` — ${item.size}` : ""}
+                    {" × "}
+                    {item.quantity}
+                  </p>
+                ))}
               </div>
 
               <div className="flex items-center justify-between gap-4 sm:flex-col sm:items-end">

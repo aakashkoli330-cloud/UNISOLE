@@ -333,7 +333,8 @@ export default function Checkout() {
                       {product.name}
                     </p>
                     <p className="text-xs text-gray-500">
-                      Qty {item.quantity} × {formatPrice(product.price)}
+                      {item.size ? `Size ${item.size} · ` : ""}Qty {item.quantity} ×{" "}
+                      {formatPrice(product.price)}
                     </p>
                   </div>
                   <span className="text-xs font-bold text-gray-900">

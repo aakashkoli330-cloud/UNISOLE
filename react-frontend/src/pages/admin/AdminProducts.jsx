@@ -11,11 +11,16 @@ import Modal from "../../components/ui/Modal";
 import Skeleton from "../../components/ui/Skeleton";
 import EmptyState from "../../components/ui/EmptyState";
 
+const SIZE_OPTIONS = [6, 7, 8, 9, 10];
+
+const emptySizes = () =>
+  Object.fromEntries(SIZE_OPTIONS.map((s) => [String(s), ""]));
+
 const emptyForm = {
   name: "",
   price: "",
   category: "men",
-  stock: "",
+  sizes: emptySizes(),
   description: "",
   image: "",
 };
@@ -50,12 +55,18 @@ export default function AdminProducts() {
   };
 
   const openEdit = (p) => {
+    const sizes = emptySizes();
+    if (p.sizes && p.sizes.length > 0) {
+      p.sizes.forEach((s) => {
+        sizes[String(s.size)] = String(s.stock ?? "");
+      });
+    }
     setEditing(p);
     setForm({
       name: p.name,
       price: p.price,
       category: p.category,
-      stock: p.stock,
+      sizes,
       description: p.description || "",
       image: p.image,
     });
@@ -65,10 +76,21 @@ export default function AdminProducts() {
 
   const setField = (key, value) => setForm((f) => ({ ...f, [key]: value }));
 
+  const setSize = (size, value) =>
+    setForm((f) => ({
+      ...f,
+      sizes: { ...f.sizes, [String(size)]: value },
+    }));
+
+  const totalStock = SIZE_OPTIONS.reduce(
+    (sum, s) => sum + (Number(form.sizes[String(s)]) || 0),
+    0,
+  );
+
   const submit = async (e) => {
     e.preventDefault();
-    if (!form.name.trim() || !form.price || form.stock === "") {
-      push("error", "Missing fields", "Name, price and stock are required");
+    if (!form.name.trim() || !form.price) {
+      push("error", "Missing fields", "Name and price are required");
       return;
     }
     if (!editing && !file) {
@@ -76,13 +98,18 @@ export default function AdminProducts() {
       return;
     }
 
+    const sizesPayload = SIZE_OPTIONS.map((s) => ({
+      size: s,
+      stock: Number(form.sizes[String(s)]) || 0,
+    }));
+
     setSaving(true);
     try {
       const fd = new FormData();
       fd.append("name", form.name.trim());
       fd.append("price", form.price);
       fd.append("category", form.category);
-      fd.append("stock", form.stock);
+      fd.append("sizes", JSON.stringify(sizesPayload));
       fd.append("description", form.description.trim());
       if (file) fd.append("image", file);
 
@@ -248,14 +275,29 @@ export default function AdminProducts() {
               value={form.price}
               onChange={(e) => setField("price", e.target.value)}
             />
-            <Input
-              label="Stock"
-              type="number"
-              min="0"
-              placeholder="50"
-              value={form.stock}
-              onChange={(e) => setField("stock", e.target.value)}
-            />
+            <div>
+              <label className="label">Stock per Size (UK)</label>
+              <div className="grid grid-cols-5 gap-2">
+                {SIZE_OPTIONS.map((s) => (
+                  <div key={s} className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      placeholder="0"
+                      value={form.sizes[String(s)]}
+                      onChange={(e) => setSize(s, e.target.value)}
+                      className="w-full rounded-lg border border-gray-300 px-2 py-2 text-center text-sm font-semibold text-gray-900 outline-none transition-colors focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
+                    />
+                    <span className="mt-1 block text-[11px] font-semibold text-gray-400">
+                      UK {s}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-1.5 text-xs text-gray-500">
+                Total stock: {totalStock}
+              </p>
+            </div>
           </div>
           <div>
             <label className="label">Category</label>

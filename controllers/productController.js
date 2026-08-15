@@ -45,9 +45,9 @@ async function uploadImageToCloudinary(localPath) {
 ========================= */
 exports.addProduct = async (req, res) => {
   try {
-    const { name, price, category, description, stock } = req.body;
+    const { name, price, category, description, stock, sizes } = req.body;
 
-    if (!name || !price || !category || stock === undefined) {
+    if (!name || !price || !category) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -57,12 +57,18 @@ exports.addProduct = async (req, res) => {
 
     const imageUrl = req.file.secure_url || req.file.path;
 
+    const sizesArr = parseSizes(sizes);
+    const totalStock = sizesArr.length
+      ? sizesArr.reduce((sum, s) => sum + (s.stock || 0), 0)
+      : Number(stock) || 0;
+
     const newProduct = new Product({
       name,
       price,
       category,
       description: description || "",
-      stock: Number(stock),
+      sizes: sizesArr,
+      stock: totalStock,
       image: imageUrl,
     });
 
@@ -158,7 +164,7 @@ exports.deleteProduct = async (req, res) => {
 ========================= */
 exports.updateProduct = async (req, res) => {
   try {
-    const { name, price, category, description, stock } = req.body;
+    const { name, price, category, description, stock, sizes } = req.body;
 
     const product = await Product.findById(req.params.id);
     if (!product) return res.status(404).json({ message: "Product not found" });
@@ -168,8 +174,17 @@ exports.updateProduct = async (req, res) => {
     product.category = category || product.category;
     product.description = description || product.description;
 
-    //  STOCK UPDATE
-    if (stock !== undefined) {
+    if (sizes !== undefined) {
+      const sizesArr = parseSizes(sizes);
+      const hasAnyStock = sizesArr.some((s) => s.stock > 0);
+      const hasExistingSizes = product.sizes && product.sizes.length > 0;
+      if (hasAnyStock || hasExistingSizes) {
+        product.sizes = sizesArr;
+        product.stock = sizesArr.length
+          ? sizesArr.reduce((sum, s) => sum + (s.stock || 0), 0)
+          : Number(stock) || 0;
+      }
+    } else if (stock !== undefined) {
       product.stock = Number(stock);
     }
 
@@ -192,6 +207,23 @@ exports.updateProduct = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+function parseSizes(raw) {
+  if (!raw) return [];
+  try {
+    const parsed = typeof raw === "string" ? JSON.parse(raw) : raw;
+    if (!Array.isArray(parsed)) return [];
+    return parsed
+      .filter((s) => s && s.size !== undefined)
+      .map((s) => ({
+        size: Number(s.size),
+        stock: Math.max(0, Number(s.stock) || 0),
+      }));
+  } catch (err) {
+    console.warn("Invalid sizes payload:", err.message);
+    return [];
+  }
+}
 
 /* =========================
    AUTO-UPLOAD EXISTING LOCAL IMAGES

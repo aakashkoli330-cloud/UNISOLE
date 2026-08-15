@@ -142,7 +142,8 @@ export default function OrderDetail() {
                   {item.name}
                 </Link>
                 <p className="mt-0.5 text-xs text-gray-500">
-                  Qty {item.quantity} × {formatPrice(item.price)}
+                  {item.size ? `Size ${item.size} · ` : ""}Qty {item.quantity} ×{" "}
+                  {formatPrice(item.price)}
                 </p>
               </div>
               <span className="text-sm font-bold text-gray-900">

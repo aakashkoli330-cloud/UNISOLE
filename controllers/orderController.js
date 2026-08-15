@@ -9,6 +9,32 @@ const Product = require("../models/product");
 const razorpay = require("../config/razorpay");
 const crypto = require("crypto");
 
+function getSizeStock(product, size) {
+  if (!product.sizes || product.sizes.length === 0) {
+    return product.stock || 0;
+  }
+  const match = product.sizes.find((s) => String(s.size) === String(size));
+  return match ? match.stock || 0 : 0;
+}
+
+async function decrementSizeStock(productId, size, quantity) {
+  const product = await Product.findById(productId);
+  if (!product) return;
+
+  if (product.sizes && product.sizes.length > 0) {
+    const entry = product.sizes.find((s) => String(s.size) === String(size));
+    if (entry) {
+      entry.stock = Math.max(0, (entry.stock || 0) - quantity);
+    }
+    product.stock = product.sizes.reduce((sum, s) => sum + (s.stock || 0), 0);
+    await product.save();
+  } else {
+    await Product.findByIdAndUpdate(productId, {
+      $inc: { stock: -quantity },
+    });
+  }
+}
+
 /* ================= CREATE RAZORPAY ORDER ================= */
 exports.createRazorpayOrder = async (req, res) => {
   try {
@@ -48,9 +74,10 @@ exports.createRazorpayOrder = async (req, res) => {
       if (!product) {
         return res.status(400).json({ message: "Product not found in cart" });
       }
-      if (product.stock < item.quantity) {
+      const sizeStock = getSizeStock(product, item.size);
+      if (item.quantity > sizeStock) {
         return res.status(400).json({
-          message: `${product.name} has only ${product.stock} left in stock`,
+          message: `${product.name} (UK ${item.size}) has only ${sizeStock} left in stock`,
         });
       }
     }
@@ -59,6 +86,7 @@ exports.createRazorpayOrder = async (req, res) => {
       productId: item.product._id,
       name: item.product.name,
       price: item.product.price,
+      size: item.size ? `UK ${item.size}` : "",
       quantity: item.quantity,
       image: item.product.image,
     }));
@@ -128,9 +156,11 @@ exports.verifyPayment = async (req, res) => {
     }
 
     for (const item of order.items) {
-      await Product.findByIdAndUpdate(item.productId, {
-        $inc: { stock: -item.quantity },
-      });
+      await decrementSizeStock(
+        item.productId,
+        item.size ? item.size.replace("UK ", "") : "",
+        item.quantity
+      );
     }
 
     order.paymentStatus = "verified";
@@ -195,23 +225,27 @@ exports.checkout = async (req, res) => {
       if (!product) {
         return res.status(400).json({ message: "Product not found in cart" });
       }
-      if (product.stock < item.quantity) {
+      const sizeStock = getSizeStock(product, item.size);
+      if (item.quantity > sizeStock) {
         return res.status(400).json({
-          message: `${product.name} has only ${product.stock} left in stock`,
+          message: `${product.name} (UK ${item.size}) has only ${sizeStock} left in stock`,
         });
       }
     }
 
     for (const item of cart.items) {
-      await Product.findByIdAndUpdate(item.product._id, {
-        $inc: { stock: -item.quantity },
-      });
+      await decrementSizeStock(
+        item.product._id,
+        item.size || "",
+        item.quantity
+      );
     }
 
     const orderItems = cart.items.map((item) => ({
       productId: item.product._id,
       name: item.product.name,
       price: item.product.price,
+      size: item.size ? `UK ${item.size}` : "",
       quantity: item.quantity,
       image: item.product.image,
     }));

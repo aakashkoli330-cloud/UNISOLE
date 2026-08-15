@@ -37,14 +37,14 @@ export function CartProvider({ children }) {
   }, [refreshCart]);
 
   const addToCart = useCallback(
-    async (productId) => {
+    async (productId, size = "") => {
       if (!token) {
         push("info", "Please login to continue", "Redirecting to login...");
         window.location.href = "/login";
         return;
       }
       try {
-        await cartApi.add(productId);
+        await cartApi.add(productId, size);
         await refreshCart();
         push("success", "Added to cart", "Product added successfully");
       } catch (err) {
@@ -55,9 +55,9 @@ export function CartProvider({ children }) {
   );
 
   const updateQty = useCallback(
-    async (productId, change) => {
+    async (productId, size, change) => {
       try {
-        await cartApi.updateQty(productId, change);
+        await cartApi.updateQty(productId, size, change);
         await refreshCart();
       } catch (err) {
         push("error", "Update failed", getErrorMessage(err));
@@ -67,9 +67,9 @@ export function CartProvider({ children }) {
   );
 
   const removeItem = useCallback(
-    async (productId) => {
+    async (productId, size) => {
       try {
-        await cartApi.remove(productId);
+        await cartApi.remove(productId, size);
         await refreshCart();
         push("info", "Item removed", "Removed from cart");
       } catch (err) {

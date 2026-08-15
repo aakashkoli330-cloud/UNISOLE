@@ -9,6 +9,16 @@ const authMiddleware = require("../middleware/authMiddleware");
 const Cart = require("../models/cart");
 const Product = require("../models/product");
 
+function getSizeStock(product, size) {
+  if (!product.sizes || product.sizes.length === 0) {
+    return product.stock || 0;
+  }
+  const match = product.sizes.find(
+    (s) => String(s.size) === String(size)
+  );
+  return match ? match.stock || 0 : 0;
+}
+
 /* =====================
    GET CART
 ===================== */
@@ -29,14 +39,14 @@ router.get("/", authMiddleware, async (req, res) => {
 });
 
 /* =====================
-   ADD TO CART (with stock check)
+   ADD TO CART (with per-size stock check)
 ===================== */
 router.post("/add", authMiddleware, async (req, res) => {
   try {
-    const { productId } = req.body;
+    const { productId, size } = req.body;
     const userId = req.user._id;
 
-    console.log("ADD TO CART:", { productId, userId: userId.toString() });
+    console.log("ADD TO CART:", { productId, userId: userId.toString(), size: size || "free" });
 
     if (!productId) {
       return res.status(400).json({ message: "Product ID required" });
@@ -49,7 +59,8 @@ router.post("/add", authMiddleware, async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    if (product.stock <= 0) {
+    const sizeStock = getSizeStock(product, size);
+    if (sizeStock <= 0) {
       return res.status(400).json({ message: "Out of stock" });
     }
 
@@ -60,7 +71,7 @@ router.post("/add", authMiddleware, async (req, res) => {
       try {
         cart = new Cart({
           user: userId,
-          items: [{ product: productId, quantity: 1 }],
+          items: [{ product: productId, size: size || "", quantity: 1 }],
         });
         await cart.save();
         console.log("New cart created");
@@ -72,19 +83,21 @@ router.post("/add", authMiddleware, async (req, res) => {
     }
 
     const index = cart.items.findIndex(
-      (item) => item.product.toString() === productId
+      (item) =>
+        item.product.toString() === productId &&
+        String(item.size || "") === String(size || "")
     );
     console.log("ITEM INDEX:", index);
 
     if (index > -1) {
       const currentQty = cart.items[index].quantity;
-      console.log("Current qty:", currentQty, "stock:", product.stock);
-      if (currentQty + 1 > product.stock) {
+      console.log("Current qty:", currentQty, "size stock:", sizeStock);
+      if (currentQty + 1 > sizeStock) {
         return res.status(400).json({ message: "Stock limit reached" });
       }
       cart.items[index].quantity += 1;
     } else {
-      cart.items.push({ product: productId, quantity: 1 });
+      cart.items.push({ product: productId, size: size || "", quantity: 1 });
     }
 
     try {
@@ -106,7 +119,7 @@ router.post("/add", authMiddleware, async (req, res) => {
 ===================== */
 router.put("/update", authMiddleware, async (req, res) => {
   try {
-    let { productId, change } = req.body;
+    let { productId, size, change } = req.body;
 
     if (!productId || change === undefined) {
       return res.status(400).json({ message: "Invalid update data" });
@@ -121,7 +134,9 @@ router.put("/update", authMiddleware, async (req, res) => {
     if (!cart) return res.status(404).json({ message: "Cart not found" });
 
     const item = cart.items.find(
-      (i) => i.product.toString() === productId
+      (i) =>
+        i.product.toString() === productId &&
+        String(i.size || "") === String(size || "")
     );
 
     if (!item) {
@@ -135,15 +150,16 @@ router.put("/update", authMiddleware, async (req, res) => {
 
     const newQty = item.quantity + change;
 
-    if (newQty > product.stock) {
+    const sizeStock = getSizeStock(product, size);
+    if (newQty > sizeStock) {
       return res.status(400).json({
-        message: `Only ${product.stock} items available`,
+        message: `Only ${sizeStock} items available`,
       });
     }
 
     if (newQty <= 0) {
       cart.items = cart.items.filter(
-        (i) => i.product.toString() !== productId
+        (i) => !(i.product.toString() === productId && String(i.size || "") === String(size || ""))
       );
     } else {
       item.quantity = newQty;
@@ -160,13 +176,18 @@ router.put("/update", authMiddleware, async (req, res) => {
 /* =====================
    REMOVE ITEM
 ===================== */
-router.delete("/remove/:productId", authMiddleware, async (req, res) => {
+router.delete("/remove", authMiddleware, async (req, res) => {
   try {
+    const { productId, size } = req.body;
     const cart = await Cart.findOne({ user: req.user._id });
     if (!cart) return res.status(404).json({ message: "Cart not found" });
 
     cart.items = cart.items.filter(
-      (item) => item.product.toString() !== req.params.productId
+      (item) =>
+        !(
+          item.product.toString() === productId &&
+          String(item.size || "") === String(size || "")
+        )
     );
 
     await cart.save();
