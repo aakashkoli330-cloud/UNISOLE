@@ -61,7 +61,7 @@ export default function Register() {
           <form onSubmit={handleSubmit} className="mt-8 space-y-4">
             <Input
               label="Full Name"
-              placeholder="Aakash Koli"
+              placeholder="Enter your name"
               value={form.name}
               onChange={(e) => setField("name", e.target.value)}
               error={errors.name}
