@@ -31,20 +31,21 @@ export default function Home() {
 
   return (
     <div>
-      <section className="relative h-[30rem] overflow-hidden bg-brand-900 sm:h-[34rem] lg:h-[36rem]">
-        <img
-          src="/banner.jpg"
-          alt="UNISOLE — Premium sneakers"
-          className="absolute inset-0 h-full w-full object-cover object-center"
-          loading="eager"
-          fetchPriority="high"
-        />
+      <section className="container-app pt-6 sm:pt-10">
+        <div className="relative h-[28rem] overflow-hidden rounded-3xl bg-brand-900 sm:h-[32rem] lg:h-[34rem]">
+          <img
+            src="/banner.jpg"
+            alt="UNISOLE — Premium sneakers"
+            className="absolute inset-0 h-full w-full object-cover object-center"
+            loading="eager"
+            fetchPriority="high"
+          />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-950/85 via-gray-950/40 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-gray-950/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-950/85 via-gray-950/40 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-gray-950/60 to-transparent" />
 
-        <div className="container-app relative flex h-full items-end pb-14 sm:pb-16">
-          <div className="max-w-2xl">
+          <div className="relative flex h-full items-end p-6 sm:p-10 lg:p-12">
+            <div className="max-w-2xl">
             <h1
               className="mt-5 animate-fade-in text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl"
               style={{ animationDelay: "100ms" }}
@@ -77,6 +78,7 @@ export default function Home() {
               </Link>
             </div>
           </div>
+        </div>
         </div>
       </section>
 
