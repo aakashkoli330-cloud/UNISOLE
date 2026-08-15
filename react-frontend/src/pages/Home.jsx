@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { productsApi } from "../api/products";
 import ProductCard from "../components/ui/ProductCard";
 import Skeleton from "../components/ui/Skeleton";
-import { getImageSrc } from "../utils/getImageSrc";
-import { formatPrice } from "../utils/format";
 
 const trustBadges = [
   { icon: "fa-solid fa-truck-fast", title: "Free Shipping", text: "On all orders above ₹999" },
@@ -30,32 +28,23 @@ export default function Home() {
   }, []);
 
   const featured = products.slice(0, 8);
-  const heroProduct = products[0];
 
   return (
     <div>
       <section className="relative h-[30rem] overflow-hidden bg-brand-900 sm:h-[34rem] lg:h-[36rem]">
-        {heroProduct?.image ? (
-          <img
-            src={getImageSrc(heroProduct.image)}
-            alt={heroProduct.name}
-            className="absolute inset-0 h-full w-full object-cover object-center"
-            loading="eager"
-            fetchPriority="high"
-          />
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-700 via-brand-600 to-brand-400" />
-        )}
+        <img
+          src="/banner.jpg"
+          alt="UNISOLE — Premium sneakers"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+          loading="eager"
+          fetchPriority="high"
+        />
 
         <div className="absolute inset-0 bg-gradient-to-r from-gray-950/85 via-gray-950/40 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-gray-950/60 to-transparent" />
 
         <div className="container-app relative flex h-full items-end pb-14 sm:pb-16">
           <div className="max-w-2xl">
-            <span className="animate-fade-in inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest text-white ring-1 ring-white/25 backdrop-blur">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent-400" />
-              New Season 2026
-            </span>
             <h1
               className="mt-5 animate-fade-in text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl"
               style={{ animationDelay: "100ms" }}
@@ -89,23 +78,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        {heroProduct && (
-          <div className="absolute right-6 top-6 hidden rounded-2xl bg-white/95 px-4 py-3 shadow-card-hover backdrop-blur sm:block lg:right-10 lg:top-8">
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-gray-500">
-              {heroProduct.category}
-            </p>
-            <p className="mt-0.5 text-lg font-black text-gray-900">
-              {formatPrice(heroProduct.price)}
-            </p>
-            <Link
-              to={`/products/${heroProduct._id}`}
-              className="mt-1 inline-block text-xs font-bold text-brand-600 hover:underline"
-            >
-              View product
-            </Link>
-          </div>
-        )}
       </section>
 
       <section className="container-app py-12 sm:py-16">
