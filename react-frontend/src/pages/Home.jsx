@@ -71,10 +71,11 @@ export default function Home() {
                 <i className="fa-solid fa-arrow-right text-xs" aria-hidden="true" />
               </Link>
               <Link
-                to="/shop"
-                className="inline-flex items-center gap-2 rounded-lg border border-white/40 bg-white/10 px-6 py-3 text-sm font-bold text-white backdrop-blur transition-colors hover:bg-white/20"
+                to="/shop?category=women"
+                className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-gray-900 shadow-lg transition-transform hover:scale-[1.03]"
               >
-                Shop All
+                Shop Women
+                <i className="fa-solid fa-arrow-right text-xs" aria-hidden="true" />
               </Link>
             </div>
           </div>
